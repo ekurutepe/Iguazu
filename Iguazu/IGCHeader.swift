@@ -8,7 +8,19 @@
 
 import Foundation
 
+extension String {
+    // parse strings like 250809 to Aug 25th 2009
+    func headerDate() -> Date? {
+        guard self.characters.count == 6 else { return nil }
 
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "ddMMyy"
+        dateFormatter.timeZone = TimeZone(forSecondsFromGMT: 0)
+        guard let date = dateFormatter.date(from: self) else { return nil }
+        
+        return date
+    }
+}
 /// <#Description#>
 ///
 /// - date:               <#date description#>
@@ -55,8 +67,50 @@ enum IGCHeaderField {
     // Any free-text description of the class this glider is in, e.g. Standard, 15m, 18m, Open.
     case competitionClass(competitionClass: String)
     
-    static func headerField(hLine: String) -> IGCHeaderField? {
-        return nil
+    static func parseHLine(hLine: String) -> IGCHeaderField? {
+        let prefix = hLine.substring(to: hLine.index(hLine.startIndex, offsetBy: 5, limitedBy: hLine.endIndex)!)
+        switch prefix {
+        case "HFDTE":
+            return parseDateString(hLine: hLine)
+        case "HFFXA":
+            return .accuracy(accuracy: 0)
+        case "HFPLT":
+            return .pilotInCharge(pilotName: "John Doe")
+        case "HFCM2":
+            return .crew(crewName: "Bob Dylan")
+//        case "HFGTY":
+//            return IGCHeaderField.date(date: Date())
+//        case "HFGID":
+//            return IGCHeaderField.date(date: Date())
+//        case "HFDTM":
+//            return IGCHeaderField.date(date: Date())
+//        case "HFRFW":
+//            return IGCHeaderField.date(date: Date())
+//        case "HFRHW":
+//            return IGCHeaderField.date(date: Date())
+//        case "HFFTY":
+//            return IGCHeaderField.date(date: Date())
+//        case "HFGPS":
+//            return IGCHeaderField.date(date: Date())
+//        case "HFPRS":
+//            return IGCHeaderField.date(date: Date())
+//        case "HFCID":
+//            return IGCHeaderField.date(date: Date())
+//        case "HFCCL":
+//            return IGCHeaderField.date(date: Date())
+        default:
+            return nil
+        }
+    }
+    
+    static func parseDateString(hLine: String) -> IGCHeaderField? {
+        guard let prefixRange = hLine.range(of: "HFDTE") else { return nil }
+        
+        let dateString = hLine.substring(from: prefixRange.upperBound)
+        
+        guard let date = dateString.headerDate() else { return nil }
+        
+        return .date(date: date)
     }
     
 }
@@ -73,16 +127,8 @@ struct IGCHeader {
             .filter({ (line) -> Bool in
                 return line.hasPrefix("H")
             })
-        
-        let hf = lines.map { (line) -> IGCHeaderField? in
-                return IGCHeaderField.headerField(hLine: line)
-            }
-            .filter { (headerField) -> Bool in
-                return headerField != nil
-            }
-            .map { (maybeHeaderField) -> IGCHeaderField in
-                return maybeHeaderField as IGCHeaderField!
-            }
+
+        let hf = lines.flatMap { IGCHeaderField.parseHLine(hLine: $0)}
         
         headerFields = hf
         

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8716DE371D115D63005312B2 /* IGCHeaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8716DE361D115D63005312B2 /* IGCHeaderTests.swift */; };
 		8722EF311D0DD90500DA4509 /* Iguazu.h in Headers */ = {isa = PBXBuildFile; fileRef = 8722EF301D0DD90500DA4509 /* Iguazu.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8722EF381D0DD90500DA4509 /* Iguazu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8722EF2D1D0DD90500DA4509 /* Iguazu.framework */; };
 		8722EF3D1D0DD90500DA4509 /* IguazuTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8722EF3C1D0DD90500DA4509 /* IguazuTests.swift */; };
@@ -28,6 +29,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8716DE361D115D63005312B2 /* IGCHeaderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGCHeaderTests.swift; sourceTree = "<group>"; };
 		8722EF2D1D0DD90500DA4509 /* Iguazu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Iguazu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8722EF301D0DD90500DA4509 /* Iguazu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Iguazu.h; sourceTree = "<group>"; };
 		8722EF321D0DD90500DA4509 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 			children = (
 				8722EF491D0DDC0800DA4509 /* Fixtures */,
 				8722EF3C1D0DD90500DA4509 /* IguazuTests.swift */,
+				8716DE361D115D63005312B2 /* IGCHeaderTests.swift */,
 				8722EF3E1D0DD90500DA4509 /* Info.plist */,
 			);
 			path = IguazuTests;
@@ -231,6 +234,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8716DE371D115D63005312B2 /* IGCHeaderTests.swift in Sources */,
 				8722EF3D1D0DD90500DA4509 /* IguazuTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
