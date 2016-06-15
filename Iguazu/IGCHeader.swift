@@ -12,7 +12,7 @@ extension String {
     // parse strings like 250809 to Aug 25th 2009
     func headerDate() -> Date? {
         guard self.characters.count == 6 else { return nil }
-
+        
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "ddMMyy"
         dateFormatter.timeZone = TimeZone(forSecondsFromGMT: 0)
@@ -20,7 +20,14 @@ extension String {
         
         return date
     }
+    
+    func igcHeaderPrefix() -> IGCHeaderField.HeaderPrefix {
+        let rawValue = self.substring(to: self.index(self.startIndex, offsetBy: 5, limitedBy: self.endIndex)!)
+        
+        return IGCHeaderField.HeaderPrefix(rawValue: rawValue)!
+    }
 }
+
 /// <#Description#>
 ///
 /// - date:               <#date description#>
@@ -38,6 +45,21 @@ extension String {
 /// - competitionID:      <#competitionID description#>
 /// - competitionClass:   <#competitionClass description#>
 enum IGCHeaderField {
+
+    enum HeaderPrefix: String {
+        case date = "HFDTE"
+        case accuracy = "HFFXA"
+        
+        func longValue() -> String {
+            switch self {
+                
+            default:
+                return self.rawValue
+            }
+        }
+    }
+    
+    
     // UTC date this file was recorded
     case date(date: Foundation.Date)
     // Fix accuracy in meters, see also FXA three-letter-code reference
@@ -68,16 +90,16 @@ enum IGCHeaderField {
     case competitionClass(competitionClass: String)
     
     static func parseHLine(hLine: String) -> IGCHeaderField? {
-        let prefix = hLine.substring(to: hLine.index(hLine.startIndex, offsetBy: 5, limitedBy: hLine.endIndex)!)
+        let prefix = hLine.igcHeaderPrefix()
         switch prefix {
-        case "HFDTE":
+        case .date:
             return parseDateString(hLine: hLine)
-        case "HFFXA":
-            return .accuracy(accuracy: 0)
-        case "HFPLT":
-            return .pilotInCharge(pilotName: "John Doe")
-        case "HFCM2":
-            return .crew(crewName: "Bob Dylan")
+        case .accuracy:
+            return parseAccuracyString(hLine: hLine)
+//        case "HFPLT":
+//            return .pilotInCharge(pilotName: "John Doe")
+//        case "HFCM2":
+//            return .crew(crewName: "Bob Dylan")
 //        case "HFGTY":
 //            return IGCHeaderField.date(date: Date())
 //        case "HFGID":
@@ -104,7 +126,7 @@ enum IGCHeaderField {
     }
     
     static func parseDateString(hLine: String) -> IGCHeaderField? {
-        guard let prefixRange = hLine.range(of: "HFDTE") else { return nil }
+        guard let prefixRange = hLine.range(of:HeaderPrefix.date.rawValue) else { return nil }
         
         let dateString = hLine.substring(from: prefixRange.upperBound)
         
@@ -113,6 +135,15 @@ enum IGCHeaderField {
         return .date(date: date)
     }
     
+    static func parseAccuracyString(hLine: String) -> IGCHeaderField? {
+        guard let prefixRange = hLine.range(of:HeaderPrefix.accuracy.rawValue) else { return nil }
+        
+        let accuracyString = hLine.substring(from: prefixRange.upperBound)
+        
+        guard let accuracy = Int(accuracyString) else { return nil }
+        
+        return .accuracy(accuracy: accuracy)
+    }
 }
 
 

@@ -12,6 +12,7 @@ import XCTest
 class IGCHeaderTests: XCTestCase {
     
     let dateHeaderString = "HFDTE250809"
+    let accuracyHeaderString = "HFFXA100"
     
     override func setUp() {
         super.setUp()
@@ -22,8 +23,6 @@ class IGCHeaderTests: XCTestCase {
     }
     
     func testDateHeader() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
         if let dateHeader = IGCHeaderField.parseHLine(hLine: dateHeaderString) {
             switch dateHeader {
             case .date(let d):
@@ -38,11 +37,19 @@ class IGCHeaderTests: XCTestCase {
         return
     }
     
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    func testAccuracyHeader() {
+        if let accuracyHeader = IGCHeaderField.parseHLine(hLine: accuracyHeaderString) {
+            switch accuracyHeader {
+            case .accuracy(let acc):
+                print("accuracy \(acc)")
+                XCTAssertEqual(acc, 100)
+            default:
+                XCTFail("expecting a accuracy header but got something else")
+            }
+        } else {
+            XCTFail("failed to parse a non-nil header from \(accuracyHeaderString)")
         }
+        return
     }
     
 }
