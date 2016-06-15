@@ -13,6 +13,8 @@ class IGCHeaderTests: XCTestCase {
     
     let dateHeaderString = "HFDTE250809"
     let accuracyHeaderString = "HFFXA100"
+    let pilotHeaderString = "HFPLTPILOT:Ian Forster-Lewis"
+    let pilotHeaderLongString = "HFPLTPILOTINCHARGE:Ian Forster-Lewis"
     
     override func setUp() {
         super.setUp()
@@ -52,4 +54,33 @@ class IGCHeaderTests: XCTestCase {
         return
     }
     
+    func testPilotHeader() {
+        if let pilotHeader = IGCHeaderField.parseHLine(hLine: pilotHeaderString) {
+            switch pilotHeader {
+            case .pilotInCharge(let pilotName):
+                print("pilot name \(pilotName)")
+                XCTAssertEqual(pilotName, "Ian Forster-Lewis")
+            default:
+                XCTFail("expecting a pilot header but got something else")
+            }
+        } else {
+            XCTFail("failed to parse a non-nil header from \(pilotHeaderString)")
+        }
+        return
+    }
+    
+    func testPilotLongHeader() {
+        if let pilotHeader = IGCHeaderField.parseHLine(hLine: pilotHeaderLongString) {
+            switch pilotHeader {
+            case .pilotInCharge(let pilotName):
+                print("pilot name \(pilotName)")
+                XCTAssertEqual(pilotName, "Ian Forster-Lewis")
+            default:
+                XCTFail("expecting a pilot header but got something else")
+            }
+        } else {
+            XCTFail("failed to parse a non-nil header from \(pilotHeaderLongString)")
+        }
+        return
+    }
 }

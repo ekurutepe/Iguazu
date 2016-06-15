@@ -49,6 +49,7 @@ enum IGCHeaderField {
     enum HeaderPrefix: String {
         case date = "HFDTE"
         case accuracy = "HFFXA"
+        case pilot = "HFPLT"
         
         func longValue() -> String {
             switch self {
@@ -96,8 +97,8 @@ enum IGCHeaderField {
             return parseDateString(hLine: hLine)
         case .accuracy:
             return parseAccuracyString(hLine: hLine)
-//        case "HFPLT":
-//            return .pilotInCharge(pilotName: "John Doe")
+        case .pilot:
+            return parsePilotInChargeLine(hLine: hLine)
 //        case "HFCM2":
 //            return .crew(crewName: "Bob Dylan")
 //        case "HFGTY":
@@ -143,6 +144,16 @@ enum IGCHeaderField {
         guard let accuracy = Int(accuracyString) else { return nil }
         
         return .accuracy(accuracy: accuracy)
+    }
+    
+    static func parsePilotInChargeLine(hLine: String) -> IGCHeaderField? {
+        guard let _ = hLine.range(of:HeaderPrefix.pilot.rawValue) else { return nil }
+        
+        guard let separatorRange = hLine.range(of: ":") else { return nil }
+        
+        let pilotName = hLine.substring(from: separatorRange.upperBound)
+        
+        return .pilotInCharge(pilotName: pilotName)
     }
 }
 
