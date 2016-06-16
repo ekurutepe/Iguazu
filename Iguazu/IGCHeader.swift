@@ -53,6 +53,9 @@ enum IGCHeaderField {
         case crew = "HFCM2"
         case gliderType = "HFGTY"
         case gliderRegistration = "HFGID"
+        case gpsDatum = "HFDTM"
+        case competitionID = "HFCID"
+        case competitionClass = "HFCCL"
     }
     
     // UTC date this file was recorded
@@ -68,7 +71,7 @@ enum IGCHeaderField {
     // Glider registration number, e.g. N-number
     case gliderRegistration(registration: String)
     // GPS datum used for the log points - use igc code 100 / WGS84 unless you are insane.
-    case gpsDatum(datum: String)
+    case gpsDatum(code: Int, datum: String)
     // Any free-text string descibing the firmware revision of the logger
     case firmwareVersion(version: String)
     // Any free-text string giving the hardware revision number of the logger
@@ -80,7 +83,7 @@ enum IGCHeaderField {
     // Free-text (separated by commas) description of the pressure sensor used in the logger
     case altimeterType(brand: String, model: String, maximumAltitude: Int)
     // The fin-number by which the glider is generally recognised
-    case competitionID(competitionID: String)
+    case competitionID(id: String)
     // Any free-text description of the class this glider is in, e.g. Standard, 15m, 18m, Open.
     case competitionClass(competitionClass: String)
     
@@ -103,6 +106,15 @@ enum IGCHeaderField {
         case .gliderRegistration:
             guard let value = parseFreeTextLine(line: hLine, prefix: HeaderPrefix.gliderRegistration.rawValue) else { return nil }
             return .gliderRegistration(registration:value)
+        case .gpsDatum:
+            // Punt on parsing this header. Assume it's standard.
+            return .gpsDatum(code: 100, datum: "WGS-1984")
+        case .competitionID:
+            guard let value = parseFreeTextLine(line: hLine, prefix: HeaderPrefix.competitionID.rawValue) else { return nil }
+            return .competitionID(id: value)
+        case .competitionClass:
+            guard let value = parseFreeTextLine(line: hLine, prefix: HeaderPrefix.competitionClass.rawValue) else { return nil }
+            return .competitionClass(competitionClass: value)
 //        case "HFDTM":
 //            return IGCHeaderField.date(date: Date())
 //        case "HFRFW":

@@ -18,6 +18,8 @@ class IGCHeaderTests: XCTestCase {
     let crewHeaderString = "HFCM2CREW2:Bob Dylan"
     let gliderTypeString = "HFGTYGLIDERTYPE: Schleicher ASH-25"
     let gliderRegistrationString = "HFGIDGLIDERID: N116 EL"
+    let tailfinNumberString = "HFCIDCOMPETITIONID: EH"
+    let competitionClassString = "HFCCLCOMPETITIONCLASS:15m Motor Glider"
     
     override func setUp() {
         super.setUp()
@@ -128,6 +130,36 @@ class IGCHeaderTests: XCTestCase {
             }
         } else {
             XCTFail("failed to parse a non-nil header from \(gliderRegistrationString)")
+        }
+        return
+    }
+    
+    func testCompetitionIDHeader() {
+        if let header = IGCHeaderField.parseHLine(hLine: tailfinNumberString) {
+            switch header {
+            case .competitionID(let tailfin):
+                print("glider registration \(tailfin)")
+                XCTAssertEqual(tailfin, "EH")
+            default:
+                XCTFail("expecting a competition ID header but got something else")
+            }
+        } else {
+            XCTFail("failed to parse a non-nil header from \(tailfinNumberString)")
+        }
+        return
+    }
+    
+    func testCompetitionClassHeader() {
+        if let header = IGCHeaderField.parseHLine(hLine: competitionClassString) {
+            switch header {
+            case .competitionClass(let cClass):
+                print("competition class \(cClass)")
+                XCTAssertEqual(cClass, "15m Motor Glider")
+            default:
+                XCTFail("expecting a competition class header but got something else")
+            }
+        } else {
+            XCTFail("failed to parse a non-nil header from \(tailfinNumberString)")
         }
         return
     }
