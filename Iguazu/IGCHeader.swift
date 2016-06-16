@@ -52,6 +52,7 @@ enum IGCHeaderField {
         case pilot = "HFPLT"
         case crew = "HFCM2"
         case gliderType = "HFGTY"
+        case gliderRegistration = "HFGID"
     }
     
     // UTC date this file was recorded
@@ -91,13 +92,17 @@ enum IGCHeaderField {
         case .accuracy:
             return parseAccuracyString(hLine: hLine)
         case .pilot:
-            return parsePilotInChargeLine(hLine: hLine)
+            guard let name = parseFreeTextLine(line: hLine, prefix: HeaderPrefix.pilot.rawValue) else { return nil }
+            return .pilotInCharge(name: name)
         case .crew:
-            return parseCrewLine(hLine: hLine)
+            guard let name = parseFreeTextLine(line: hLine, prefix: HeaderPrefix.crew.rawValue) else { return nil }
+            return .crew(name: name)
         case .gliderType:
-            return parseGliderTypeLine(hLine: hLine)
-//        case "HFGID":
-//            return IGCHeaderField.date(date: Date())
+            guard let name = parseFreeTextLine(line: hLine, prefix: HeaderPrefix.gliderType.rawValue) else { return nil }
+            return .gliderType(gliderType: name)
+        case .gliderRegistration:
+            guard let value = parseFreeTextLine(line: hLine, prefix: HeaderPrefix.gliderRegistration.rawValue) else { return nil }
+            return .gliderRegistration(registration:value)
 //        case "HFDTM":
 //            return IGCHeaderField.date(date: Date())
 //        case "HFRFW":
@@ -137,24 +142,6 @@ enum IGCHeaderField {
         guard let accuracy = Int(accuracyString) else { return nil }
         
         return .accuracy(accuracy: accuracy)
-    }
-    
-    static func parsePilotInChargeLine(hLine: String) -> IGCHeaderField? {
-        guard let name = parseFreeTextLine(line: hLine, prefix: HeaderPrefix.pilot.rawValue) else { return nil }
-        
-        return .pilotInCharge(name: name)
-    }
-    
-    static func parseCrewLine(hLine: String) -> IGCHeaderField? {
-        guard let name = parseFreeTextLine(line: hLine, prefix: HeaderPrefix.crew.rawValue) else { return nil }
-        
-        return .crew(name: name)
-    }
-    
-    static func parseGliderTypeLine(hLine: String) -> IGCHeaderField? {
-        guard let name = parseFreeTextLine(line: hLine, prefix: HeaderPrefix.gliderType.rawValue) else { return nil }
-        
-        return .gliderType(gliderType: name)
     }
     
     static func parseFreeTextLine(line: String, prefix: String) -> String? {
