@@ -16,6 +16,7 @@ class IGCHeaderTests: XCTestCase {
     let pilotHeaderString = "HFPLTPILOT:Ian Forster-Lewis"
     let pilotHeaderLongString = "HFPLTPILOTINCHARGE:Ian Forster-Lewis"
     let crewHeaderString = "HFCM2CREW2:Bob Dylan"
+    let gliderTypeString = "HFGTYGLIDERTYPE: Schleicher ASH-25"
     
     override func setUp() {
         super.setUp()
@@ -96,6 +97,21 @@ class IGCHeaderTests: XCTestCase {
             }
         } else {
             XCTFail("failed to parse a non-nil header from \(crewHeaderString)")
+        }
+        return
+    }
+    
+    func testGliderTypeHeader() {
+        if let header = IGCHeaderField.parseHLine(hLine: gliderTypeString) {
+            switch header {
+            case .gliderType(let type):
+                print("glider type \(type)")
+                XCTAssertEqual(type, "Schleicher ASH-25")
+            default:
+                XCTFail("expecting a glider type header but got something else")
+            }
+        } else {
+            XCTFail("failed to parse a non-nil header from \(gliderTypeString)")
         }
         return
     }

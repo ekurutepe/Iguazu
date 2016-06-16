@@ -51,6 +51,7 @@ enum IGCHeaderField {
         case accuracy = "HFFXA"
         case pilot = "HFPLT"
         case crew = "HFCM2"
+        case gliderType = "HFGTY"
     }
     
     // UTC date this file was recorded
@@ -93,8 +94,8 @@ enum IGCHeaderField {
             return parsePilotInChargeLine(hLine: hLine)
         case .crew:
             return parseCrewLine(hLine: hLine)
-//        case "HFGTY":
-//            return IGCHeaderField.date(date: Date())
+        case .gliderType:
+            return parseGliderTypeLine(hLine: hLine)
 //        case "HFGID":
 //            return IGCHeaderField.date(date: Date())
 //        case "HFDTM":
@@ -139,25 +140,32 @@ enum IGCHeaderField {
     }
     
     static func parsePilotInChargeLine(hLine: String) -> IGCHeaderField? {
-        return parseFreeTextLine(line: hLine, prefix: HeaderPrefix.pilot.rawValue, consumer: {
-            return .pilotInCharge(name: $0)
-        })
+        guard let name = parseFreeTextLine(line: hLine, prefix: HeaderPrefix.pilot.rawValue) else { return nil }
+        
+        return .pilotInCharge(name: name)
     }
     
     static func parseCrewLine(hLine: String) -> IGCHeaderField? {
-        return parseFreeTextLine(line: hLine, prefix: HeaderPrefix.crew.rawValue, consumer: {
-            return .crew(name: $0)
-        })
+        guard let name = parseFreeTextLine(line: hLine, prefix: HeaderPrefix.crew.rawValue) else { return nil }
+        
+        return .crew(name: name)
     }
     
-    static func parseFreeTextLine(line: String, prefix: String, consumer: (String) -> IGCHeaderField) -> IGCHeaderField? {
+    static func parseGliderTypeLine(hLine: String) -> IGCHeaderField? {
+        guard let name = parseFreeTextLine(line: hLine, prefix: HeaderPrefix.gliderType.rawValue) else { return nil }
+        
+        return .gliderType(gliderType: name)
+    }
+    
+    static func parseFreeTextLine(line: String, prefix: String) -> String? {
         guard let _ = line.range(of:prefix) else { return nil }
         
         guard let separatorRange = line.range(of: ":") else { return nil }
         
-        let name = line.substring(from: separatorRange.upperBound)
+        let value = line.substring(from: separatorRange.upperBound)
+            .trimmingCharacters(in: .whitespacesAndNewlines)
         
-        return consumer(name)
+        return value
     }
 }
 
