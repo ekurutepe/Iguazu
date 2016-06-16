@@ -15,6 +15,7 @@ class IGCHeaderTests: XCTestCase {
     let accuracyHeaderString = "HFFXA100"
     let pilotHeaderString = "HFPLTPILOT:Ian Forster-Lewis"
     let pilotHeaderLongString = "HFPLTPILOTINCHARGE:Ian Forster-Lewis"
+    let crewHeaderString = "HFCM2CREW2:Bob Dylan"
     
     override func setUp() {
         super.setUp()
@@ -57,9 +58,9 @@ class IGCHeaderTests: XCTestCase {
     func testPilotHeader() {
         if let pilotHeader = IGCHeaderField.parseHLine(hLine: pilotHeaderString) {
             switch pilotHeader {
-            case .pilotInCharge(let pilotName):
-                print("pilot name \(pilotName)")
-                XCTAssertEqual(pilotName, "Ian Forster-Lewis")
+            case .pilotInCharge(let name):
+                print("pilot name \(name)")
+                XCTAssertEqual(name, "Ian Forster-Lewis")
             default:
                 XCTFail("expecting a pilot header but got something else")
             }
@@ -72,14 +73,29 @@ class IGCHeaderTests: XCTestCase {
     func testPilotLongHeader() {
         if let pilotHeader = IGCHeaderField.parseHLine(hLine: pilotHeaderLongString) {
             switch pilotHeader {
-            case .pilotInCharge(let pilotName):
-                print("pilot name \(pilotName)")
-                XCTAssertEqual(pilotName, "Ian Forster-Lewis")
+            case .pilotInCharge(let name):
+                print("pilot name \(name)")
+                XCTAssertEqual(name, "Ian Forster-Lewis")
             default:
                 XCTFail("expecting a pilot header but got something else")
             }
         } else {
             XCTFail("failed to parse a non-nil header from \(pilotHeaderLongString)")
+        }
+        return
+    }
+    
+    func testCrewHeader() {
+        if let header = IGCHeaderField.parseHLine(hLine: crewHeaderString) {
+            switch header {
+            case .crew(let name):
+                print("pilot name \(name)")
+                XCTAssertEqual(name, "Bob Dylan")
+            default:
+                XCTFail("expecting a crew header but got something else")
+            }
+        } else {
+            XCTFail("failed to parse a non-nil header from \(crewHeaderString)")
         }
         return
     }

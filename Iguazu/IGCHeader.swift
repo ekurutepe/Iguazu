@@ -50,25 +50,17 @@ enum IGCHeaderField {
         case date = "HFDTE"
         case accuracy = "HFFXA"
         case pilot = "HFPLT"
-        
-        func longValue() -> String {
-            switch self {
-                
-            default:
-                return self.rawValue
-            }
-        }
+        case crew = "HFCM2"
     }
-    
     
     // UTC date this file was recorded
     case date(date: Foundation.Date)
     // Fix accuracy in meters, see also FXA three-letter-code reference
     case accuracy(accuracy: Int)
     // Name of the competing pilot
-    case pilotInCharge(pilotName: String)
+    case pilotInCharge(name: String)
     // Name of the second pilot in a two-seater
-    case crew(crewName: String)
+    case crew(name: String)
     // Free-text name of the glider model
     case gliderType(gliderType: String)
     // Glider registration number, e.g. N-number
@@ -99,8 +91,8 @@ enum IGCHeaderField {
             return parseAccuracyString(hLine: hLine)
         case .pilot:
             return parsePilotInChargeLine(hLine: hLine)
-//        case "HFCM2":
-//            return .crew(crewName: "Bob Dylan")
+        case .crew:
+            return parseCrewLine(hLine: hLine)
 //        case "HFGTY":
 //            return IGCHeaderField.date(date: Date())
 //        case "HFGID":
@@ -147,13 +139,25 @@ enum IGCHeaderField {
     }
     
     static func parsePilotInChargeLine(hLine: String) -> IGCHeaderField? {
-        guard let _ = hLine.range(of:HeaderPrefix.pilot.rawValue) else { return nil }
+        return parseFreeTextLine(line: hLine, prefix: HeaderPrefix.pilot.rawValue, consumer: {
+            return .pilotInCharge(name: $0)
+        })
+    }
+    
+    static func parseCrewLine(hLine: String) -> IGCHeaderField? {
+        return parseFreeTextLine(line: hLine, prefix: HeaderPrefix.crew.rawValue, consumer: {
+            return .crew(name: $0)
+        })
+    }
+    
+    static func parseFreeTextLine(line: String, prefix: String, consumer: (String) -> IGCHeaderField) -> IGCHeaderField? {
+        guard let _ = line.range(of:prefix) else { return nil }
         
-        guard let separatorRange = hLine.range(of: ":") else { return nil }
+        guard let separatorRange = line.range(of: ":") else { return nil }
         
-        let pilotName = hLine.substring(from: separatorRange.upperBound)
+        let name = line.substring(from: separatorRange.upperBound)
         
-        return .pilotInCharge(pilotName: pilotName)
+        return consumer(name)
     }
 }
 

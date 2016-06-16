@@ -10,7 +10,6 @@
 		8716DE371D115D63005312B2 /* IGCHeaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8716DE361D115D63005312B2 /* IGCHeaderTests.swift */; };
 		8722EF311D0DD90500DA4509 /* Iguazu.h in Headers */ = {isa = PBXBuildFile; fileRef = 8722EF301D0DD90500DA4509 /* Iguazu.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8722EF381D0DD90500DA4509 /* Iguazu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8722EF2D1D0DD90500DA4509 /* Iguazu.framework */; };
-		8722EF3D1D0DD90500DA4509 /* IguazuTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8722EF3C1D0DD90500DA4509 /* IguazuTests.swift */; };
 		8722EF481D0DDB8200DA4509 /* IGCParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8722EF471D0DDB8200DA4509 /* IGCParser.swift */; };
 		8722EF4B1D0DDC1D00DA4509 /* lx7007.igc in Resources */ = {isa = PBXBuildFile; fileRef = 8722EF4A1D0DDC1D00DA4509 /* lx7007.igc */; };
 		8722EF4D1D0DDCEC00DA4509 /* IGCHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8722EF4C1D0DDCEC00DA4509 /* IGCHeader.swift */; };
@@ -34,7 +33,6 @@
 		8722EF301D0DD90500DA4509 /* Iguazu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Iguazu.h; sourceTree = "<group>"; };
 		8722EF321D0DD90500DA4509 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8722EF371D0DD90500DA4509 /* IguazuTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IguazuTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		8722EF3C1D0DD90500DA4509 /* IguazuTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IguazuTests.swift; sourceTree = "<group>"; };
 		8722EF3E1D0DD90500DA4509 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8722EF471D0DDB8200DA4509 /* IGCParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGCParser.swift; sourceTree = "<group>"; };
 		8722EF4A1D0DDC1D00DA4509 /* lx7007.igc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = lx7007.igc; sourceTree = "<group>"; };
@@ -97,7 +95,6 @@
 			isa = PBXGroup;
 			children = (
 				8722EF491D0DDC0800DA4509 /* Fixtures */,
-				8722EF3C1D0DD90500DA4509 /* IguazuTests.swift */,
 				8716DE361D115D63005312B2 /* IGCHeaderTests.swift */,
 				8722EF3E1D0DD90500DA4509 /* Info.plist */,
 			);
@@ -235,7 +232,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8716DE371D115D63005312B2 /* IGCHeaderTests.swift in Sources */,
-				8722EF3D1D0DD90500DA4509 /* IguazuTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

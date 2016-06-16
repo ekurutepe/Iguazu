@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Iguazu/IGCHeader.swift"
-            timestampString = "487705320.232932"
+            timestampString = "487753200.159247"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "130"
-            endingLineNumber = "130"
+            startingLineNumber = "122"
+            endingLineNumber = "122"
             landmarkName = "parseDateString(hLine:)"
             landmarkType = "7">
          </BreakpointContent>
