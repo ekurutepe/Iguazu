@@ -21,10 +21,11 @@ extension String {
         return date
     }
     
-    func igcHeaderPrefix() -> IGCHeaderField.HeaderPrefix {
-        let rawValue = self.substring(to: self.index(self.startIndex, offsetBy: 5, limitedBy: self.endIndex)!)
+    func igcHeaderPrefix() -> IGCHeaderField.HeaderPrefix? {
+        let index = self.index(self.startIndex, offsetBy: 5, limitedBy: self.endIndex) ?? self.startIndex
+        let rawValue = self.substring(to: index)
         
-        return IGCHeaderField.HeaderPrefix(rawValue: rawValue)!
+        return IGCHeaderField.HeaderPrefix(rawValue: rawValue)
     }
 }
 
@@ -54,6 +55,7 @@ enum IGCHeaderField {
         case gliderType = "HFGTY"
         case gliderRegistration = "HFGID"
         case gpsDatum = "HFDTM"
+        
         case competitionID = "HFCID"
         case competitionClass = "HFCCL"
     }
@@ -88,7 +90,7 @@ enum IGCHeaderField {
     case competitionClass(competitionClass: String)
     
     static func parseHLine(hLine: String) -> IGCHeaderField? {
-        let prefix = hLine.igcHeaderPrefix()
+        guard let prefix = hLine.igcHeaderPrefix() else { return nil }
         switch prefix {
         case .date:
             return parseDateString(hLine: hLine)
@@ -115,22 +117,6 @@ enum IGCHeaderField {
         case .competitionClass:
             guard let value = parseFreeTextLine(line: hLine, prefix: HeaderPrefix.competitionClass.rawValue) else { return nil }
             return .competitionClass(competitionClass: value)
-//        case "HFDTM":
-//            return IGCHeaderField.date(date: Date())
-//        case "HFRFW":
-//            return IGCHeaderField.date(date: Date())
-//        case "HFRHW":
-//            return IGCHeaderField.date(date: Date())
-//        case "HFFTY":
-//            return IGCHeaderField.date(date: Date())
-//        case "HFGPS":
-//            return IGCHeaderField.date(date: Date())
-//        case "HFPRS":
-//            return IGCHeaderField.date(date: Date())
-//        case "HFCID":
-//            return IGCHeaderField.date(date: Date())
-//        case "HFCCL":
-//            return IGCHeaderField.date(date: Date())
         default:
             return nil
         }
@@ -184,7 +170,6 @@ struct IGCHeader {
         let hf = lines.flatMap { IGCHeaderField.parseHLine(hLine: $0)}
         
         headerFields = hf
-        
-        return nil
+    
     }
 }
