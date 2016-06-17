@@ -17,7 +17,10 @@ class IGCParser: NSObject {
     ///
     /// - returns: <#return value description#>
     class func parse(_ igcString: String) -> IGCData? {
-        return nil
+        guard let header = IGCHeader(igcString: igcString) else { return nil }
+        let data = IGCData(header: header, records: [IGCRecord](), extensions: nil)
+        
+        return data
     }
 }
 

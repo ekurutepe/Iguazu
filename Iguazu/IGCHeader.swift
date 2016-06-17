@@ -117,8 +117,8 @@ enum IGCHeaderField {
         case .competitionClass:
             guard let value = parseFreeTextLine(line: hLine, prefix: HeaderPrefix.competitionClass.rawValue) else { return nil }
             return .competitionClass(competitionClass: value)
-        default:
-            return nil
+//        default:
+//            return nil
         }
     }
     
