@@ -30,11 +30,17 @@ class IGCParserTests: XCTestCase {
     }
     
     func testHeader() {
-        let header = IGCHeader(igcString: igcString)
+        guard let data = IGCParser.parse(igcString) else { XCTFail("could not parse igc file"); return }
+        let header = data.header
         
-        XCTAssertNotNil(header)
-        guard let headerFields = header?.headerFields else { return }
-        XCTAssertGreaterThan(headerFields.count, 0)
+        XCTAssertGreaterThan(header.headerFields.count, 0)
     }
     
+    func testExtensions() {
+        guard let data = IGCParser.parse(igcString) else { XCTFail("could not parse igc file"); return }
+        
+        XCTAssertNotNil(data.extensions)
+        
+        XCTAssertEqual(data.extensions?.count, 2)
+    }
 }

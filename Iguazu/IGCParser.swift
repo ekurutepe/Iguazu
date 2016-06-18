@@ -18,7 +18,14 @@ class IGCParser: NSObject {
     /// - returns: <#return value description#>
     class func parse(_ igcString: String) -> IGCData? {
         guard let header = IGCHeader(igcString: igcString) else { return nil }
-        let data = IGCData(header: header, records: [IGCRecord](), extensions: nil)
+        
+        let iLines = igcString.components(separatedBy: .newlines).filter { (line) -> Bool in
+            return line.hasPrefix("I")
+        }
+        
+        let extensions = IGCExtension.parseExtensions(line: iLines.first ?? "")
+        
+        let data = IGCData(header: header, records: [IGCRecord](), extensions: extensions)
         
         return data
     }
