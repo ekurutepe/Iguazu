@@ -16,6 +16,8 @@
 		8722EF511D0DEF2A00DA4509 /* IGCRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8722EF501D0DEF2A00DA4509 /* IGCRecord.swift */; };
 		874F49251D1489490019DC30 /* IGCExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874F49241D1489490019DC30 /* IGCExtensionTests.swift */; };
 		876CBA3D1D10659200C125AC /* IGCExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876CBA3C1D10659200C125AC /* IGCExtension.swift */; };
+		877A18971D18367A00EC6E41 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877A18961D18367A00EC6E41 /* StringExtensions.swift */; };
+		877A18991D18370100EC6E41 /* StringExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877A18981D18370100EC6E41 /* StringExtensionsTests.swift */; };
 		87FA6A6B1D12D10F000C5F7E /* IGCParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87FA6A6A1D12D10F000C5F7E /* IGCParserTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +44,8 @@
 		8722EF501D0DEF2A00DA4509 /* IGCRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGCRecord.swift; sourceTree = "<group>"; };
 		874F49241D1489490019DC30 /* IGCExtensionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGCExtensionTests.swift; sourceTree = "<group>"; };
 		876CBA3C1D10659200C125AC /* IGCExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGCExtension.swift; sourceTree = "<group>"; };
+		877A18961D18367A00EC6E41 /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
+		877A18981D18370100EC6E41 /* StringExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensionsTests.swift; sourceTree = "<group>"; };
 		87FA6A6A1D12D10F000C5F7E /* IGCParserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGCParserTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -91,6 +95,7 @@
 				8722EF4C1D0DDCEC00DA4509 /* IGCHeader.swift */,
 				8722EF501D0DEF2A00DA4509 /* IGCRecord.swift */,
 				876CBA3C1D10659200C125AC /* IGCExtension.swift */,
+				877A18961D18367A00EC6E41 /* StringExtensions.swift */,
 			);
 			path = Iguazu;
 			sourceTree = "<group>";
@@ -103,6 +108,7 @@
 				87FA6A6A1D12D10F000C5F7E /* IGCParserTests.swift */,
 				874F49241D1489490019DC30 /* IGCExtensionTests.swift */,
 				8722EF3E1D0DD90500DA4509 /* Info.plist */,
+				877A18981D18370100EC6E41 /* StringExtensionsTests.swift */,
 			);
 			path = IguazuTests;
 			sourceTree = "<group>";
@@ -228,6 +234,7 @@
 			files = (
 				8722EF511D0DEF2A00DA4509 /* IGCRecord.swift in Sources */,
 				876CBA3D1D10659200C125AC /* IGCExtension.swift in Sources */,
+				877A18971D18367A00EC6E41 /* StringExtensions.swift in Sources */,
 				8722EF4D1D0DDCEC00DA4509 /* IGCHeader.swift in Sources */,
 				8722EF481D0DDB8200DA4509 /* IGCParser.swift in Sources */,
 			);
@@ -237,6 +244,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				877A18991D18370100EC6E41 /* StringExtensionsTests.swift in Sources */,
 				87FA6A6B1D12D10F000C5F7E /* IGCParserTests.swift in Sources */,
 				8716DE371D115D63005312B2 /* IGCHeaderTests.swift in Sources */,
 				874F49251D1489490019DC30 /* IGCExtensionTests.swift in Sources */,

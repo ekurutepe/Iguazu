@@ -25,21 +25,20 @@ struct IGCExtension {
         
         guard firstChar == "I" || firstChar == "J" else { return nil }
         
-        let extensionStartIndex = line.index(countIndex, offsetBy: 2)
-        guard let extensionCount = Int(line.substring(with: countIndex..<extensionStartIndex)) else { return nil }
+        guard let extensionCount = Int(line.extract(from: 1, length: 2)) else { return nil }
         
-        let extensionCharCount = 7
+        let extensionCharLength = 7
+        
+        let extensionsString = line.substring(from: line.index(countIndex, offsetBy: 2))
         
         var extensions = [IGCExtension]()
         
         for i in 0..<extensionCount {
-            let firstByteIndex = line.index(extensionStartIndex, offsetBy: i*extensionCharCount)
-            let secondByteIndex = line.index(firstByteIndex, offsetBy: 2)
-            let codeIndex = line.index(secondByteIndex, offsetBy: 2)
+            guard let firstByte = Int(extensionsString.extract(from: (i*extensionCharLength), length: 2)) else { break }
+            guard let secondByte = Int(extensionsString.extract(from: (i*extensionCharLength)+2, length: 2)) else { break }
+            let code = extensionsString.extract(from: (i*extensionCharLength)+4, length: 3)
             
-            guard let firstByte = Int(line.substring(with: firstByteIndex..<secondByteIndex)) else { break }
-            guard let secondByte = Int(line.substring(with: secondByteIndex..<codeIndex)) else { break }
-            guard let type = ExtensionType(rawValue: line.substring(with: codeIndex..<line.index(codeIndex, offsetBy: 3))) else { break }
+            guard let type = ExtensionType(rawValue: code) else { break }
             
             let ext = IGCExtension(startIndex: firstByte, endIndex: secondByte, type: type)
             
