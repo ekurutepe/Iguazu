@@ -14,13 +14,18 @@ protocol IGCRecord {
 }
 
 /// <#Description#>
-struct IGCLocation: IGCRecord {
+struct IGCFix: IGCRecord {
     let timestamp: Date
     let coordinate: CLLocationCoordinate2D
     let altimeterAltitude: Int
     let gpsAltitude: Int
     let fixAccuracy: Int
-    let extensions: [IGCExtension]?
+    
+    static func parseFix(with line:String) -> IGCFix? {
+        guard let prefix = line.extract(from: 0, length: 1) where prefix == "B" else { return nil }
+    
+        return nil
+    }
 }
 
 // TODO: create real event type
