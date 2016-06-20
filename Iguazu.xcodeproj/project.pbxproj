@@ -107,8 +107,8 @@
 				8716DE361D115D63005312B2 /* IGCHeaderTests.swift */,
 				87FA6A6A1D12D10F000C5F7E /* IGCParserTests.swift */,
 				874F49241D1489490019DC30 /* IGCExtensionTests.swift */,
-				8722EF3E1D0DD90500DA4509 /* Info.plist */,
 				877A18981D18370100EC6E41 /* StringExtensionsTests.swift */,
+				8722EF3E1D0DD90500DA4509 /* Info.plist */,
 			);
 			path = IguazuTests;
 			sourceTree = "<group>";

@@ -16,7 +16,10 @@ extension String {
     /// - parameter length: length of the substring to extract
     ///
     /// - returns: the extracted substring
-    func extract(from start:Int, length: Int) -> String {
+    func extract(from start:Int, length: Int) -> String? {
+        guard start+length <= self.utf8.count else { return nil }
+        guard start >= 0 else { return nil }
+        
         let startIndex = self.index(self.startIndex, offsetBy:start)
         let endIndex = self.index(startIndex, offsetBy: length)
         
