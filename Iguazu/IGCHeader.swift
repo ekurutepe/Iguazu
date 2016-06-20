@@ -8,27 +8,6 @@
 
 import Foundation
 
-extension String {
-    // parse strings like 250809 to Aug 25th 2009
-    func headerDate() -> Date? {
-        guard self.characters.count == 6 else { return nil }
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "ddMMyy"
-        dateFormatter.timeZone = TimeZone(forSecondsFromGMT: 0)
-        guard let date = dateFormatter.date(from: self) else { return nil }
-        
-        return date
-    }
-    
-    func igcHeaderPrefix() -> IGCHeaderField.HeaderPrefix? {
-        let index = self.index(self.startIndex, offsetBy: 5, limitedBy: self.endIndex) ?? self.startIndex
-        let rawValue = self.substring(to: index)
-        
-        return IGCHeaderField.HeaderPrefix(rawValue: rawValue)
-    }
-}
-
 /// <#Description#>
 ///
 /// - date:               <#date description#>
