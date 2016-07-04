@@ -16,7 +16,7 @@ extension String {
     /// - parameter length: length of the substring to extract
     ///
     /// - returns: the extracted substring
-    func extract(from start:Int, length: Int) -> String? {
+    func extractString(from start:Int, length: Int) -> String? {
         guard start+length <= self.utf8.count else { return nil }
         guard start >= 0 else { return nil }
         
@@ -24,6 +24,41 @@ extension String {
         let endIndex = self.index(startIndex, offsetBy: length)
         
         return self.substring(with: startIndex..<endIndex)
+    }
+    
+    /// Extract date components for the time in the format HHMMSS from this 
+    /// string starting at given index.
+    ///
+    /// - parameter start:  the index where the time string of the format HHMMSS starts
+    ///
+    /// - returns: DateComponents with hour, minute and seconds fields set if 
+    ///            the string could be extracted. Nil otherwise.
+    func extractTime(from start:Int) -> DateComponents? {
+        let length = 6
+        guard start+length <= self.utf8.count else { return nil }
+        guard start >= 0 else { return nil }
+        
+        guard let hours = Int(self.extractString(from: start, length: 2)!) else { return nil }
+        guard let minutes = Int(self.extractString(from: start+2, length: 2)!) else { return nil }
+        guard let seconds = Int(self.extractString(from: start+4, length: 2)!) else { return nil }
+        
+        return DateComponents(calendar: Calendar.current(),
+            timeZone: TimeZone(abbreviation: "UTC"),
+            era: nil,
+            year: nil,
+            month: nil,
+            day: nil,
+            hour: hours,
+            minute: minutes,
+            second: seconds,
+            nanosecond: nil,
+            weekday: nil,
+            weekdayOrdinal: nil,
+            quarter: nil,
+            weekOfMonth: nil,
+            weekOfYear: nil,
+            yearForWeekOfYear: nil)
+        
     }
     
     // parse strings like 250809 to Aug 25th 2009

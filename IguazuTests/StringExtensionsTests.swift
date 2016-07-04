@@ -12,6 +12,7 @@ import XCTest
 class StringExtensionsTests: XCTestCase {
 
     let exampleString = "1234567890"
+    let dateString = "B1101355206343N00006198WA0058700558"
     
     override func setUp() {
         super.setUp()
@@ -24,21 +25,35 @@ class StringExtensionsTests: XCTestCase {
     }
 
     func testStringExtract1() {
-        let s123 = exampleString.extract(from: 0, length: 3)
+        let s123 = exampleString.extractString(from: 0, length: 3)
         
         XCTAssertEqual(s123, "123")
     }
 
     func testStringExtract2() {
-        let s = exampleString.extract(from: 0, length: 0)
+        let s = exampleString.extractString(from: 0, length: 0)
         
         XCTAssertEqual(s, "")
     }
     
     func testStringExtract3() {
-        let s = exampleString.extract(from: 1, length: 2)
+        let s = exampleString.extractString(from: 1, length: 2)
         
         XCTAssertEqual(s, "23")
+    }
+    
+    func testDateExtract() {
+        let components = dateString.extractTime(from: 1)
+        
+        XCTAssertEqual(components?.hour, 11)
+        XCTAssertEqual(components?.minute, 1)
+        XCTAssertEqual(components?.second, 35)
+    }
+    
+    func testDateExtractFail() {
+        let components = "B12qw34".extractTime(from: 1)
+        
+        XCTAssertNil(components)
     }
 
 }

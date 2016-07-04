@@ -25,7 +25,7 @@ struct IGCExtension {
         
         guard firstChar == "I" || firstChar == "J" else { return nil }
         
-        guard let extensionCount = Int(line.extract(from: 1, length: 2) ?? "") else { return nil }
+        guard let extensionCount = Int(line.extractString(from: 1, length: 2) ?? "") else { return nil }
         
         let extensionCharLength = 7
         
@@ -34,9 +34,9 @@ struct IGCExtension {
         var extensions = [IGCExtension]()
         
         for i in 0..<extensionCount {
-            guard let firstByte = Int(extensionsString.extract(from: (i*extensionCharLength), length: 2) ?? "") else { break }
-            guard let secondByte = Int(extensionsString.extract(from: (i*extensionCharLength)+2, length: 2) ?? "") else { break }
-            let code = extensionsString.extract(from: (i*extensionCharLength)+4, length: 3) ?? ""
+            guard let firstByte = Int(extensionsString.extractString(from: (i*extensionCharLength), length: 2) ?? "") else { break }
+            guard let secondByte = Int(extensionsString.extractString(from: (i*extensionCharLength)+2, length: 2) ?? "") else { break }
+            let code = extensionsString.extractString(from: (i*extensionCharLength)+4, length: 3) ?? ""
             
             guard let type = ExtensionType(rawValue: code) else { break }
             
