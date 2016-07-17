@@ -42,7 +42,7 @@ extension String {
         guard let minutes = Int(self.extractString(from: start+2, length: 2)!) else { return nil }
         guard let seconds = Int(self.extractString(from: start+4, length: 2)!) else { return nil }
         
-        return DateComponents(calendar: Calendar.current(),
+        return DateComponents(calendar: Calendar.current,
             timeZone: TimeZone(abbreviation: "UTC"),
             era: nil,
             year: nil,
