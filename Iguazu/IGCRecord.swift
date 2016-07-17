@@ -21,10 +21,22 @@ struct IGCFix: IGCRecord {
     let gpsAltitude: Int
     let fixAccuracy: Int
     
-    static func parseFix(with line:String) -> IGCFix? {
+    static func parseFix(with line:String, midnight: Date) -> IGCFix? {
         guard let prefix = line.extractString(from: 0, length: 1) where prefix == "B" else { return nil }
-    
-        return nil
+        
+        guard let timeComponents = line.extractTime(from: 1) else { return nil }
+        
+        let timestamp = Calendar.current.date(byAdding: timeComponents, to: midnight, options: [])
+        
+        
+        print(timestamp)
+        
+        return nil 
+//        return IGCFix(timestamp: timestamp,
+//            coordinate: <#T##CLLocationCoordinate2D#>,
+//            altimeterAltitude: <#T##Int#>,
+//            gpsAltitude: <#T##Int#>,
+//            fixAccuracy: <#T##Int#>)
     }
 }
 
@@ -33,7 +45,7 @@ enum IGCEventType {
     case dummy
 }
 
-/// <#Description#>
+///
 struct IGCEvent: IGCRecord {
     let timestamp: Date
     let event: IGCEventType

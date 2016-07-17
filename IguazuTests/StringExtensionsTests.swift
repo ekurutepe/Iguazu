@@ -12,7 +12,7 @@ import XCTest
 class StringExtensionsTests: XCTestCase {
 
     let exampleString = "1234567890"
-    let dateString = "B1101355206343N00006198WA0058700558"
+    let fixString = "B1101355206343N00006198WA0058700558"
     
     override func setUp() {
         super.setUp()
@@ -43,7 +43,7 @@ class StringExtensionsTests: XCTestCase {
     }
     
     func testDateExtract() {
-        let components = dateString.extractTime(from: 1)
+        let components = fixString.extractTime(from: 1)
         
         XCTAssertEqual(components?.hour, 11)
         XCTAssertEqual(components?.minute, 1)
@@ -54,6 +54,14 @@ class StringExtensionsTests: XCTestCase {
         let components = "B12qw34".extractTime(from: 1)
         
         XCTAssertNil(components)
+    }
+    
+    func testLatitude() {
+        guard let latitude = fixString.extractLatitude(from: 7) else {
+            XCTFail("could not parse latitude"); return
+        }
+        
+        XCTAssertNotEqualWithAccuracy(latitude, 52.105716, 0.0000001)
     }
 
 }
