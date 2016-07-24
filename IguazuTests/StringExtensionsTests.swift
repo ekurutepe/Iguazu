@@ -61,7 +61,14 @@ class StringExtensionsTests: XCTestCase {
             XCTFail("could not parse latitude"); return
         }
         
-        XCTAssertNotEqualWithAccuracy(latitude, 52.105716, 0.0000001)
+        XCTAssertEqualWithAccuracy(latitude, 52.105716, accuracy: 0.000001)
     }
 
+    func testLongitude() {
+        guard let longitude = fixString.extractLongitude(from: 15) else {
+            XCTFail("could not parse longitude"); return
+        }
+        
+        XCTAssertEqualWithAccuracy(longitude, -0.0103166, accuracy: 0.000001)
+    }
 }

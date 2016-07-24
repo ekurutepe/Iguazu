@@ -86,6 +86,31 @@ extension String {
         return lat
     }
     
+    /// <#Description#>
+    ///
+    /// - parameter start: <#start description#>
+    ///
+    /// - returns: <#return value description#>
+    func extractLongitude(from start: Int) -> Double? {
+        //    B 104915 5210978N 00006639W A 00114 00065 031 000
+        let length = 9
+        guard start >= 0 else { return nil }
+        guard start+length <= self.utf8.count else { return nil }
+        
+        guard let degress = Double(self.extractString(from: start, length: 3)!) else { return nil }
+        guard let minutesInt = Double(self.extractString(from: start+2, length: 2)!) else { return nil }
+        guard let minutesFrac = Double(self.extractString(from: start+4, length: 3)!) else { return nil }
+        guard let hemisphere = self.extractString(from: start+7, length: 1) else { return nil }
+        
+        let minutes = minutesInt + minutesFrac/1000
+        
+        let lng = degress + minutes/60
+        
+        guard hemisphere == "E" else { return -1 * lng }
+        
+        return lng
+    }
+    
     // parse strings like 250809 to Aug 25th 2009
     func headerDate() -> Date? {
         guard self.characters.count == 6 else { return nil }
