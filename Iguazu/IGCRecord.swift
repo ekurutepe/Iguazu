@@ -28,8 +28,14 @@ struct IGCFix: IGCRecord {
         
         let timestamp = Calendar.current.date(byAdding: timeComponents, to: midnight, options: [])
         
-        
         print(timestamp)
+        
+        guard let lat = line.extractLatitude(from: 7) else { return nil }
+        guard let lng = line.extractLongitude(from: 15) else { return nil }
+        
+        let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: lng)
+        
+        print(coordinate)
         
         return nil 
 //        return IGCFix(timestamp: timestamp,
