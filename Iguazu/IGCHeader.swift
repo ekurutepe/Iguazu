@@ -45,7 +45,7 @@ public enum IGCHeaderField {
     }
     
     // UTC date this file was recorded
-    case date(date: Foundation.Date)
+    case date(flightDate: Date)
     // Fix accuracy in meters, see also FXA three-letter-code reference
     case accuracy(accuracy: Int)
     // Name of the competing pilot
@@ -121,7 +121,7 @@ public enum IGCHeaderField {
         
         guard let date = dateString.headerDate() else { fatalError() }
         
-        return .date(date: date)
+        return .date(flightDate: date)
     }
     
     static func parseAccuracyString(hLine: String) -> IGCHeaderField {
@@ -158,9 +158,22 @@ public struct IGCHeader {
                 return line.hasPrefix("H")
             })
 
-        let hf = lines.flatMap { IGCHeaderField.parseHLine(hLine: $0)}
-        
-        headerFields = hf
-    
+        headerFields = lines.flatMap { IGCHeaderField.parseHLine(hLine: $0)}
     }
+    
+    var flightDate: Date {
+        let midnight = headerFields.flatMap({ (header) -> Date? in
+                switch header {
+                case IGCHeaderField.date(let flightDate):
+                    return flightDate
+                default:
+                    return nil
+                }
+            }).map { (date) -> Date in
+                return date.midnight
+            }.first!
+        
+        return midnight
+    }
+
 }

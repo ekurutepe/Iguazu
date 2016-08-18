@@ -37,7 +37,7 @@ public extension IGCData {
             .flatMap { IGCExtension.parseExtensions(line: $0 ) }.first
         
         let fixes = lines.filter { $0.hasPrefix("B") }
-            .map { IGCFix.parseFix(with: $0, midnight: Date()) }
+            .map { IGCFix.parseFix(with: $0, midnight: header.flightDate) }
         
         self.init(header: header, fixes: fixes, extensions: extensions)
     }
