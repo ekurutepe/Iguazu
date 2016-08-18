@@ -23,15 +23,22 @@ struct IGCFix: IGCRecord {
     let gpsAltitude: Int
     let fixAccuracy: Int
     
+    private static let TimeOffset = 1
+    private static let LatitudeOffset = 7
+    private static let LongitudeOffset = 15
+    private static let AltimeterOffset = 25
+    private static let GPSAltitudeOffset = 30
+    private static let FixAccucaryOffset = 35
+    
     static func parseFix(with line:String, midnight: Date) -> IGCFix {
         guard let prefix = line.extractString(from: 0, length: 1), prefix == "B",
-            let timeComponents = line.extractTime(from: 1),
+            let timeComponents = line.extractTime(from: TimeOffset),
             let timestamp = Calendar.current.date(byAdding: timeComponents, to: midnight),
-            let lat = line.extractLatitude(from: 7),
-            let lng = line.extractLongitude(from: 15),
-            let barometricAltitude = line.extractAltitude(from: 25),
-            let gpsAltitude = line.extractAltitude(from: 30),
-            let accuracy = line.extractAccuracy(from: 35) else { fatalError("could not parse line: \(line)") } // TODO: throw here instead of fatalError
+            let lat = line.extractLatitude(from: LatitudeOffset),
+            let lng = line.extractLongitude(from: LongitudeOffset),
+            let barometricAltitude = line.extractAltitude(from: AltimeterOffset),
+            let gpsAltitude = line.extractAltitude(from: GPSAltitudeOffset),
+            let accuracy = line.extractAccuracy(from: FixAccucaryOffset) else { fatalError("could not parse line: \(line)") } // TODO: throw here instead of fatalError
         
         let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: lng)
 
