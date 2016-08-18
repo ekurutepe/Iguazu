@@ -8,19 +8,26 @@
 
 import Foundation
 import CoreLocation
+import MapKit
 
 /// Represents an IGC file.
-struct IGCData {
-    let header: IGCHeader
-    let fixes: [IGCFix]
-    let extensions: [IGCExtension]?
+public struct IGCData {
+    public let header: IGCHeader
+    public let fixes: [IGCFix]
+    public let extensions: [IGCExtension]?
     
-    var locations: [CLLocation] {
+    public var locations: [CLLocation] {
         return fixes.map { $0.clLocation }
+    }
+    
+    public var polyline: MKPolyline {
+        let coordinates = locations.map { $0.coordinate }
+        return MKPolyline(coordinates: coordinates, count: coordinates.count)
+        
     }
 }
 
-extension IGCData {
+public extension IGCData {
     init?(with igcString: String) {
         guard let header = IGCHeader(igcString: igcString) else { return nil }
         
