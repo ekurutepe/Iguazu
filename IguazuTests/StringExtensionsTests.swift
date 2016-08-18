@@ -71,4 +71,26 @@ class StringExtensionsTests: XCTestCase {
         
         XCTAssertEqualWithAccuracy(longitude, -0.0103166, accuracy: 0.000001)
     }
+    
+    func testBarometricAltitude() {
+        guard let altitude = fixString.extractAltitude(from: 25) else {
+            XCTFail("could not parse barometric altitude"); return
+        }
+        
+        XCTAssertEqual(altitude, 587)
+    }
+    
+    func testGPSAltitude() {
+        guard let altitude = fixString.extractAltitude(from: 30) else {
+            XCTFail("could not parse GPS altitude"); return
+        }
+        
+        XCTAssertEqual(altitude, 558)
+    }
+    
+    func testAltitudeFail() {
+        let altitude = "abc".extractAltitude(from: 0)
+        
+        XCTAssertNil(altitude)
+    }
 }

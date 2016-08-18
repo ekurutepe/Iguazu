@@ -18,7 +18,7 @@ extension String {
     /// - returns: the extracted substring
     func extractString(from start: Int, length: Int) -> String? {
         guard start+length <= self.utf8.count,
-         start >= 0 else { return nil }
+            start >= 0 else { return nil }
         
         let startIndex = self.index(self.startIndex, offsetBy:start)
         let endIndex = self.index(startIndex, offsetBy: length)
@@ -39,8 +39,8 @@ extension String {
         start+length <= self.utf8.count else { return nil }
         
         guard let hours = Int(self.extractString(from: start, length: 2)!),
- let minutes = Int(self.extractString(from: start+2, length: 2)!),
- let seconds = Int(self.extractString(from: start+4, length: 2)!) else { return nil }
+            let minutes = Int(self.extractString(from: start+2, length: 2)!),
+            let seconds = Int(self.extractString(from: start+4, length: 2)!) else { return nil }
         
         return DateComponents(calendar: Calendar.current,
             timeZone: TimeZone(abbreviation: "UTC"),
@@ -70,7 +70,7 @@ extension String {
 //    B 104915 5210978N 00006639W A 00114 00065 031 000
         let length = 8
         guard start >= 0,
- start+length <= self.utf8.count else { return nil }
+            start+length <= self.utf8.count else { return nil }
         
         guard let degress = Double(self.extractString(from: start, length: 2)!),
             let minutesInt = Double(self.extractString(from: start+2, length: 2)!),
@@ -95,7 +95,7 @@ extension String {
         //    B 104915 5210978N 00006639W A 00114 00065 031 000
         let length = 9
         guard start >= 0,
- start+length <= self.utf8.count else { return nil }
+            start+length <= self.utf8.count else { return nil }
         
         guard let degress = Double(self.extractString(from: start, length: 3)!),
             let minutesInt = Double(self.extractString(from: start+2, length: 2)!),
@@ -109,6 +109,14 @@ extension String {
         guard hemisphere == "E" else { return -1 * lng }
         
         return lng
+    }
+    
+    func extractAltitude(from start: Int) -> Int? {
+        let length = 5
+        guard start >= 0,
+            start+length <= self.utf8.count else { return nil }
+        
+        return extractString(from: start, length: length).flatMap { Int($0) }
     }
     
     // parse strings like 250809 to Aug 25th 2009
@@ -129,4 +137,6 @@ extension String {
         
         return IGCHeaderField.HeaderPrefix(rawValue: rawValue)
     }
+    
+    
 }
