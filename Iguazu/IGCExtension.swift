@@ -8,8 +8,7 @@
 
 import Foundation
 
-struct IGCExtension {
-    
+public struct IGCExtension {
     enum ExtensionType: String {
         case fixAccuracy = "FXA"
         case engineNoiseLevel = "ENL"

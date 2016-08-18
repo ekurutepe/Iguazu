@@ -16,7 +16,7 @@ protocol IGCRecord {
 }
 
 /// Representes a fix record in the IGC file.
-struct IGCFix: IGCRecord {
+public struct IGCFix: IGCRecord, CustomStringConvertible {
     let timestamp: Date
     let coordinate: CLLocationCoordinate2D
     let altimeterAltitude: Int
@@ -55,6 +55,10 @@ struct IGCFix: IGCRecord {
             horizontalAccuracy: CLLocationAccuracy(fixAccuracy),
             verticalAccuracy: -1,
             timestamp: timestamp)
+    }
+    
+    public var description: String {
+        return "\(timestamp), lat: \(coordinate.latitude), lng: \(coordinate.longitude), alt: \(altimeterAltitude)"
     }
 }
 

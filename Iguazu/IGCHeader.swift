@@ -25,7 +25,7 @@ import Foundation
 /// - altimeterType:      altimeter make/model etc  (not implemeneted)
 /// - competitionID:      competition callsign of the glider
 /// - competitionClass:   competition class of the glider
-enum IGCHeaderField {
+public enum IGCHeaderField {
 
     enum HeaderPrefix: String {
         case date = "HFDTE"
@@ -147,10 +147,10 @@ enum IGCHeaderField {
 
 
 /// Represents the header section contained in an IGC file
-struct IGCHeader {
+public struct IGCHeader {
 
     /// header fields in this section
-    let headerFields: [ IGCHeaderField ]
+    public let headerFields: [ IGCHeaderField ]
     
     init?(igcString: String) {
         let lines = igcString.components(separatedBy: .newlines)

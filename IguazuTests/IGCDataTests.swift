@@ -17,7 +17,7 @@ class IGCDataTests: XCTestCase {
         super.setUp()
         do {
             let path = Bundle(for: IGCDataTests.self).path(forResource: "lx7007", ofType: "igc")
-            igcString = try String.init(contentsOfFile: path!)
+            igcString = try String(contentsOfFile: path!)
         }
         catch _ {
             XCTFail()

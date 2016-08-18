@@ -103,7 +103,7 @@
 		8722EF3B1D0DD90500DA4509 /* IguazuTests */ = {
 			isa = PBXGroup;
 			children = (
-				8722EF491D0DDC0800DA4509 /* Fixtures */,
+				8722EF491D0DDC0800DA4509 /* Test Files */,
 				8716DE361D115D63005312B2 /* IGCHeaderTests.swift */,
 				87FA6A6A1D12D10F000C5F7E /* IGCDataTests.swift */,
 				874F49241D1489490019DC30 /* IGCExtensionTests.swift */,
@@ -113,12 +113,12 @@
 			path = IguazuTests;
 			sourceTree = "<group>";
 		};
-		8722EF491D0DDC0800DA4509 /* Fixtures */ = {
+		8722EF491D0DDC0800DA4509 /* Test Files */ = {
 			isa = PBXGroup;
 			children = (
 				8722EF4A1D0DDC1D00DA4509 /* lx7007.igc */,
 			);
-			name = Fixtures;
+			name = "Test Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
