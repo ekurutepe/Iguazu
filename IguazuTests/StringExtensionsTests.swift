@@ -48,6 +48,7 @@ class StringExtensionsTests: XCTestCase {
         XCTAssertEqual(components?.hour, 11)
         XCTAssertEqual(components?.minute, 1)
         XCTAssertEqual(components?.second, 35)
+        XCTAssertEqual(components?.timeZone, TimeZone(abbreviation: "UTC"))
     }
     
     func testDateExtractFail() {
