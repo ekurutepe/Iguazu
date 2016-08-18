@@ -1,5 +1,5 @@
 //
-//  IGCParserTests.swift
+//  IGCDataTests.swift
 //  Iguazu
 //
 //  Created by Engin Kurutepe on 16/06/16.
@@ -9,14 +9,14 @@
 import XCTest
 @testable import Iguazu
 
-class IGCParserTests: XCTestCase {
+class IGCDataTests: XCTestCase {
 
     var igcString = ""
     
     override func setUp() {
         super.setUp()
         do {
-            let path = Bundle(for: IGCParserTests.self).path(forResource: "lx7007", ofType: "igc")
+            let path = Bundle(for: IGCDataTests.self).path(forResource: "lx7007", ofType: "igc")
             igcString = try String.init(contentsOfFile: path!)
         }
         catch _ {
@@ -30,17 +30,23 @@ class IGCParserTests: XCTestCase {
     }
     
     func testHeader() {
-        guard let data = IGCParser.parse(igcString) else { XCTFail("could not parse igc file"); return }
+        guard let data = IGCData(with: igcString) else { XCTFail("could not parse igc file"); return }
         let header = data.header
         
         XCTAssertGreaterThan(header.headerFields.count, 0)
     }
     
     func testExtensions() {
-        guard let data = IGCParser.parse(igcString) else { XCTFail("could not parse igc file"); return }
+        guard let data = IGCData(with: igcString) else { XCTFail("could not parse igc file"); return }
         
         XCTAssertNotNil(data.extensions)
         
         XCTAssertEqual(data.extensions?.count, 2)
+    }
+    
+    func testRecords() {
+        guard let data = IGCData(with: igcString) else { XCTFail("could not parse igc file"); return }
+        
+        XCTAssertGreaterThan(data.fixes.count, 0)
     }
 }
