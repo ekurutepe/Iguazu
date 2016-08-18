@@ -16,7 +16,7 @@ class IGCParserTests: XCTestCase {
     override func setUp() {
         super.setUp()
         do {
-            let path = Bundle(for: IGCParserTests.self).pathForResource("lx7007", ofType: "igc")
+            let path = Bundle(for: IGCParserTests.self).path(forResource: "lx7007", ofType: "igc")
             igcString = try String.init(contentsOfFile: path!)
         }
         catch _ {

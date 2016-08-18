@@ -117,7 +117,7 @@ extension String {
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "ddMMyy"
-        dateFormatter.timeZone = TimeZone(forSecondsFromGMT: 0)
+        dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
         guard let date = dateFormatter.date(from: self) else { return nil }
         
         return date

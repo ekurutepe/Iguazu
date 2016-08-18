@@ -22,11 +22,11 @@ struct IGCFix: IGCRecord {
     let fixAccuracy: Int
     
     static func parseFix(with line:String, midnight: Date) -> IGCFix? {
-        guard let prefix = line.extractString(from: 0, length: 1) where prefix == "B" else { return nil }
+        guard let prefix = line.extractString(from: 0, length: 1), prefix == "B" else { return nil }
         
         guard let timeComponents = line.extractTime(from: 1) else { return nil }
         
-        let timestamp = Calendar.current.date(byAdding: timeComponents, to: midnight, options: [])
+        let timestamp = Calendar.current.date(byAdding: timeComponents, to: midnight)
         
         print(timestamp)
         
