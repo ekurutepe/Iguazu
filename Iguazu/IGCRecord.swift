@@ -9,11 +9,13 @@
 import Foundation
 import CoreLocation
 
+
+/// Basic protocol all record types need to conform to.
 protocol IGCRecord {
     var timestamp: Date { get }
 }
 
-/// <#Description#>
+/// Representes a fix record in the IGC file.
 struct IGCFix: IGCRecord {
     let timestamp: Date
     let coordinate: CLLocationCoordinate2D
@@ -49,13 +51,3 @@ struct IGCFix: IGCRecord {
     }
 }
 
-// TODO: create real event type
-enum IGCEventType {
-    case dummy
-}
-
-///
-struct IGCEvent: IGCRecord {
-    let timestamp: Date
-    let event: IGCEventType
-}

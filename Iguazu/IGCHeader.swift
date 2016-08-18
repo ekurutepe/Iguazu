@@ -8,22 +8,23 @@
 
 import Foundation
 
-/// <#Description#>
+/// Representation of the Header field types as listed in
+/// http://carrier.csi.cam.ac.uk/forsterlewis/soaring/igc_file_format/igc_format_2008.html#link_3.3
 ///
-/// - date:               <#date description#>
-/// - accuracy:           <#accuracy description#>
-/// - pilotInCharge:      <#pilotInCharge description#>
-/// - crew:               <#crew description#>
-/// - gliderType:         <#gliderType description#>
-/// - gliderRegistration: <#gliderRegistration description#>
-/// - gpsDatum:           <#gpsDatum description#>
-/// - firmwareVersion:    <#firmwareVersion description#>
-/// - hardwareVersion:    <#hardwareVersion description#>
-/// - loggerType:         <#loggerType description#>
-/// - gpsType:            <#gpsType description#>
-/// - altimeterType:      <#altimeterType description#>
-/// - competitionID:      <#competitionID description#>
-/// - competitionClass:   <#competitionClass description#>
+/// - date:               flight date
+/// - accuracy:           typical accuracy the logger is capable of
+/// - pilotInCharge:      name of PIC
+/// - crew:               name of crew
+/// - gliderType:         free-text glider make/model
+/// - gliderRegistration: official registration of the glider
+/// - gpsDatum:           GPS datum used for the fixes
+/// - firmwareVersion:    free-text firmware version of the logger (not implemeneted)
+/// - hardwareVersion:    free-text hardware version of the logger (not implemeneted)
+/// - loggerType:         logger make/model  (not implemeneted)
+/// - gpsType:            gps make/model etc  (not implemeneted)
+/// - altimeterType:      altimeter make/model etc  (not implemeneted)
+/// - competitionID:      competition callsign of the glider
+/// - competitionClass:   competition class of the glider
 enum IGCHeaderField {
 
     enum HeaderPrefix: String {
@@ -34,7 +35,11 @@ enum IGCHeaderField {
         case gliderType = "HFGTY"
         case gliderRegistration = "HFGID"
         case gpsDatum = "HFDTM"
-        
+        case firmwareVersion = "HFRFW"
+        case hardwareVersion = "HFRHW"
+        case loggerType = "HFFTY"
+        case gpsType = "HFGPS"
+        case altimeterType = "HFPRS"
         case competitionID = "HFCID"
         case competitionClass = "HFCCL"
     }
@@ -68,63 +73,70 @@ enum IGCHeaderField {
     // Any free-text description of the class this glider is in, e.g. Standard, 15m, 18m, Open.
     case competitionClass(competitionClass: String)
     
-    static func parseHLine(hLine: String) -> IGCHeaderField? {
-        guard let prefix = hLine.igcHeaderPrefix() else { return nil }
+    static func parseHLine(hLine: String) -> IGCHeaderField {
+        guard let prefix = hLine.igcHeaderPrefix() else { fatalError("unknown header type: \(hLine)") }
         switch prefix {
         case .date:
             return parseDateString(hLine: hLine)
         case .accuracy:
             return parseAccuracyString(hLine: hLine)
         case .pilot:
-            guard let name = parseFreeTextLine(line: hLine, prefix: HeaderPrefix.pilot.rawValue) else { return nil }
+            let name = parseFreeTextLine(line: hLine, prefix: HeaderPrefix.pilot.rawValue)
             return .pilotInCharge(name: name)
         case .crew:
-            guard let name = parseFreeTextLine(line: hLine, prefix: HeaderPrefix.crew.rawValue) else { return nil }
+            let name = parseFreeTextLine(line: hLine, prefix: HeaderPrefix.crew.rawValue)
             return .crew(name: name)
         case .gliderType:
-            guard let name = parseFreeTextLine(line: hLine, prefix: HeaderPrefix.gliderType.rawValue) else { return nil }
+            let name = parseFreeTextLine(line: hLine, prefix: HeaderPrefix.gliderType.rawValue)
             return .gliderType(gliderType: name)
         case .gliderRegistration:
-            guard let value = parseFreeTextLine(line: hLine, prefix: HeaderPrefix.gliderRegistration.rawValue) else { return nil }
+            let value = parseFreeTextLine(line: hLine, prefix: HeaderPrefix.gliderRegistration.rawValue)
             return .gliderRegistration(registration:value)
         case .gpsDatum:
             // Punt on parsing this header. Assume it's standard.
             return .gpsDatum(code: 100, datum: "WGS-1984")
+        case .firmwareVersion:
+            return .firmwareVersion(version: "0.0.0")
+        case .hardwareVersion:
+            return .hardwareVersion(version: "0.0.0")
+        case .loggerType:
+            return .loggerType(brand: "Unknown Brand", model: "Unknown Model")
+        case .gpsType:
+            return .gpsType(brand: "Unknown Brand", model: "Unknown Model", channels: 0, maximumAltitude: 0)
+        case .altimeterType:
+            return .altimeterType(brand: "Unknown Brand", model: "Unknown Model", maximumAltitude: 0)
         case .competitionID:
-            guard let value = parseFreeTextLine(line: hLine, prefix: HeaderPrefix.competitionID.rawValue) else { return nil }
+            let value = parseFreeTextLine(line: hLine, prefix: HeaderPrefix.competitionID.rawValue)
             return .competitionID(id: value)
         case .competitionClass:
-            guard let value = parseFreeTextLine(line: hLine, prefix: HeaderPrefix.competitionClass.rawValue) else { return nil }
+            let value = parseFreeTextLine(line: hLine, prefix: HeaderPrefix.competitionClass.rawValue)
             return .competitionClass(competitionClass: value)
-//        default:
-//            return nil
         }
     }
     
-    static func parseDateString(hLine: String) -> IGCHeaderField? {
-        guard let prefixRange = hLine.range(of:HeaderPrefix.date.rawValue) else { return nil }
+    static func parseDateString(hLine: String) -> IGCHeaderField {
+        guard let prefixRange = hLine.range(of:HeaderPrefix.date.rawValue) else { fatalError() }
         
         let dateString = hLine.substring(from: prefixRange.upperBound)
         
-        guard let date = dateString.headerDate() else { return nil }
+        guard let date = dateString.headerDate() else { fatalError() }
         
         return .date(date: date)
     }
     
-    static func parseAccuracyString(hLine: String) -> IGCHeaderField? {
-        guard let prefixRange = hLine.range(of:HeaderPrefix.accuracy.rawValue) else { return nil }
+    static func parseAccuracyString(hLine: String) -> IGCHeaderField {
+        guard let prefixRange = hLine.range(of:HeaderPrefix.accuracy.rawValue) else { fatalError() }
         
         let accuracyString = hLine.substring(from: prefixRange.upperBound)
         
-        guard let accuracy = Int(accuracyString) else { return nil }
+        guard let accuracy = Int(accuracyString) else { fatalError() }
         
         return .accuracy(accuracy: accuracy)
     }
     
-    static func parseFreeTextLine(line: String, prefix: String) -> String? {
-        guard let _ = line.range(of:prefix) else { return nil }
-        
-        guard let separatorRange = line.range(of: ":") else { return nil }
+    static func parseFreeTextLine(line: String, prefix: String) -> String {
+        guard let _ = line.range(of:prefix),
+            let separatorRange = line.range(of: ":") else { fatalError() }
         
         let value = line.substring(from: separatorRange.upperBound)
             .trimmingCharacters(in: .whitespacesAndNewlines)
