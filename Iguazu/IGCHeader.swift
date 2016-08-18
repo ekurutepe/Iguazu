@@ -146,10 +146,10 @@ enum IGCHeaderField {
 }
 
 
-/// <#Description#>
+/// Represents the header section contained in an IGC file
 struct IGCHeader {
 
-    /// <#Description#>
+    /// header fields in this section
     let headerFields: [ IGCHeaderField ]
     
     init?(igcString: String) {

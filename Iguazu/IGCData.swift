@@ -9,7 +9,7 @@
 import Foundation
 import CoreLocation
 
-/// <#Description#>
+/// Represents an IGC file.
 struct IGCData {
     let header: IGCHeader
     let fixes: [IGCFix]
