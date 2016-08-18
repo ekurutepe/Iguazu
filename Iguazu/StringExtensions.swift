@@ -17,8 +17,8 @@ extension String {
     ///
     /// - returns: the extracted substring
     func extractString(from start: Int, length: Int) -> String? {
-        guard start+length <= self.utf8.count else { return nil }
-        guard start >= 0 else { return nil }
+        guard start+length <= self.utf8.count,
+         start >= 0 else { return nil }
         
         let startIndex = self.index(self.startIndex, offsetBy:start)
         let endIndex = self.index(startIndex, offsetBy: length)
@@ -35,12 +35,12 @@ extension String {
     ///            the string could be extracted. Nil otherwise.
     func extractTime(from start: Int) -> DateComponents? {
         let length = 6
-        guard start >= 0 else { return nil }
-        guard start+length <= self.utf8.count else { return nil }
+        guard start >= 0,
+        start+length <= self.utf8.count else { return nil }
         
-        guard let hours = Int(self.extractString(from: start, length: 2)!) else { return nil }
-        guard let minutes = Int(self.extractString(from: start+2, length: 2)!) else { return nil }
-        guard let seconds = Int(self.extractString(from: start+4, length: 2)!) else { return nil }
+        guard let hours = Int(self.extractString(from: start, length: 2)!),
+ let minutes = Int(self.extractString(from: start+2, length: 2)!),
+ let seconds = Int(self.extractString(from: start+4, length: 2)!) else { return nil }
         
         return DateComponents(calendar: Calendar.current,
             timeZone: TimeZone(abbreviation: "UTC"),
@@ -69,13 +69,13 @@ extension String {
     func extractLatitude(from start: Int) -> Double? {
 //    B 104915 5210978N 00006639W A 00114 00065 031 000
         let length = 8
-        guard start >= 0 else { return nil }
-        guard start+length <= self.utf8.count else { return nil }
+        guard start >= 0,
+ start+length <= self.utf8.count else { return nil }
         
-        guard let degress = Double(self.extractString(from: start, length: 2)!) else { return nil }
-        guard let minutesInt = Double(self.extractString(from: start+2, length: 2)!) else { return nil }
-        guard let minutesFrac = Double(self.extractString(from: start+4, length: 3)!) else { return nil }
-        guard let hemisphere = self.extractString(from: start+7, length: 1) else { return nil }
+        guard let degress = Double(self.extractString(from: start, length: 2)!),
+            let minutesInt = Double(self.extractString(from: start+2, length: 2)!),
+            let minutesFrac = Double(self.extractString(from: start+4, length: 3)!),
+            let hemisphere = self.extractString(from: start+7, length: 1) else { return nil }
         
         let minutes = minutesInt + minutesFrac/1000
         
@@ -94,13 +94,13 @@ extension String {
     func extractLongitude(from start: Int) -> Double? {
         //    B 104915 5210978N 00006639W A 00114 00065 031 000
         let length = 9
-        guard start >= 0 else { return nil }
-        guard start+length <= self.utf8.count else { return nil }
+        guard start >= 0,
+ start+length <= self.utf8.count else { return nil }
         
-        guard let degress = Double(self.extractString(from: start, length: 3)!) else { return nil }
-        guard let minutesInt = Double(self.extractString(from: start+2, length: 2)!) else { return nil }
-        guard let minutesFrac = Double(self.extractString(from: start+4, length: 3)!) else { return nil }
-        guard let hemisphere = self.extractString(from: start+7, length: 1) else { return nil }
+        guard let degress = Double(self.extractString(from: start, length: 3)!),
+            let minutesInt = Double(self.extractString(from: start+2, length: 2)!),
+            let minutesFrac = Double(self.extractString(from: start+4, length: 3)!),
+            let hemisphere = self.extractString(from: start+7, length: 1) else { return nil }
         
         let minutes = minutesInt + minutesFrac/1000
         
