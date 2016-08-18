@@ -19,11 +19,11 @@ class IGCParser: NSObject {
     class func parse(_ igcString: String) -> IGCData? {
         guard let header = IGCHeader(igcString: igcString) else { return nil }
         
-        let iLines = igcString.components(separatedBy: .newlines).filter { (line) -> Bool in
-            return line.hasPrefix("I")
-        }
-        
-        let extensions = IGCExtension.parseExtensions(line: iLines.first ?? "")
+        let extensions = igcString.components(separatedBy: .newlines)
+            .filter { (line) -> Bool in
+                return line.hasPrefix("I")
+            }
+            .flatMap { IGCExtension.parseExtensions(line: $0 ) }.first
         
         let data = IGCData(header: header, records: [IGCRecord](), extensions: extensions)
         

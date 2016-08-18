@@ -12,7 +12,7 @@ import XCTest
 class StringExtensionsTests: XCTestCase {
 
     let exampleString = "1234567890"
-    let fixString = "B1101355206343N00006198WA0058700558"
+    let fixString = "B1101355206343N00006198WA0058700558027000"
     
     override func setUp() {
         super.setUp()
@@ -92,5 +92,13 @@ class StringExtensionsTests: XCTestCase {
         let altitude = "abc".extractAltitude(from: 0)
         
         XCTAssertNil(altitude)
+    }
+    
+    func testAccuracy() {
+        guard let accuracy = fixString.extractAccuracy(from: 35) else {
+            XCTFail("could not parse Fix Accuracy"); return
+        }
+        
+        XCTAssertEqual(accuracy, 27)
     }
 }

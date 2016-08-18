@@ -119,6 +119,14 @@ extension String {
         return extractString(from: start, length: length).flatMap { Int($0) }
     }
     
+    func extractAccuracy(from start: Int) -> Int? {
+        let length = 3
+        guard start >= 0,
+            start+length <= self.utf8.count else { return nil }
+        
+        return extractString(from: start, length: length).flatMap { Int($0) }
+    }
+    
     // parse strings like 250809 to Aug 25th 2009
     func headerDate() -> Date? {
         guard self.characters.count == 6 else { return nil }
