@@ -98,9 +98,9 @@ extension String {
             start+length <= self.utf8.count else { return nil }
         
         guard let degress = Double(self.extractString(from: start, length: 3)!),
-            let minutesInt = Double(self.extractString(from: start+2, length: 2)!),
-            let minutesFrac = Double(self.extractString(from: start+4, length: 3)!),
-            let hemisphere = self.extractString(from: start+7, length: 1) else { return nil }
+            let minutesInt = Double(self.extractString(from: start+3, length: 2)!),
+            let minutesFrac = Double(self.extractString(from: start+5, length: 3)!),
+            let hemisphere = self.extractString(from: start+8, length: 1) else { return nil }
         
         let minutes = minutesInt + minutesFrac/1000
         
@@ -142,6 +142,7 @@ extension String {
     func igcHeaderPrefix() -> IGCHeaderField.HeaderPrefix? {
         let index = self.index(self.startIndex, offsetBy: 5, limitedBy: self.endIndex) ?? self.startIndex
         let rawValue = self.substring(to: index)
+        
         
         return IGCHeaderField.HeaderPrefix(rawValue: rawValue)
     }
