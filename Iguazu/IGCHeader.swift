@@ -32,6 +32,7 @@ public enum IGCHeaderField {
         case accuracy = "HFFXA"
         case pilot = "HFPLT"
         case crew = "HFCM2"
+        case crewAlt = "HPCM2"
         case gliderType = "HFGTY"
         case gliderRegistration = "HFGID"
         case gpsDatum = "HFDTM"
@@ -85,6 +86,9 @@ public enum IGCHeaderField {
             return .pilotInCharge(name: name)
         case .crew:
             let name = parseFreeTextLine(line: hLine, prefix: HeaderPrefix.crew.rawValue)
+            return .crew(name: name)
+        case .crewAlt:
+            let name = parseFreeTextLine(line: hLine, prefix: HeaderPrefix.crewAlt.rawValue)
             return .crew(name: name)
         case .gliderType:
             let name = parseFreeTextLine(line: hLine, prefix: HeaderPrefix.gliderType.rawValue)
