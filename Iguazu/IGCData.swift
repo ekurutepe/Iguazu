@@ -13,18 +13,21 @@ import MapKit
 /// Represents an IGC file.
 public struct IGCData {
     public let header: IGCHeader
-    public let fixes: [IGCFix]
+    
+    private let fixLines: [String]
+    public lazy var fixes: [IGCFix] = {
+        self.fixLines.map { IGCFix.parseFix(with: $0, midnight: self.header.flightDate) }
+    }()
     public let extensions: [IGCExtension]?
     
-    public var locations: [CLLocation] {
-        return fixes.map { $0.clLocation }
-    }
+    public lazy var locations: [CLLocation] = {
+        self.fixes.map { $0.clLocation }
+    }()
     
-    public var polyline: MKPolyline {
-        let coordinates = locations.map { $0.coordinate }
+    public lazy var polyline: MKPolyline = {
+        let coordinates = self.locations.map { $0.coordinate }
         return MKPolyline(coordinates: coordinates, count: coordinates.count)
-        
-    }
+    }()
 }
 
 public extension IGCData {
@@ -37,8 +40,9 @@ public extension IGCData {
             .flatMap { IGCExtension.parseExtensions(line: $0 ) }.first
         
         let fixes = lines.filter { $0.hasPrefix("B") }
-            .map { IGCFix.parseFix(with: $0, midnight: header.flightDate) }
         
-        self.init(header: header, fixes: fixes, extensions: extensions)
+        self.header = header
+        self.fixLines = fixes
+        self.extensions = extensions
     }
 }
