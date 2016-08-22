@@ -18,6 +18,23 @@ public struct IGCData {
     public lazy var fixes: [IGCFix] = {
         self.fixLines.map { IGCFix.parseFix(with: $0, midnight: self.header.flightDate) }
     }()
+    
+    public lazy var takeOffLocation: CLLocation? = {
+        guard let line = self.fixLines.first else { return nil }
+        
+        let fix = IGCFix.parseFix(with: line , midnight: self.header.flightDate)
+        
+        return fix.clLocation
+    }()
+    
+    public lazy var landingLocation: CLLocation? = {
+        guard let line = self.fixLines.last else { return nil }
+        
+        let fix = IGCFix.parseFix(with: line , midnight: self.header.flightDate)
+        
+        return fix.clLocation
+    }()
+    
     public let extensions: [IGCExtension]?
     
     public lazy var locations: [CLLocation] = {
