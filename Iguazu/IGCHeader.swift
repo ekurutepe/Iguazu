@@ -165,7 +165,7 @@ public struct IGCHeader {
         headerFields = lines.flatMap { IGCHeaderField.parseHLine(hLine: $0)}
     }
     
-    var flightDate: Date {
+    public var flightDate: Date {
         let midnight = headerFields.flatMap({ (header) -> Date? in
                 switch header {
                 case IGCHeaderField.date(let flightDate):
@@ -178,6 +178,19 @@ public struct IGCHeader {
             }.first!
         
         return midnight
+    }
+    
+    public  var pilotInCharge: String {
+        let pic = headerFields.flatMap({ (header) -> String? in
+            switch header {
+            case IGCHeaderField.pilotInCharge(let name):
+                return name
+            default:
+                return nil
+            }
+        }).first!
+        
+        return pic
     }
 
 }
