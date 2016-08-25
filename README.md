@@ -1,6 +1,7 @@
 # Iguazu
 
-[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) 
+[![Build Status](https://travis-ci.org/ekurutepe/Iguazu.svg?branch=master)](https://travis-ci.org/ekurutepe/Iguazu)
 
 
 An IGC file format deserialization framework written in Swift 3.0. Very much work in progress.
