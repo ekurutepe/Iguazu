@@ -10,7 +10,7 @@ import XCTest
 @testable import Iguazu
 
 class IGCHeaderTests: XCTestCase {
-    
+
     let dateHeaderString = "HFDTE250809"
     let accuracyHeaderString = "HFFXA100"
     let pilotHeaderString = "HFPLTPILOT:Ian Forster-Lewis"
@@ -20,15 +20,15 @@ class IGCHeaderTests: XCTestCase {
     let gliderRegistrationString = "HFGIDGLIDERID: N116 EL"
     let tailfinNumberString = "HFCIDCOMPETITIONID: EH"
     let competitionClassString = "HFCCLCOMPETITIONCLASS:15m Motor Glider"
-    
+
     override func setUp() {
         super.setUp()
     }
-    
+
     override func tearDown() {
         super.tearDown()
     }
-    
+
     func testDateHeader() {
         let dateHeader = IGCHeaderField.parseHLine(hLine: dateHeaderString)
         switch dateHeader {
@@ -41,7 +41,7 @@ class IGCHeaderTests: XCTestCase {
 
         return
     }
-    
+
     func testAccuracyHeader() {
         let accuracyHeader = IGCHeaderField.parseHLine(hLine: accuracyHeaderString)
         switch accuracyHeader {
@@ -53,7 +53,7 @@ class IGCHeaderTests: XCTestCase {
         }
         return
     }
-    
+
     func testPilotHeader() {
         let pilotHeader = IGCHeaderField.parseHLine(hLine: pilotHeaderString)
         switch pilotHeader {
@@ -66,9 +66,9 @@ class IGCHeaderTests: XCTestCase {
 
         return
     }
-    
+
     func testPilotLongHeader() {
-        let pilotHeader = IGCHeaderField.parseHLine(hLine: pilotHeaderLongString) 
+        let pilotHeader = IGCHeaderField.parseHLine(hLine: pilotHeaderLongString)
         switch pilotHeader {
         case .pilotInCharge(let name):
             print("pilot name \(name)")
@@ -79,7 +79,7 @@ class IGCHeaderTests: XCTestCase {
 
         return
     }
-    
+
     func testCrewHeader() {
         let header = IGCHeaderField.parseHLine(hLine: crewHeaderString)
         switch header {
@@ -92,7 +92,7 @@ class IGCHeaderTests: XCTestCase {
 
         return
     }
-    
+
     func testGliderTypeHeader() {
         let header = IGCHeaderField.parseHLine(hLine: gliderTypeString)
         switch header {
@@ -105,7 +105,7 @@ class IGCHeaderTests: XCTestCase {
 
         return
     }
-    
+
     func testGliderRegistrationHeader() {
         let header = IGCHeaderField.parseHLine(hLine: gliderRegistrationString)
         switch header {
@@ -118,7 +118,7 @@ class IGCHeaderTests: XCTestCase {
 
         return
     }
-    
+
     func testCompetitionIDHeader() {
         let header = IGCHeaderField.parseHLine(hLine: tailfinNumberString)
         switch header {
@@ -131,7 +131,7 @@ class IGCHeaderTests: XCTestCase {
 
         return
     }
-    
+
     func testCompetitionClassHeader() {
         let header = IGCHeaderField.parseHLine(hLine: competitionClassString)
         switch header {

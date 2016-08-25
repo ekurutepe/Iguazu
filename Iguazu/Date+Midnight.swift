@@ -9,7 +9,7 @@
 import Foundation
 
 extension Date {
-    
+
     /// Last midnight preceeding the receiver
     var midnight: Date {
         let calendar = Calendar.current

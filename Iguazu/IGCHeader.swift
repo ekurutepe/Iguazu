@@ -44,7 +44,7 @@ public enum IGCHeaderField {
         case competitionID = "HFCID"
         case competitionClass = "HFCCL"
     }
-    
+
     // UTC date this file was recorded
     case date(flightDate: Date)
     // Fix accuracy in meters, see also FXA three-letter-code reference
@@ -73,7 +73,7 @@ public enum IGCHeaderField {
     case competitionID(id: String)
     // Any free-text description of the class this glider is in, e.g. Standard, 15m, 18m, Open.
     case competitionClass(competitionClass: String)
-    
+
     static func parseHLine(hLine: String) -> IGCHeaderField {
         guard let prefix = hLine.igcHeaderPrefix() else { fatalError("unknown header type: \(hLine)") }
         switch prefix {
@@ -95,7 +95,7 @@ public enum IGCHeaderField {
             return .gliderType(gliderType: name)
         case .gliderRegistration:
             let value = parseFreeTextLine(line: hLine, prefix: HeaderPrefix.gliderRegistration.rawValue)
-            return .gliderRegistration(registration:value)
+            return .gliderRegistration(registration: value)
         case .gpsDatum:
             // Punt on parsing this header. Assume it's standard.
             return .gpsDatum(code: 100, datum: "WGS-1984")
@@ -117,69 +117,68 @@ public enum IGCHeaderField {
             return .competitionClass(competitionClass: value)
         }
     }
-    
+
     static func parseDateString(hLine: String) -> IGCHeaderField {
-        guard let prefixRange = hLine.range(of:HeaderPrefix.date.rawValue) else { fatalError() }
-        
+        guard let prefixRange = hLine.range(of: HeaderPrefix.date.rawValue) else { fatalError() }
+
         let dateString = hLine.substring(from: prefixRange.upperBound)
-        
+
         guard let date = dateString.headerDate() else { fatalError() }
-        
+
         return .date(flightDate: date)
     }
-    
+
     static func parseAccuracyString(hLine: String) -> IGCHeaderField {
-        guard let prefixRange = hLine.range(of:HeaderPrefix.accuracy.rawValue) else { fatalError() }
-        
+        guard let prefixRange = hLine.range(of: HeaderPrefix.accuracy.rawValue) else { fatalError() }
+
         let accuracyString = hLine.substring(from: prefixRange.upperBound)
-        
+
         guard let accuracy = Int(accuracyString) else { fatalError() }
-        
+
         return .accuracy(accuracy: accuracy)
     }
-    
+
     static func parseFreeTextLine(line: String, prefix: String) -> String {
-        guard let _ = line.range(of:prefix),
+        guard let _ = line.range(of: prefix),
             let separatorRange = line.range(of: ":") else { fatalError() }
-        
+
         let value = line.substring(from: separatorRange.upperBound)
             .trimmingCharacters(in: .whitespacesAndNewlines)
-        
+
         return value
     }
 }
-
 
 /// Represents the header section contained in an IGC file
 public struct IGCHeader {
 
     /// header fields in this section
-    public let headerFields: [ IGCHeaderField ]
-    
+    public let headerFields: [IGCHeaderField]
+
     init?(igcString: String) {
         let lines = igcString.components(separatedBy: .newlines)
             .filter({ (line) -> Bool in
-                return line.hasPrefix("H")
-            })
+            return line.hasPrefix("H")
+        })
 
-        headerFields = lines.flatMap { IGCHeaderField.parseHLine(hLine: $0)}
+        headerFields = lines.flatMap { IGCHeaderField.parseHLine(hLine: $0) }
     }
-    
+
     public var flightDate: Date {
         let midnight = headerFields.flatMap({ (header) -> Date? in
-                switch header {
-                case IGCHeaderField.date(let flightDate):
-                    return flightDate
-                default:
-                    return nil
-                }
-            }).map { (date) -> Date in
-                return date.midnight
-            }.first!
-        
+            switch header {
+            case IGCHeaderField.date(let flightDate):
+                return flightDate
+            default:
+                return nil
+            }
+        }).map { (date) -> Date in
+            return date.midnight
+        }.first!
+
         return midnight
     }
-    
+
     public  var pilotInCharge: String {
         let pic = headerFields.flatMap({ (header) -> String? in
             switch header {
@@ -189,7 +188,7 @@ public struct IGCHeader {
                 return nil
             }
         }).first!
-        
+
         return pic
     }
 

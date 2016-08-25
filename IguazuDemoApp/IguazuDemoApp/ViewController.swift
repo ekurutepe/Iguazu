@@ -13,11 +13,11 @@ import MapKit
 class ViewController: UIViewController, MKMapViewDelegate {
 
     @IBOutlet weak var mapview: MKMapView!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         var igcString = ""
-        
+
         do {
             let path = Bundle.main.path(forResource: "lx7007", ofType: "igc")
             igcString = try String(contentsOfFile: path!)
@@ -25,9 +25,9 @@ class ViewController: UIViewController, MKMapViewDelegate {
         catch _ {
             fatalError("could not open the IGC file")
         }
-        
+
         let igcData = IGCData(with: igcString)!
-        
+
         print("Loaded IGC File")
         print("Headers:")
         print("\(igcData.header)")
@@ -35,13 +35,13 @@ class ViewController: UIViewController, MKMapViewDelegate {
         print("\(igcData.extensions)")
         print("Fixes:")
         print("\(igcData.fixes)")
-        
+
         mapview.delegate = self
         let flightPath = igcData.polyline
         mapview.addOverlays([flightPath])
         mapview.setVisibleMapRect(flightPath.boundingMapRect, animated: false)
     }
-    
+
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         let renderer = MKPolylineRenderer(polyline: overlay as! MKPolyline)
         renderer.strokeColor = UIColor.blue.withAlphaComponent(0.7)
@@ -49,6 +49,4 @@ class ViewController: UIViewController, MKMapViewDelegate {
         return renderer
     }
 
-
 }
-
