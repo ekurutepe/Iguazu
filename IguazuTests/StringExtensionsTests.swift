@@ -70,7 +70,7 @@ class StringExtensionsTests: XCTestCase {
             XCTFail("could not parse longitude"); return
         }
 
-        XCTAssertEqualWithAccuracy(longitude, -0.0103166, accuracy: 0.000001)
+        XCTAssertEqualWithAccuracy(longitude, -0.1033, accuracy: 0.000001)
     }
 
     func testBarometricAltitude() {

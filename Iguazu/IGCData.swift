@@ -14,7 +14,7 @@ import MapKit
 public struct IGCData {
     public let header: IGCHeader
 
-    private let fixLines: [String]
+    let fixLines: [String]
     public lazy var fixes: [IGCFix] = {
         self.fixLines.map { IGCFix.parseFix(with: $0, midnight: self.header.flightDate) }
     }()

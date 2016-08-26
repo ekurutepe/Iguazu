@@ -45,7 +45,7 @@ class IGCDataTests: XCTestCase {
     }
 
     func testRecords() {
-        guard let data = IGCData(with: igcString) else { XCTFail("could not parse igc file"); return }
+        guard var data = IGCData(with: igcString) else { XCTFail("could not parse igc file"); return }
 
         XCTAssertGreaterThan(data.fixes.count, 0)
     }
