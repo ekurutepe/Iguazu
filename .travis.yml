@@ -2,3 +2,4 @@ language: objective-c
 osx_image: xcode8
 xcode_workspace: Iguazu.xcworkspace
 xcode_scheme: IguazuTests
+script: xcodebuild -scheme IguazuTests -sdk iphonesimulator10.0 -destination 'platform=iOS Simulator,name=iPhone 6,OS=10.0' clean  test
