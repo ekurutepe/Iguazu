@@ -16,11 +16,11 @@ protocol IGCRecord {
 
 /// Representes a fix record in the IGC file.
 public struct IGCFix: IGCRecord, CustomStringConvertible {
-    let timestamp: Date
-    let coordinate: CLLocationCoordinate2D
-    let altimeterAltitude: Int
-    let gpsAltitude: Int
-    let fixAccuracy: Int
+    public let timestamp: Date
+    public let coordinate: CLLocationCoordinate2D
+    public let altimeterAltitude: Int
+    public let gpsAltitude: Int
+    public let fixAccuracy: Int
 
     private static let TimeOffset = 1
     private static let LatitudeOffset = 7
@@ -48,7 +48,7 @@ public struct IGCFix: IGCRecord, CustomStringConvertible {
             fixAccuracy: accuracy)
     }
 
-    var clLocation: CLLocation {
+    public var clLocation: CLLocation {
         return CLLocation.init(coordinate: coordinate,
             altitude: CLLocationDistance(altimeterAltitude),
             horizontalAccuracy: CLLocationAccuracy(fixAccuracy),
