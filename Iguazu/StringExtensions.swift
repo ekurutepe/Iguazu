@@ -138,11 +138,10 @@ extension String {
         return date
     }
 
-    func igcHeaderPrefix() -> IGCHeaderField.HeaderPrefix? {
-        let index = self.index(self.startIndex, offsetBy: 5, limitedBy: self.endIndex) ?? self.startIndex
-        let rawValue = self.substring(to: index)
-
-        return IGCHeaderField.HeaderPrefix(rawValue: rawValue)
+    func igcHeaderPrefix() -> IGCHeaderField.HeaderRecordCode? {
+        let code = self.extractString(from: 2, length: 3) ?? ""
+        
+        return IGCHeaderField.HeaderRecordCode(rawValue: code)
     }
 
 }

@@ -27,22 +27,21 @@ import Foundation
 /// - competitionClass:   competition class of the glider
 public enum IGCHeaderField {
 
-    enum HeaderPrefix: String {
-        case date = "HFDTE"
-        case accuracy = "HFFXA"
-        case pilot = "HFPLT"
-        case crew = "HFCM2"
-        case crewAlt = "HPCM2"
-        case gliderType = "HFGTY"
-        case gliderRegistration = "HFGID"
-        case gpsDatum = "HFDTM"
-        case firmwareVersion = "HFRFW"
-        case hardwareVersion = "HFRHW"
-        case loggerType = "HFFTY"
-        case gpsType = "HFGPS"
-        case altimeterType = "HFPRS"
-        case competitionID = "HFCID"
-        case competitionClass = "HFCCL"
+    enum HeaderRecordCode: String {
+        case date = "DTE"
+        case accuracy = "FXA"
+        case pilot = "PLT"
+        case crew = "CM2"
+        case gliderType = "GTY"
+        case gliderRegistration = "GID"
+        case gpsDatum = "DTM"
+        case firmwareVersion = "RFW"
+        case hardwareVersion = "RHW"
+        case loggerType = "FTY"
+        case gpsType = "GPS"
+        case altimeterType = "PRS"
+        case competitionID = "CID"
+        case competitionClass = "CCL"
     }
 
     // UTC date this file was recorded
@@ -82,19 +81,16 @@ public enum IGCHeaderField {
         case .accuracy:
             return parseAccuracyString(hLine: hLine)
         case .pilot:
-            let name = parseFreeTextLine(line: hLine, prefix: HeaderPrefix.pilot.rawValue)
+            let name = parseFreeTextLine(line: hLine, prefix: HeaderRecordCode.pilot.rawValue)
             return .pilotInCharge(name: name)
         case .crew:
-            let name = parseFreeTextLine(line: hLine, prefix: HeaderPrefix.crew.rawValue)
-            return .crew(name: name)
-        case .crewAlt:
-            let name = parseFreeTextLine(line: hLine, prefix: HeaderPrefix.crewAlt.rawValue)
+            let name = parseFreeTextLine(line: hLine, prefix: HeaderRecordCode.crew.rawValue)
             return .crew(name: name)
         case .gliderType:
-            let name = parseFreeTextLine(line: hLine, prefix: HeaderPrefix.gliderType.rawValue)
+            let name = parseFreeTextLine(line: hLine, prefix: HeaderRecordCode.gliderType.rawValue)
             return .gliderType(gliderType: name)
         case .gliderRegistration:
-            let value = parseFreeTextLine(line: hLine, prefix: HeaderPrefix.gliderRegistration.rawValue)
+            let value = parseFreeTextLine(line: hLine, prefix: HeaderRecordCode.gliderRegistration.rawValue)
             return .gliderRegistration(registration: value)
         case .gpsDatum:
             // Punt on parsing this header. Assume it's standard.
@@ -110,16 +106,16 @@ public enum IGCHeaderField {
         case .altimeterType:
             return .altimeterType(brand: "Unknown Brand", model: "Unknown Model", maximumAltitude: 0)
         case .competitionID:
-            let value = parseFreeTextLine(line: hLine, prefix: HeaderPrefix.competitionID.rawValue)
+            let value = parseFreeTextLine(line: hLine, prefix: HeaderRecordCode.competitionID.rawValue)
             return .competitionID(id: value)
         case .competitionClass:
-            let value = parseFreeTextLine(line: hLine, prefix: HeaderPrefix.competitionClass.rawValue)
+            let value = parseFreeTextLine(line: hLine, prefix: HeaderRecordCode.competitionClass.rawValue)
             return .competitionClass(competitionClass: value)
         }
     }
 
     static func parseDateString(hLine: String) -> IGCHeaderField {
-        guard let prefixRange = hLine.range(of: HeaderPrefix.date.rawValue) else { fatalError() }
+        guard let prefixRange = hLine.range(of: HeaderRecordCode.date.rawValue) else { fatalError() }
 
         let dateString = hLine.substring(from: prefixRange.upperBound)
 
@@ -129,7 +125,7 @@ public enum IGCHeaderField {
     }
 
     static func parseAccuracyString(hLine: String) -> IGCHeaderField {
-        guard let prefixRange = hLine.range(of: HeaderPrefix.accuracy.rawValue) else { fatalError() }
+        guard let prefixRange = hLine.range(of: HeaderRecordCode.accuracy.rawValue) else { fatalError() }
 
         let accuracyString = hLine.substring(from: prefixRange.upperBound)
 
