@@ -18,7 +18,6 @@
 		876CBA3D1D10659200C125AC /* IGCExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876CBA3C1D10659200C125AC /* IGCExtension.swift */; };
 		877A18971D18367A00EC6E41 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877A18961D18367A00EC6E41 /* StringExtensions.swift */; };
 		877A18991D18370100EC6E41 /* StringExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877A18981D18370100EC6E41 /* StringExtensionsTests.swift */; };
-		87F2E8521D6647C600FA4CD2 /* Date+Midnight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F2E8511D6647C600FA4CD2 /* Date+Midnight.swift */; };
 		87FA6A6B1D12D10F000C5F7E /* IGCDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87FA6A6A1D12D10F000C5F7E /* IGCDataTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -47,7 +46,6 @@
 		876CBA3C1D10659200C125AC /* IGCExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGCExtension.swift; sourceTree = "<group>"; };
 		877A18961D18367A00EC6E41 /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		877A18981D18370100EC6E41 /* StringExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensionsTests.swift; sourceTree = "<group>"; };
-		87F2E8511D6647C600FA4CD2 /* Date+Midnight.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Midnight.swift"; sourceTree = "<group>"; };
 		87FA6A6A1D12D10F000C5F7E /* IGCDataTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGCDataTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -98,7 +96,6 @@
 				8722EF501D0DEF2A00DA4509 /* IGCRecord.swift */,
 				876CBA3C1D10659200C125AC /* IGCExtension.swift */,
 				877A18961D18367A00EC6E41 /* StringExtensions.swift */,
-				87F2E8511D6647C600FA4CD2 /* Date+Midnight.swift */,
 			);
 			path = Iguazu;
 			sourceTree = "<group>";
@@ -240,7 +237,6 @@
 				877A18971D18367A00EC6E41 /* StringExtensions.swift in Sources */,
 				8722EF4D1D0DDCEC00DA4509 /* IGCHeader.swift in Sources */,
 				8722EF481D0DDB8200DA4509 /* IGCData.swift in Sources */,
-				87F2E8521D6647C600FA4CD2 /* Date+Midnight.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
