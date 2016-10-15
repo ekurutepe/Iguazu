@@ -48,7 +48,7 @@ class IGCHeaderTests: XCTestCase {
     }
     
     func testHeaderDate() {
-        XCTAssertEqual(header.flightDate.timeIntervalSince1970, 1251151200.0)
+        XCTAssertEqual(header.flightDate.timeIntervalSinceReferenceDate, 272844000.0)
     }
     
     func testHeaderPic() {
