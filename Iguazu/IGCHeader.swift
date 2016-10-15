@@ -160,8 +160,8 @@ public struct IGCHeader {
         headerFields = lines.flatMap { IGCHeaderField.parseHLine(hLine: $0) }
     }
 
-    public var flightDate: Date {
-        let midnight = headerFields.flatMap({ (header) -> Date? in
+    public lazy var flightDate: Date = {
+        let midnight = self.headerFields.flatMap({ (header) -> Date? in
             switch header {
             case .date(let flightDate):
                 return flightDate
@@ -173,10 +173,10 @@ public struct IGCHeader {
         }.first!
 
         return midnight
-    }
+    }()
 
-    public var pilotInCharge: String {
-        let pic = headerFields.flatMap({ (header) -> String? in
+    public lazy var pilotInCharge: String = {
+        let pic = self.headerFields.flatMap({ (header) -> String? in
             switch header {
             case .pilotInCharge(let name):
                 return name
@@ -186,6 +186,46 @@ public struct IGCHeader {
         }).first!
 
         return pic
-    }
+    }()
+    
+    public lazy var crew: String? = {
+        let crew = self.headerFields.flatMap({ (header) -> String? in
+            switch header {
+            case .crew(let name):
+                return name
+            default:
+                return nil
+            }
+        }).first
+        
+        return crew
+    }()
+
+    public lazy var gliderType: String = {
+        let gliderType = self.headerFields.flatMap({ (header) -> String? in
+            switch header {
+            case .gliderType(let value):
+                return value
+            default:
+                return nil
+            }
+        }).first!
+        
+        return gliderType
+    }()
+
+    public lazy var gliderRegistration: String = {
+        let gliderRegistration = self.headerFields.flatMap({ (header) -> String? in
+            switch header {
+            case .gliderRegistration(let value):
+                return value
+            default:
+                return nil
+            }
+        }).first!
+        
+        return gliderRegistration
+    }()
+
 
 }

@@ -20,14 +20,54 @@ class IGCHeaderTests: XCTestCase {
     let gliderRegistrationString = "HFGIDGLIDERID: N116 EL"
     let tailfinNumberString = "HFCIDCOMPETITIONID: EH"
     let competitionClassString = "HFCCLCOMPETITIONCLASS:15m Motor Glider"
-
+    
+    var fullIGCString = ""
+    
+    var header: IGCHeader!
+    
     override func setUp() {
         super.setUp()
+        do {
+            let path = Bundle(for: IGCHeaderTests.self).path(forResource: "lx7007", ofType: "igc")
+            fullIGCString = try String(contentsOfFile: path!)
+            header = IGCHeader(igcString: fullIGCString)
+        }
+        catch _ {
+            XCTFail()
+        }
     }
 
     override func tearDown() {
         super.tearDown()
     }
+    
+    // MARK: - Test for public header API
+    
+    func testHeaderInit() {
+        XCTAssertNotNil(header)
+    }
+    
+    func testHeaderDate() {
+        XCTAssertEqual(header.flightDate.timeIntervalSince1970, 1251151200.0)
+    }
+    
+    func testHeaderPic() {
+        XCTAssertEqual(header.pilotInCharge, "Ian Forster-Lewis")
+    }
+    
+    func testHeaderCrew() {
+        XCTAssertNil(header.crew)
+    }
+    
+    func testHeaderGliderType() {
+        XCTAssertEqual(header.gliderType, "LS_8-18")
+    }
+    
+    func testHeaderGliderRegistration() {
+        XCTAssertEqual(header.gliderRegistration, "G_CKPM")
+    }
+    
+    // MARK: - Tests for line parsing
 
     func testDateHeader() {
         let dateHeader = IGCHeaderField.parseHLine(hLine: dateHeaderString)

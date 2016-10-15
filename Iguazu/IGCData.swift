@@ -12,7 +12,10 @@ import MapKit
 
 /// Represents an IGC file.
 public struct IGCData {
-    public let header: IGCHeader
+
+    // must be declared as var due to lazy property accessors in IGCHeader
+    // pending https://github.com/apple/swift-evolution/blob/master/proposals/0030-property-behavior-decls.md
+    public var header: IGCHeader
 
     let fixLines: [String]
     
