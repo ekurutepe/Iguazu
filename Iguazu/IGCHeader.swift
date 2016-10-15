@@ -161,18 +161,16 @@ public struct IGCHeader {
     }
 
     public lazy var flightDate: Date = {
-        let midnight = self.headerFields.flatMap({ (header) -> Date? in
+        let date = self.headerFields.flatMap({ (header) -> Date? in
             switch header {
             case .date(let flightDate):
                 return flightDate
             default:
                 return nil
             }
-        }).map { (date) -> Date in
-            return date.midnight
-        }.first!
+        }).first!
 
-        return midnight
+        return date
     }()
 
     public lazy var pilotInCharge: String = {
