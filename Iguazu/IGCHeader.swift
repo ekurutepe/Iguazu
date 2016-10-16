@@ -119,7 +119,7 @@ public enum IGCHeaderField {
 
         let dateString = hLine.substring(from: prefixRange.upperBound)
 
-        guard let date = dateString.headerDate() else { fatalError() }
+        guard let date = Date.parse(headerDateString: dateString) else { fatalError() }
 
         return .date(flightDate: date)
     }
@@ -225,5 +225,19 @@ public struct IGCHeader {
         return gliderRegistration
     }()
 
+    public init(with date: Date, pic: String, crew: String?, gliderType: String, gliderRegistration: String) {
+        var headers: [IGCHeaderField] = [
+            .date(flightDate: date),
+            .pilotInCharge(name: pic),
+            .gliderType(gliderType: gliderType),
+            .gliderRegistration(registration: gliderRegistration)
+        ]
+        
+        if let crew = crew {
+            headers.append(.crew(name: crew))
+        }
+        
+        self.headerFields = headers
+    }
 
 }
