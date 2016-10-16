@@ -42,21 +42,6 @@ class StringExtensionsTests: XCTestCase {
         XCTAssertEqual(s, "23")
     }
 
-    func testDateExtract() {
-        let components = fixString.extractTime(from: 1)
-
-        XCTAssertEqual(components?.hour, 11)
-        XCTAssertEqual(components?.minute, 1)
-        XCTAssertEqual(components?.second, 35)
-        XCTAssertEqual(components?.timeZone, TimeZone(abbreviation: "UTC"))
-    }
-
-    func testDateExtractFail() {
-        let components = "B12qw34".extractTime(from: 1)
-
-        XCTAssertNil(components)
-    }
-
     func testLatitude() {
         guard let latitude = fixString.extractLatitude(from: 7) else {
             XCTFail("could not parse latitude"); return

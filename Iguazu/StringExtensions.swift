@@ -33,32 +33,9 @@ extension String {
     ///
     /// - returns: DateComponents with hour, minute and seconds fields set if
     ///            the string could be extracted. Nil otherwise.
-    func extractTime(from start: Int) -> DateComponents? {
-        let length = 6
-        guard start >= 0,
-            start + length <= self.utf8.count else { return nil }
-
-        guard let hours = Int(self.extractString(from: start, length: 2)!),
-            let minutes = Int(self.extractString(from: start + 2, length: 2)!),
-            let seconds = Int(self.extractString(from: start + 4, length: 2)!) else { return nil }
-
-        return DateComponents(calendar: Calendar.current,
-            timeZone: TimeZone(abbreviation: "UTC"),
-            era: nil,
-            year: nil,
-            month: nil,
-            day: nil,
-            hour: hours,
-            minute: minutes,
-            second: seconds,
-            nanosecond: nil,
-            weekday: nil,
-            weekdayOrdinal: nil,
-            quarter: nil,
-            weekOfMonth: nil,
-            weekOfYear: nil,
-            yearForWeekOfYear: nil)
-    }
+//    func extractTime(from start: Int) -> DateComponents? {
+//        
+//    }
 
     /// <#Description#>
     ///
@@ -124,18 +101,6 @@ extension String {
             start + length <= self.utf8.count else { return nil }
 
         return extractString(from: start, length: length).flatMap { Int($0) }
-    }
-
-    // parse strings like 250809 to Aug 25th 2009
-    func headerDate() -> Date? {
-        guard self.characters.count == 6 else { return nil }
-
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "ddMMyy"
-        dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
-        guard let date = dateFormatter.date(from: self) else { return nil }
-
-        return date
     }
 
     func igcHeaderPrefix() -> IGCHeaderField.HeaderRecordCode? {

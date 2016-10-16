@@ -14,10 +14,14 @@
 		8722EF4B1D0DDC1D00DA4509 /* lx7007.igc in Resources */ = {isa = PBXBuildFile; fileRef = 8722EF4A1D0DDC1D00DA4509 /* lx7007.igc */; };
 		8722EF4D1D0DDCEC00DA4509 /* IGCHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8722EF4C1D0DDCEC00DA4509 /* IGCHeader.swift */; };
 		8722EF511D0DEF2A00DA4509 /* IGCRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8722EF501D0DEF2A00DA4509 /* IGCRecord.swift */; };
+		873CB3141DB3708800A6325E /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873CB3131DB3708800A6325E /* DateExtensions.swift */; };
+		873CB3161DB3718300A6325E /* IGCFix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873CB3151DB3718300A6325E /* IGCFix.swift */; };
+		873CB3181DB3778500A6325E /* IGCFixTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873CB3171DB3778500A6325E /* IGCFixTests.swift */; };
 		874F49251D1489490019DC30 /* IGCExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874F49241D1489490019DC30 /* IGCExtensionTests.swift */; };
 		876CBA3D1D10659200C125AC /* IGCExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876CBA3C1D10659200C125AC /* IGCExtension.swift */; };
 		877A18971D18367A00EC6E41 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877A18961D18367A00EC6E41 /* StringExtensions.swift */; };
 		877A18991D18370100EC6E41 /* StringExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877A18981D18370100EC6E41 /* StringExtensionsTests.swift */; };
+		87BB56D11DB37A5D00379BE0 /* DateExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BB56D01DB37A5D00379BE0 /* DateExtensionsTests.swift */; };
 		87FA6A6B1D12D10F000C5F7E /* IGCDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87FA6A6A1D12D10F000C5F7E /* IGCDataTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -42,10 +46,14 @@
 		8722EF4A1D0DDC1D00DA4509 /* lx7007.igc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = lx7007.igc; sourceTree = "<group>"; };
 		8722EF4C1D0DDCEC00DA4509 /* IGCHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGCHeader.swift; sourceTree = "<group>"; };
 		8722EF501D0DEF2A00DA4509 /* IGCRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGCRecord.swift; sourceTree = "<group>"; };
+		873CB3131DB3708800A6325E /* DateExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
+		873CB3151DB3718300A6325E /* IGCFix.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGCFix.swift; sourceTree = "<group>"; };
+		873CB3171DB3778500A6325E /* IGCFixTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGCFixTests.swift; sourceTree = "<group>"; };
 		874F49241D1489490019DC30 /* IGCExtensionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGCExtensionTests.swift; sourceTree = "<group>"; };
 		876CBA3C1D10659200C125AC /* IGCExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGCExtension.swift; sourceTree = "<group>"; };
 		877A18961D18367A00EC6E41 /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		877A18981D18370100EC6E41 /* StringExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensionsTests.swift; sourceTree = "<group>"; };
+		87BB56D01DB37A5D00379BE0 /* DateExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtensionsTests.swift; sourceTree = "<group>"; };
 		87FA6A6A1D12D10F000C5F7E /* IGCDataTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGCDataTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -89,12 +97,14 @@
 		8722EF2F1D0DD90500DA4509 /* Iguazu */ = {
 			isa = PBXGroup;
 			children = (
-				8722EF301D0DD90500DA4509 /* Iguazu.h */,
-				8722EF321D0DD90500DA4509 /* Info.plist */,
+				873CB3131DB3708800A6325E /* DateExtensions.swift */,
 				8722EF471D0DDB8200DA4509 /* IGCData.swift */,
+				876CBA3C1D10659200C125AC /* IGCExtension.swift */,
+				873CB3151DB3718300A6325E /* IGCFix.swift */,
 				8722EF4C1D0DDCEC00DA4509 /* IGCHeader.swift */,
 				8722EF501D0DEF2A00DA4509 /* IGCRecord.swift */,
-				876CBA3C1D10659200C125AC /* IGCExtension.swift */,
+				8722EF301D0DD90500DA4509 /* Iguazu.h */,
+				8722EF321D0DD90500DA4509 /* Info.plist */,
 				877A18961D18367A00EC6E41 /* StringExtensions.swift */,
 			);
 			path = Iguazu;
@@ -109,6 +119,8 @@
 				874F49241D1489490019DC30 /* IGCExtensionTests.swift */,
 				877A18981D18370100EC6E41 /* StringExtensionsTests.swift */,
 				8722EF3E1D0DD90500DA4509 /* Info.plist */,
+				873CB3171DB3778500A6325E /* IGCFixTests.swift */,
+				87BB56D01DB37A5D00379BE0 /* DateExtensionsTests.swift */,
 			);
 			path = IguazuTests;
 			sourceTree = "<group>";
@@ -235,8 +247,10 @@
 				8722EF511D0DEF2A00DA4509 /* IGCRecord.swift in Sources */,
 				876CBA3D1D10659200C125AC /* IGCExtension.swift in Sources */,
 				877A18971D18367A00EC6E41 /* StringExtensions.swift in Sources */,
+				873CB3161DB3718300A6325E /* IGCFix.swift in Sources */,
 				8722EF4D1D0DDCEC00DA4509 /* IGCHeader.swift in Sources */,
 				8722EF481D0DDB8200DA4509 /* IGCData.swift in Sources */,
+				873CB3141DB3708800A6325E /* DateExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -247,7 +261,9 @@
 				877A18991D18370100EC6E41 /* StringExtensionsTests.swift in Sources */,
 				87FA6A6B1D12D10F000C5F7E /* IGCDataTests.swift in Sources */,
 				8716DE371D115D63005312B2 /* IGCHeaderTests.swift in Sources */,
+				873CB3181DB3778500A6325E /* IGCFixTests.swift in Sources */,
 				874F49251D1489490019DC30 /* IGCExtensionTests.swift in Sources */,
+				87BB56D11DB37A5D00379BE0 /* DateExtensionsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
