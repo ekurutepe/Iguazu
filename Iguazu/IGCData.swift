@@ -49,9 +49,7 @@ public struct IGCData {
         let coordinates = self.locations.map { $0.coordinate }
         return MKPolyline(coordinates: coordinates, count: coordinates.count)
     }()
-}
 
-public extension IGCData {
     init?(with igcString: String) {
         guard let header = IGCHeader(igcString: igcString) else { return nil }
 
