@@ -3,7 +3,7 @@ import XCTest
 
 class DateExtensionsTests : XCTestCase {
 
-    let fixTime = "110135"
+    let fixTime = "010135"
     let headerDate = "250809"
     func testHeaderDate() {
         let date = Date.parse(headerDateString: headerDate)

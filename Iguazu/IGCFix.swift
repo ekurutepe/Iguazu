@@ -66,8 +66,24 @@ extension IGCFix {
     }
     
     public var bLine: String {
-        //TODO: implement!
-        return "B123123"
+        let time = self.timestamp.igcFixTime
+        
+        let latitude = self.coordinate.latitude
+        let northSouth = (latitude > 0) ? "N" : "S"
+        let latDegrees = String(format: "%02d", abs(Int(latitude)))
+        let latMinutes = String(format: "%05d", Int(round(1000 * abs(latitude - Double(Int(latitude))) * 60.0)))
+        
+        let longitude = self.coordinate.longitude
+        let eastWest = (longitude > 0) ? "E" : "W"
+        let lonDegrees = String(format: "%03d", abs(Int(longitude)))
+        let lonMinutes = String(format: "%05d", Int(round(1000 * abs(longitude - Double(Int(longitude))) * 60.0)))
+        
+        let gpsAltitude = String(format: "%05d", self.gpsAltitude)
+        let altimeterAltitude = String(format: "%05d", self.altimeterAltitude)
+        
+        let fixAccuracy = String(format: "%03d", self.fixAccuracy)
+        
+        return "B\(time)\(latDegrees)\(latMinutes)\(northSouth)\(lonDegrees)\(lonMinutes)\(eastWest)A\(altimeterAltitude)\(gpsAltitude)\(fixAccuracy)"
     }
 }
 
