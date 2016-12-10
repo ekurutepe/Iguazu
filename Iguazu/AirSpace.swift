@@ -26,7 +26,7 @@ public typealias Altitude = Measurement<UnitLength>
 
 public typealias DegreeComponents = Array<String>
 
-public extension Collection where Iterator.Element == String, Index == Int {
+public extension Collection where Iterator.Element == String {
     var degree: CLLocationDegrees {
         return self.enumerated().map { (n,c) in
             let idx = Double(n)
@@ -83,12 +83,12 @@ public enum AirSpaceAltitude {
 }
 
 public struct AirSpace {
-    let `class`: AirSpaceClass
-    let ceiling: AirSpaceAltitude
-    let floor: AirSpaceAltitude
-    let name: String
-    let labelCoordinates: [CLLocationCoordinate2D]?
-    let polygonCoordinates: [CLLocationCoordinate2D]
+    public let `class`: AirSpaceClass
+    public let ceiling: AirSpaceAltitude
+    public let floor: AirSpaceAltitude
+    public let name: String
+    public let labelCoordinates: [CLLocationCoordinate2D]?
+    public let polygonCoordinates: [CLLocationCoordinate2D]
 }
 
 public extension AirSpace {
