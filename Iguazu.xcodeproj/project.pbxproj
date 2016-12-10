@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8716DE371D115D63005312B2 /* IGCHeaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8716DE361D115D63005312B2 /* IGCHeaderTests.swift */; };
+		871E012B1DFC72AD0072487D /* AirSpaceMapDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871E012A1DFC72AD0072487D /* AirSpaceMapDelegate.swift */; };
 		8722EF311D0DD90500DA4509 /* Iguazu.h in Headers */ = {isa = PBXBuildFile; fileRef = 8722EF301D0DD90500DA4509 /* Iguazu.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8722EF381D0DD90500DA4509 /* Iguazu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8722EF2D1D0DD90500DA4509 /* Iguazu.framework */; };
 		8722EF481D0DDB8200DA4509 /* IGCData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8722EF471D0DDB8200DA4509 /* IGCData.swift */; };
@@ -53,6 +54,7 @@
 
 /* Begin PBXFileReference section */
 		8716DE361D115D63005312B2 /* IGCHeaderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGCHeaderTests.swift; sourceTree = "<group>"; };
+		871E012A1DFC72AD0072487D /* AirSpaceMapDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AirSpaceMapDelegate.swift; sourceTree = "<group>"; };
 		8722EF2D1D0DD90500DA4509 /* Iguazu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Iguazu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8722EF301D0DD90500DA4509 /* Iguazu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Iguazu.h; sourceTree = "<group>"; };
 		8722EF321D0DD90500DA4509 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 				877B9CF21DFC1BAB00D2EB91 /* CLLocationCoordinate2DExtensions.swift */,
 				877B9CF41DFC1BE300D2EB91 /* CharacterSetExtensions.swift */,
 				877B9CF61DFC1C0F00D2EB91 /* ScannerExtensions.swift */,
+				871E012A1DFC72AD0072487D /* AirSpaceMapDelegate.swift */,
 			);
 			path = Iguazu;
 			sourceTree = "<group>";
@@ -332,6 +335,7 @@
 				876CBA3D1D10659200C125AC /* IGCExtension.swift in Sources */,
 				877B9CF71DFC1C0F00D2EB91 /* ScannerExtensions.swift in Sources */,
 				877A18971D18367A00EC6E41 /* StringExtensions.swift in Sources */,
+				871E012B1DFC72AD0072487D /* AirSpaceMapDelegate.swift in Sources */,
 				877B9CF51DFC1BE300D2EB91 /* CharacterSetExtensions.swift in Sources */,
 				877B9CF31DFC1BAB00D2EB91 /* CLLocationCoordinate2DExtensions.swift in Sources */,
 				873CB3161DB3718300A6325E /* IGCFix.swift in Sources */,
