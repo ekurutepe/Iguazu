@@ -209,7 +209,6 @@ public extension AirSpace {
         }
         
         currentAirspace.flatMap {
-            //            dump($0)
             $0.validAirSpace.flatMap { asp in
                 airSpaces.append(asp)
             }
@@ -250,18 +249,15 @@ public extension AirSpace {
         
         let sign = clockwise ? 1.0 : -1.0
         
-        var degressInArc = sign * (to - from)
+        let start = from
+        let end = (to == from) ? from+360.0 : to
         
-        if to == from { degressInArc = 360.0 }
+        let range = fabs(end - start)
+        let count = ceil(range/resolution)
+        let step = sign*range/count
         
-        if degressInArc < 0.0 { degressInArc += 360.0 }
-        
-        let numberOfPoints = Darwin.floor(degressInArc / resolution)
-        
-        let coordinates = (0 ... Int(numberOfPoints)).map { idx -> CLLocationCoordinate2D in
-            let degrees = from + sign * Double(idx) * resolution
-            return center.coordinate(at: radius, direction: degrees)
-        }
+        let coordinates = stride(from: start, through: end, by: step)
+            .map { degree in center.coordinate(at: radius, direction: degree) }
         
         return coordinates
     }
