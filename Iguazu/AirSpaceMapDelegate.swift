@@ -29,8 +29,11 @@ public class AirSpaceMapDelegate: NSObject, MKMapViewDelegate {
          if let polygon = overlay as? MKPolygon {
             let airSpace = self.airspaceTable[polygon]
             let renderer = MKPolygonRenderer(polygon: polygon)
-            renderer.strokeColor = (airSpace?.class.color ?? .blue).withAlphaComponent(0.7)
+            let airspaceColor = airSpace?.class.color ?? .blue
+            renderer.strokeColor = airspaceColor.withAlphaComponent(0.7)
+            renderer.fillColor = airspaceColor.withAlphaComponent(0.1)
             renderer.lineWidth = 1.0
+            
             return renderer
         }
         
