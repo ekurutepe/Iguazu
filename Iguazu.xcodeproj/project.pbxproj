@@ -612,6 +612,7 @@
 				877B9D191DFC225800D2EB91 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

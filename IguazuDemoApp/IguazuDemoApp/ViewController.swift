@@ -20,6 +20,8 @@ class ViewController: UIViewController, MKMapViewDelegate {
         self.loadAirSpaces()
     }
     
+    var airspaceTable = [MKPolygon: AirSpace]()
+    
     func loadAirSpaces() {
         var openAirString = ""
         
@@ -38,6 +40,7 @@ class ViewController: UIViewController, MKMapViewDelegate {
         airspaces?.forEach {
             let coords = $0.polygonCoordinates
             let polygon = MKPolygon(coordinates: coords, count: coords.count)
+            self.airspaceTable[polygon] = $0
             self.mapview.add(polygon)
         }
     }
@@ -77,8 +80,9 @@ class ViewController: UIViewController, MKMapViewDelegate {
             renderer.lineWidth = 3.0
             return renderer
         } else if let polygon = overlay as? MKPolygon {
+            let airSpace = self.airspaceTable[polygon]
             let renderer = MKPolygonRenderer(polygon: polygon)
-            renderer.strokeColor = UIColor.blue.withAlphaComponent(0.7)
+            renderer.strokeColor = (airSpace?.class.color ?? .blue).withAlphaComponent(0.7)
             renderer.lineWidth = 1.0
             return renderer
         }
@@ -86,4 +90,15 @@ class ViewController: UIViewController, MKMapViewDelegate {
         return MKOverlayRenderer(overlay: overlay)
     }
 
+}
+
+extension AirSpaceClass {
+    var color: UIColor {
+        switch self {
+        case .CTR, .Danger, .GliderProhibited, .Prohibited, .Restricted:
+            return .red
+        default:
+            return .blue
+        }
+    }
 }
