@@ -7,16 +7,34 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		877B9D3A1DFC257400D2EB91 /* DAeC_Germany_Week22_2016.txt in Resources */ = {isa = PBXBuildFile; fileRef = 877B9D391DFC257400D2EB91 /* DAeC_Germany_Week22_2016.txt */; };
+		877B9D421DFC286500D2EB91 /* Iguazu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 877B9D411DFC286500D2EB91 /* Iguazu.framework */; };
+		877B9D431DFC286500D2EB91 /* Iguazu.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 877B9D411DFC286500D2EB91 /* Iguazu.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		87F2E83B1D6632B000FA4CD2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F2E83A1D6632B000FA4CD2 /* AppDelegate.swift */; };
 		87F2E83D1D6632B000FA4CD2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F2E83C1D6632B000FA4CD2 /* ViewController.swift */; };
 		87F2E8401D6632B000FA4CD2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87F2E83E1D6632B000FA4CD2 /* Main.storyboard */; };
 		87F2E8421D6632B000FA4CD2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 87F2E8411D6632B000FA4CD2 /* Assets.xcassets */; };
 		87F2E8451D6632B000FA4CD2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87F2E8431D6632B000FA4CD2 /* LaunchScreen.storyboard */; };
 		87F2E84D1D66343E00FA4CD2 /* lx7007.igc in Resources */ = {isa = PBXBuildFile; fileRef = 87F2E84C1D66343E00FA4CD2 /* lx7007.igc */; };
-		87F2E8501D66349F00FA4CD2 /* Iguazu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87F2E84F1D66349F00FA4CD2 /* Iguazu.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		877B9D441DFC286500D2EB91 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				877B9D431DFC286500D2EB91 /* Iguazu.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		877B9D391DFC257400D2EB91 /* DAeC_Germany_Week22_2016.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DAeC_Germany_Week22_2016.txt; sourceTree = "<group>"; };
+		877B9D411DFC286500D2EB91 /* Iguazu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Iguazu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		87F2E8371D6632B000FA4CD2 /* IguazuDemoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IguazuDemoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		87F2E83A1D6632B000FA4CD2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		87F2E83C1D6632B000FA4CD2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -25,7 +43,6 @@
 		87F2E8441D6632B000FA4CD2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		87F2E8461D6632B000FA4CD2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		87F2E84C1D66343E00FA4CD2 /* lx7007.igc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = lx7007.igc; sourceTree = "<group>"; };
-		87F2E84F1D66349F00FA4CD2 /* Iguazu.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Iguazu.framework; path = "../../../../Library/Developer/Xcode/DerivedData/Iguazu-adrywmbtfzttvygdfvcrhtueeaye/Build/Products/Debug-iphonesimulator/Iguazu.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,7 +50,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				87F2E8501D66349F00FA4CD2 /* Iguazu.framework in Frameworks */,
+				877B9D421DFC286500D2EB91 /* Iguazu.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -43,6 +60,7 @@
 		87F2E82E1D6632B000FA4CD2 = {
 			isa = PBXGroup;
 			children = (
+				877B9D411DFC286500D2EB91 /* Iguazu.framework */,
 				87F2E8391D6632B000FA4CD2 /* IguazuDemoApp */,
 				87F2E8381D6632B000FA4CD2 /* Products */,
 				87F2E84E1D66349F00FA4CD2 /* Frameworks */,
@@ -61,6 +79,7 @@
 			isa = PBXGroup;
 			children = (
 				87F2E84C1D66343E00FA4CD2 /* lx7007.igc */,
+				877B9D391DFC257400D2EB91 /* DAeC_Germany_Week22_2016.txt */,
 				87F2E83A1D6632B000FA4CD2 /* AppDelegate.swift */,
 				87F2E83C1D6632B000FA4CD2 /* ViewController.swift */,
 				87F2E83E1D6632B000FA4CD2 /* Main.storyboard */,
@@ -74,7 +93,6 @@
 		87F2E84E1D66349F00FA4CD2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				87F2E84F1D66349F00FA4CD2 /* Iguazu.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -89,6 +107,7 @@
 				87F2E8331D6632B000FA4CD2 /* Sources */,
 				87F2E8341D6632B000FA4CD2 /* Frameworks */,
 				87F2E8351D6632B000FA4CD2 /* Resources */,
+				877B9D441DFC286500D2EB91 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -142,6 +161,7 @@
 				87F2E8451D6632B000FA4CD2 /* LaunchScreen.storyboard in Resources */,
 				87F2E84D1D66343E00FA4CD2 /* lx7007.igc in Resources */,
 				87F2E8421D6632B000FA4CD2 /* Assets.xcassets in Resources */,
+				877B9D3A1DFC257400D2EB91 /* DAeC_Germany_Week22_2016.txt in Resources */,
 				87F2E8401D6632B000FA4CD2 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -316,6 +336,7 @@
 				87F2E84B1D6632B000FA4CD2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

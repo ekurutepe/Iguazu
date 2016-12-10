@@ -16,6 +16,33 @@ class ViewController: UIViewController, MKMapViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.loadAirSpaces()
+    }
+    
+    func loadAirSpaces() {
+        var openAirString = ""
+        
+        do {
+            let url = Bundle.main.url(forResource: "DAeC_Germany_Week22_2016", withExtension: "txt")!
+            openAirString = try String(contentsOf: url, encoding: .ascii)
+        }
+        catch _ {
+            fatalError("could not open the OpenAir file")
+        }
+        
+        let airspaces = AirSpace.airSpaces(from: openAirString)
+        
+        mapview.delegate = self
+        
+        airspaces?.forEach {
+            let coords = $0.polygonCoordinates
+            let polygon = MKPolygon(coordinates: coords, count: coords.count)
+            self.mapview.add(polygon)
+        }
+    }
+    
+    func loadIGCFile() {
         var igcString = ""
 
         do {
@@ -26,7 +53,7 @@ class ViewController: UIViewController, MKMapViewDelegate {
             fatalError("could not open the IGC file")
         }
 
-        let igcData = IGCData(with: igcString)!
+        var igcData = IGCData(with: igcString)!
 
         print("Loaded IGC File")
         print("Headers:")
@@ -40,13 +67,23 @@ class ViewController: UIViewController, MKMapViewDelegate {
         let flightPath = igcData.polyline
         mapview.addOverlays([flightPath])
         mapview.setVisibleMapRect(flightPath.boundingMapRect, animated: false)
+        
     }
 
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-        let renderer = MKPolylineRenderer(polyline: overlay as! MKPolyline)
-        renderer.strokeColor = UIColor.blue.withAlphaComponent(0.7)
-        renderer.lineWidth = 3.0
-        return renderer
+        if let polyline = overlay as? MKPolyline {
+            let renderer = MKPolylineRenderer(polyline: polyline)
+            renderer.strokeColor = UIColor.blue.withAlphaComponent(0.7)
+            renderer.lineWidth = 3.0
+            return renderer
+        } else if let polygon = overlay as? MKPolygon {
+            let renderer = MKPolygonRenderer(polygon: polygon)
+            renderer.strokeColor = UIColor.blue.withAlphaComponent(0.7)
+            renderer.lineWidth = 1.0
+            return renderer
+        }
+        
+        return MKOverlayRenderer(overlay: overlay)
     }
 
 }
