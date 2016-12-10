@@ -21,6 +21,11 @@
 		876CBA3D1D10659200C125AC /* IGCExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876CBA3C1D10659200C125AC /* IGCExtension.swift */; };
 		877A18971D18367A00EC6E41 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877A18961D18367A00EC6E41 /* StringExtensions.swift */; };
 		877A18991D18370100EC6E41 /* StringExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877A18981D18370100EC6E41 /* StringExtensionsTests.swift */; };
+		877B9CF11DFC1B6700D2EB91 /* AirSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877B9CF01DFC1B6700D2EB91 /* AirSpace.swift */; };
+		877B9CF31DFC1BAB00D2EB91 /* CLLocationCoordinate2DExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877B9CF21DFC1BAB00D2EB91 /* CLLocationCoordinate2DExtensions.swift */; };
+		877B9CF51DFC1BE300D2EB91 /* CharacterSetExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877B9CF41DFC1BE300D2EB91 /* CharacterSetExtensions.swift */; };
+		877B9CF71DFC1C0F00D2EB91 /* ScannerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877B9CF61DFC1C0F00D2EB91 /* ScannerExtensions.swift */; };
+		877B9CF91DFC1C4600D2EB91 /* DAeC_Germany_Week22_2016.txt in Resources */ = {isa = PBXBuildFile; fileRef = 877B9CF81DFC1C4600D2EB91 /* DAeC_Germany_Week22_2016.txt */; };
 		87BB56D11DB37A5D00379BE0 /* DateExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BB56D01DB37A5D00379BE0 /* DateExtensionsTests.swift */; };
 		87FA6A6B1D12D10F000C5F7E /* IGCDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87FA6A6A1D12D10F000C5F7E /* IGCDataTests.swift */; };
 /* End PBXBuildFile section */
@@ -53,6 +58,11 @@
 		876CBA3C1D10659200C125AC /* IGCExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGCExtension.swift; sourceTree = "<group>"; };
 		877A18961D18367A00EC6E41 /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		877A18981D18370100EC6E41 /* StringExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensionsTests.swift; sourceTree = "<group>"; };
+		877B9CF01DFC1B6700D2EB91 /* AirSpace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AirSpace.swift; sourceTree = "<group>"; };
+		877B9CF21DFC1BAB00D2EB91 /* CLLocationCoordinate2DExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLLocationCoordinate2DExtensions.swift; sourceTree = "<group>"; };
+		877B9CF41DFC1BE300D2EB91 /* CharacterSetExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharacterSetExtensions.swift; sourceTree = "<group>"; };
+		877B9CF61DFC1C0F00D2EB91 /* ScannerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScannerExtensions.swift; sourceTree = "<group>"; };
+		877B9CF81DFC1C4600D2EB91 /* DAeC_Germany_Week22_2016.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DAeC_Germany_Week22_2016.txt; sourceTree = "<group>"; };
 		87BB56D01DB37A5D00379BE0 /* DateExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtensionsTests.swift; sourceTree = "<group>"; };
 		87FA6A6A1D12D10F000C5F7E /* IGCDataTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGCDataTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -106,6 +116,10 @@
 				8722EF301D0DD90500DA4509 /* Iguazu.h */,
 				8722EF321D0DD90500DA4509 /* Info.plist */,
 				877A18961D18367A00EC6E41 /* StringExtensions.swift */,
+				877B9CF01DFC1B6700D2EB91 /* AirSpace.swift */,
+				877B9CF21DFC1BAB00D2EB91 /* CLLocationCoordinate2DExtensions.swift */,
+				877B9CF41DFC1BE300D2EB91 /* CharacterSetExtensions.swift */,
+				877B9CF61DFC1C0F00D2EB91 /* ScannerExtensions.swift */,
 			);
 			path = Iguazu;
 			sourceTree = "<group>";
@@ -128,6 +142,7 @@
 		8722EF491D0DDC0800DA4509 /* Test Files */ = {
 			isa = PBXGroup;
 			children = (
+				877B9CF81DFC1C4600D2EB91 /* DAeC_Germany_Week22_2016.txt */,
 				8722EF4A1D0DDC1D00DA4509 /* lx7007.igc */,
 			);
 			name = "Test Files";
@@ -233,6 +248,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				877B9CF91DFC1C4600D2EB91 /* DAeC_Germany_Week22_2016.txt in Resources */,
 				8722EF4B1D0DDC1D00DA4509 /* lx7007.igc in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -245,8 +261,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				8722EF511D0DEF2A00DA4509 /* IGCRecord.swift in Sources */,
+				877B9CF11DFC1B6700D2EB91 /* AirSpace.swift in Sources */,
 				876CBA3D1D10659200C125AC /* IGCExtension.swift in Sources */,
+				877B9CF71DFC1C0F00D2EB91 /* ScannerExtensions.swift in Sources */,
 				877A18971D18367A00EC6E41 /* StringExtensions.swift in Sources */,
+				877B9CF51DFC1BE300D2EB91 /* CharacterSetExtensions.swift in Sources */,
+				877B9CF31DFC1BAB00D2EB91 /* CLLocationCoordinate2DExtensions.swift in Sources */,
 				873CB3161DB3718300A6325E /* IGCFix.swift in Sources */,
 				8722EF4D1D0DDCEC00DA4509 /* IGCHeader.swift in Sources */,
 				8722EF481D0DDB8200DA4509 /* IGCData.swift in Sources */,
@@ -319,7 +339,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -366,7 +386,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
@@ -388,6 +408,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = Iguazu/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.fifteenjugglers.Iguazu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -408,6 +429,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = Iguazu/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.fifteenjugglers.Iguazu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
