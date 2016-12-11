@@ -10,6 +10,7 @@
 		877B9D3A1DFC257400D2EB91 /* DAeC_Germany_Week22_2016.txt in Resources */ = {isa = PBXBuildFile; fileRef = 877B9D391DFC257400D2EB91 /* DAeC_Germany_Week22_2016.txt */; };
 		877B9D421DFC286500D2EB91 /* Iguazu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 877B9D411DFC286500D2EB91 /* Iguazu.framework */; };
 		877B9D431DFC286500D2EB91 /* Iguazu.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 877B9D411DFC286500D2EB91 /* Iguazu.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		87F0A8691DFDA29C0041EB85 /* allusa.v16.11-10.1.txt in Resources */ = {isa = PBXBuildFile; fileRef = 87F0A8681DFDA29C0041EB85 /* allusa.v16.11-10.1.txt */; };
 		87F2E83B1D6632B000FA4CD2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F2E83A1D6632B000FA4CD2 /* AppDelegate.swift */; };
 		87F2E83D1D6632B000FA4CD2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F2E83C1D6632B000FA4CD2 /* ViewController.swift */; };
 		87F2E8401D6632B000FA4CD2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87F2E83E1D6632B000FA4CD2 /* Main.storyboard */; };
@@ -35,6 +36,7 @@
 /* Begin PBXFileReference section */
 		877B9D391DFC257400D2EB91 /* DAeC_Germany_Week22_2016.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DAeC_Germany_Week22_2016.txt; sourceTree = "<group>"; };
 		877B9D411DFC286500D2EB91 /* Iguazu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Iguazu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		87F0A8681DFDA29C0041EB85 /* allusa.v16.11-10.1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "allusa.v16.11-10.1.txt"; sourceTree = "<group>"; };
 		87F2E8371D6632B000FA4CD2 /* IguazuDemoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IguazuDemoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		87F2E83A1D6632B000FA4CD2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		87F2E83C1D6632B000FA4CD2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 			isa = PBXGroup;
 			children = (
 				87F2E84C1D66343E00FA4CD2 /* lx7007.igc */,
+				87F0A8681DFDA29C0041EB85 /* allusa.v16.11-10.1.txt */,
 				877B9D391DFC257400D2EB91 /* DAeC_Germany_Week22_2016.txt */,
 				87F2E83A1D6632B000FA4CD2 /* AppDelegate.swift */,
 				87F2E83C1D6632B000FA4CD2 /* ViewController.swift */,
@@ -160,6 +163,7 @@
 			files = (
 				87F2E8451D6632B000FA4CD2 /* LaunchScreen.storyboard in Resources */,
 				87F2E84D1D66343E00FA4CD2 /* lx7007.igc in Resources */,
+				87F0A8691DFDA29C0041EB85 /* allusa.v16.11-10.1.txt in Resources */,
 				87F2E8421D6632B000FA4CD2 /* Assets.xcassets in Resources */,
 				877B9D3A1DFC257400D2EB91 /* DAeC_Germany_Week22_2016.txt in Resources */,
 				87F2E8401D6632B000FA4CD2 /* Main.storyboard in Resources */,

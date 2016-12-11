@@ -23,21 +23,20 @@ class ViewController: UIViewController {
     }
     
     func loadAirSpaces() {
-        var openAirString = ""
         
-        do {
-            let url = Bundle.main.url(forResource: "DAeC_Germany_Week22_2016", withExtension: "txt")!
-            openAirString = try String(contentsOf: url, encoding: .ascii)
-        }
-        catch _ {
-            fatalError("could not open the OpenAir file")
-        }
+        let urlDE = Bundle.main.url(forResource: "DAeC_Germany_Week22_2016", withExtension: "txt")!
         
-        if let airspaces = AirSpace.airSpaces(from: openAirString) {
-            mapDelegate = AirSpaceMapDelegate(airspaces: airspaces)
-            mapview.delegate = mapDelegate
-            mapview.addOverlays(mapDelegate!.polygons)
-        }
+        let germany = AirSpace.airSpaces(withContentsOf: urlDE)
+        
+        let urlUS = Bundle.main.url(forResource: "allusa.v16.11-10.1", withExtension: "txt")!
+        
+        let usa = AirSpace.airSpaces(withContentsOf: urlUS)
+        
+        let allAirspaces = [germany ?? [], usa ?? []].joined().map { $0 }
+        
+        mapDelegate = AirSpaceMapDelegate(airspaces: allAirspaces)
+        mapview.delegate = mapDelegate
+        mapview.addOverlays(mapDelegate!.polygons)
     }
     
     func loadIGCFile() {
