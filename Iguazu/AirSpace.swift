@@ -20,6 +20,8 @@ public enum AirSpaceClass: String {
     case GliderProhibited = "GP"
     case CTR = "CTR"
     case WaveWindow = "W"
+    case TransponderMandatoryZone = "TMZ"
+    case RadioMandatoryZone = "RMZ"
 }
 
 public typealias Altitude = Measurement<UnitLength>
