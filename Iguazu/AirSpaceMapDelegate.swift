@@ -9,7 +9,11 @@
 import MapKit
 
 public class AirSpaceMapDelegate: NSObject, MKMapViewDelegate {
-    var airspaceTable = [MKPolygon: AirSpace]()
+    private var _airspaceTable = [MKPolygon: AirSpace]()
+    
+    public var airspaceTable: [MKPolygon: AirSpace] {
+        return _airspaceTable
+    }
     
     public var polygons = [MKPolygon]()
     
@@ -18,7 +22,7 @@ public class AirSpaceMapDelegate: NSObject, MKMapViewDelegate {
         polygons = airspaces.map {
             let coords = $0.polygonCoordinates
             let polygon = MKPolygon(coordinates: coords, count: coords.count)
-            self.airspaceTable[polygon] = $0
+            self._airspaceTable[polygon] = $0
             return polygon
         }
     }
@@ -41,8 +45,8 @@ public class AirSpaceMapDelegate: NSObject, MKMapViewDelegate {
     }
 }
 
-extension AirSpaceClass {
-    var color: UIColor {
+public extension AirSpaceClass {
+    public var color: UIColor {
         switch self {
         case .Danger:
             return .black
