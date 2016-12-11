@@ -139,7 +139,7 @@ public extension AirSpace {
             guard let firstWhiteSpace = line.rangeOfCharacter(from: .whitespaces) else { continue }
             
             let prefix = line.substring(to: firstWhiteSpace.lowerBound)
-            let value = line.substring(from: firstWhiteSpace.upperBound)
+            let value = line.substring(from: firstWhiteSpace.upperBound).trimmingCharacters(in: .whitespacesAndNewlines)
             
             switch prefix {
             case "AC":
