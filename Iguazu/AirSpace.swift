@@ -219,6 +219,18 @@ public extension AirSpace {
         return airSpaces
     }
     
+    public static func airSpaces(withContentsOf url: URL) -> [AirSpace]? {
+        var openAirString = ""
+        do {
+            openAirString = try String(contentsOf: url, encoding: .ascii)
+        }
+        catch _ {
+            return nil
+        }
+        
+        return self.airSpaces(from: openAirString)
+    }
+    
     private static func coordinate(from string:String) -> CLLocationCoordinate2D? {
         let scanner = Scanner(string: string.uppercased())
         guard let latString = scanner.scanUpToCharacters(from: .northSouth) else { fatalError("could not find N/S in coordinate string") }
