@@ -264,7 +264,16 @@ public extension AirSpace {
         let sign = clockwise ? 1.0 : -1.0
         
         let start = from
-        let end = (to == from) ? from+360.0 : to
+        
+        var end = (to == from) ? from+360.0 : to
+        
+        if (clockwise && to < from ) {
+            end += 360.0
+        }
+        
+        if (!clockwise && to > from) {
+            end -= 360.0
+        }
         
         let range = fabs(end - start)
         let count = ceil(range/resolution)
