@@ -55,7 +55,7 @@ public extension AirSpaceClass {
         case .Delta:
             return .green
         case .Bravo, .Charlie, .RadioMandatoryZone:
-            return UIColor(colorLiteralRed: 0.0, green: 0.6, blue: 1.0, alpha: 1.0)
+            return UIColor(red: 0.0, green: 0.6, blue: 1.0, alpha: 1.0)
         case .TransponderMandatoryZone:
             return .gray
         default:

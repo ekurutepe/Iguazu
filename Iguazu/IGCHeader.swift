@@ -117,9 +117,9 @@ public enum IGCHeaderField {
     static func parseDateString(hLine: String) -> IGCHeaderField {
         guard let prefixRange = hLine.range(of: HeaderRecordCode.date.rawValue) else { fatalError() }
 
-        let dateString = hLine.substring(from: prefixRange.upperBound)
+        let dateString = hLine.dropFirst(prefixRange.upperBound.encodedOffset)
 
-        guard let date = Date.parse(headerDateString: dateString) else { fatalError() }
+        guard let date = Date.parse(headerDateString: String(dateString)) else { fatalError() }
 
         return .date(flightDate: date)
     }
@@ -127,7 +127,7 @@ public enum IGCHeaderField {
     static func parseAccuracyString(hLine: String) -> IGCHeaderField {
         guard let prefixRange = hLine.range(of: HeaderRecordCode.accuracy.rawValue) else { fatalError() }
 
-        let accuracyString = hLine.substring(from: prefixRange.upperBound)
+        let accuracyString = hLine.dropFirst(prefixRange.upperBound.encodedOffset)
 
         guard let accuracy = Int(accuracyString) else { fatalError() }
 
@@ -138,7 +138,7 @@ public enum IGCHeaderField {
         guard let _ = line.range(of: prefix),
             let separatorRange = line.range(of: ":") else { fatalError() }
 
-        let value = line.substring(from: separatorRange.upperBound)
+        let value = line.dropFirst(separatorRange.upperBound.encodedOffset)
             .trimmingCharacters(in: .whitespacesAndNewlines)
 
         return value
@@ -157,11 +157,11 @@ public struct IGCHeader {
             return line.hasPrefix("H")
         })
 
-        headerFields = lines.flatMap { IGCHeaderField.parseHLine(hLine: $0) }
+        headerFields = lines.compactMap { IGCHeaderField.parseHLine(hLine: $0) }
     }
 
     public lazy var flightDate: Date = {
-        let date = self.headerFields.flatMap({ (header) -> Date? in
+        let date = self.headerFields.compactMap({ (header) -> Date? in
             switch header {
             case .date(let flightDate):
                 return flightDate
@@ -174,7 +174,7 @@ public struct IGCHeader {
     }()
 
     public lazy var pilotInCharge: String = {
-        let pic = self.headerFields.flatMap({ (header) -> String? in
+        let pic = self.headerFields.compactMap({ (header) -> String? in
             switch header {
             case .pilotInCharge(let name):
                 return name
@@ -187,7 +187,7 @@ public struct IGCHeader {
     }()
     
     public lazy var crew: String? = {
-        let crew = self.headerFields.flatMap({ (header) -> String? in
+        let crew = self.headerFields.compactMap({ (header) -> String? in
             switch header {
             case .crew(let name):
                 return name
@@ -200,7 +200,7 @@ public struct IGCHeader {
     }()
 
     public lazy var gliderType: String = {
-        let gliderType = self.headerFields.flatMap({ (header) -> String? in
+        let gliderType = self.headerFields.compactMap({ (header) -> String? in
             switch header {
             case .gliderType(let value):
                 return value
@@ -213,7 +213,7 @@ public struct IGCHeader {
     }()
 
     public lazy var gliderRegistration: String = {
-        let gliderRegistration = self.headerFields.flatMap({ (header) -> String? in
+        let gliderRegistration = self.headerFields.compactMap({ (header) -> String? in
             switch header {
             case .gliderRegistration(let value):
                 return value

@@ -20,7 +20,7 @@ extension Date {
     
     // parse strings like 250809 to Aug 25th 2009
     static func parse(headerDateString: String) -> Date? {
-        guard headerDateString.characters.count == 6 else { return nil }
+        guard headerDateString.count == 6 else { return nil }
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "ddMMyy"

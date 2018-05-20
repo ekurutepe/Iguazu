@@ -63,7 +63,7 @@ public struct IGCData {
         guard lines.count > 0 else { return nil }
 
         let extensions = lines.filter { $0.hasPrefix("I") }
-            .flatMap { IGCExtension.parseExtensions(line: $0) }.first
+            .compactMap { IGCExtension.parseExtensions(line: $0) }.first
 
         let fixes = lines.filter { $0.hasPrefix("B") }
 

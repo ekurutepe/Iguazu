@@ -9,8 +9,8 @@
 import CoreLocation
 
 extension CLLocationCoordinate2D {
-    private func DegreesToRadians(_ degrees: Double) -> Double { return degrees * M_PI / 180.0 }
-    private func RadiansToDegrees(_ radians: Double) -> CLLocationDegrees { return radians * 180.0/M_PI }
+    private func DegreesToRadians(_ degrees: Double) -> Double { return degrees * .pi / 180.0 }
+    private func RadiansToDegrees(_ radians: Double) -> CLLocationDegrees { return radians * 180.0 / .pi }
     
     // calculations taken from http://gis.stackexchange.com/questions/75528/length-of-a-degree-where-do-the-terms-in-this-formula-come-from
     var metersPerLatitudeDegree: CLLocationDistance {

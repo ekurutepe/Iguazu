@@ -138,8 +138,9 @@ public extension AirSpace {
             
             guard let firstWhiteSpace = line.rangeOfCharacter(from: .whitespaces) else { continue }
             
-            let prefix = line.substring(to: firstWhiteSpace.lowerBound)
-            let value = line.substring(from: firstWhiteSpace.upperBound).trimmingCharacters(in: .whitespacesAndNewlines)
+            let prefix = line[line.startIndex ..< firstWhiteSpace.lowerBound]
+            let value = line[firstWhiteSpace.upperBound ..< line.endIndex]
+                .trimmingCharacters(in: .whitespacesAndNewlines)
             
             switch prefix {
             case "AC":
@@ -164,10 +165,10 @@ public extension AirSpace {
             case "V":
                 if value.hasPrefix("X") {
                     let eqRange = value.range(of: "=")!
-                    state.x = coordinate(from: value.substring(from: eqRange.upperBound))
+                    state.x = coordinate(from: value.dropFirst(eqRange.upperBound.encodedOffset))
                 } else if value.hasPrefix("D") {
                     guard let signRange = value.rangeOfCharacter(from: .plusMinus) else { fatalError("malformed direction line: \(line)") }
-                    let sign = value.substring(with: signRange)
+                    let sign = value[signRange.lowerBound ..< signRange.upperBound]
                     state.clockwise = (sign == "+")
                 } else {
                     continue
@@ -185,7 +186,7 @@ public extension AirSpace {
             case "DA":
                 //*    DA radius, angleStart, angleEnd; add an arc, angles in degrees, radius in nm (set center using V X=...)
                 guard let center = state.x else { fatalError("got an arc but got no center: \(line)") }
-                let numbers = value.components(separatedBy: ",").map { $0.trimmingCharacters(in: .whitespaces) }.flatMap(Double.init)
+                let numbers = value.components(separatedBy: ",").map { $0.trimmingCharacters(in: .whitespaces) }.compactMap(Double.init)
                 guard numbers.count == 3 else { fatalError("Need 3 parameters for DA arc but got \(numbers.count): \(line)") }
                 let radius = Measurement(value: numbers[0], unit: UnitLength.nauticalMiles).converted(to: .meters)
                 let coords = polygonArc(around: center, radius: radius.value, from: numbers[1], to: numbers[2], clockwise: state.clockwise)
@@ -193,7 +194,7 @@ public extension AirSpace {
             case "DB":
                 //*    DB coordinate1, coordinate2; add an arc, from coordinate1 to coordinate2 (set center using V X=...)
                 guard let center = state.x else { fatalError("got an arc but got no center: \(line)") }
-                let fromToCoords = value.components(separatedBy: ",").flatMap(coordinate)
+                let fromToCoords = value.components(separatedBy: ",").compactMap(coordinate)
                 guard fromToCoords.count == 2 else { fatalError("Need 2 points for DB arc but got \(fromToCoords.count): \(line)") }
                 let from = fromToCoords.first!
                 let to = fromToCoords.last!
@@ -231,7 +232,7 @@ public extension AirSpace {
         return self.airSpaces(from: openAirString)
     }
     
-    private static func coordinate(from string:String) -> CLLocationCoordinate2D? {
+    private static func coordinate<S: StringProtocol>(from string: S) -> CLLocationCoordinate2D? {
         let scanner = Scanner(string: string.uppercased())
         guard let latString = scanner.scanUpToCharacters(from: .northSouth) else { fatalError("could not find N/S in coordinate string") }
         

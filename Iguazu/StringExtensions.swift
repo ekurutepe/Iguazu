@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension String {
+extension StringProtocol {
 
     /// Extract a substring from this string
     ///
@@ -22,8 +22,8 @@ extension String {
 
         let startIndex = self.index(self.startIndex, offsetBy: start)
         let endIndex = self.index(startIndex, offsetBy: length)
-
-        return self.substring(with: startIndex ..< endIndex)
+        let val = self[startIndex ..< endIndex]
+        return String(val)
     }
 
     /// Extract date components for the time in the format HHMMSS from this

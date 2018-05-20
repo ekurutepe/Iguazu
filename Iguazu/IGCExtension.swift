@@ -19,8 +19,8 @@ public struct IGCExtension {
     let type: ExtensionType
 
     static func parseExtensions(line: String) -> [IGCExtension]? {
-        let countIndex = line.index(after: line.startIndex)
-        let firstChar = line.substring(to: countIndex)
+        
+        guard let firstChar = line.first else { return nil }
 
         guard firstChar == "I" || firstChar == "J" else { return nil }
 
@@ -28,7 +28,7 @@ public struct IGCExtension {
 
         let extensionCharLength = 7
 
-        let extensionsString = line.substring(from: line.index(countIndex, offsetBy: 2))
+        let extensionsString = line.dropFirst(3)
 
         var extensions = [IGCExtension]()
 
