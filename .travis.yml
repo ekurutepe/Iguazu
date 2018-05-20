@@ -2,6 +2,6 @@ language: objective-c
 osx_image: xcode8
 xcode_workspace: Iguazu.xcworkspace
 xcode_scheme: IguazuTests
-script: xcodebuild -scheme IguazuTests -sdk iphonesimulator10.0 -destination 'platform=iOS Simulator,name=iPhone 6,OS=10.0' clean  test
+script: xcodebuild -scheme IguazuTests -sdk iphonesimulator11.3 -destination 'platform=iOS Simulator,name=iPhone 6,OS=11.3' clean  test
 after_success:
   - bash <(curl -s https://codecov.io/bash)
