@@ -24,6 +24,8 @@ public enum AirSpaceClass: String {
     case RadioMandatoryZone = "RMZ"
 }
 
+public typealias AirSpacesByClassDictionary = [AirSpaceClass: [AirSpace]]
+
 public typealias Altitude = Measurement<UnitLength>
 
 public typealias DegreeComponents = Array<String>
@@ -124,10 +126,10 @@ public extension AirSpace {
         }
     }
     
-    public static func airSpaces(from openAirString:String) -> [AirSpace]? {
+    public static func airSpacesByClass(from openAirString:String) -> AirSpacesByClassDictionary? {
         let lines = openAirString.components(separatedBy: .newlines)
         
-        var airSpaces = [AirSpace]()
+        var airSpaces = [AirSpaceClass: [AirSpace]]()
         
         var currentAirspace: AirSpaceInProgress? = nil
         
@@ -146,7 +148,10 @@ public extension AirSpace {
             case "AC":
                 currentAirspace.flatMap {
                     $0.validAirSpace.flatMap { asp in
-                        airSpaces.append(asp) }
+                        var list = airSpaces[asp.class] ?? [AirSpace]()
+                        list.append(asp)
+                        airSpaces[asp.class] = list
+                    }
                 }
                 
                 state = ParserState()
@@ -213,13 +218,35 @@ public extension AirSpace {
         
         currentAirspace.flatMap {
             $0.validAirSpace.flatMap { asp in
-                airSpaces.append(asp)
+                var list = airSpaces[asp.class] ?? [AirSpace]()
+                list.append(asp)
+                airSpaces[asp.class] = list
             }
         }
         
         return airSpaces
     }
+        
+    public static func airSpaces(from openAirString:String) -> [AirSpace]? {
+        guard let airspaces = self.airSpacesByClass(from: openAirString) else { return nil }
+        let flatAirSpaces = airspaces.reduce([AirSpace]()) { (res, tuple) -> [AirSpace] in
+            return res + tuple.value
+        }
+        return flatAirSpaces
+    }
     
+    public static func airSpacesByClass(withContentsOf url: URL) ->AirSpacesByClassDictionary? {
+        var openAirString = ""
+        do {
+            openAirString = try String(contentsOf: url, encoding: .ascii)
+        }
+        catch _ {
+            return nil
+        }
+        
+        return self.airSpacesByClass(from: openAirString)
+    }
+        
     public static func airSpaces(withContentsOf url: URL) -> [AirSpace]? {
         var openAirString = ""
         do {
