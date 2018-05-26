@@ -56,7 +56,7 @@ class ViewController: UIViewController {
         print("Headers:")
         print("\(igcData.header)")
         print("Extensions:")
-        print("\(igcData.extensions)")
+        print("\(String(describing: igcData.extensions))")
         print("Fixes:")
         print("\(igcData.fixes)")
 
