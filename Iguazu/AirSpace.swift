@@ -62,6 +62,11 @@ public enum AirSpaceAltitude {
         }
         
         guard let value = Int(impliedMSLString.trimmingCharacters(in: CharacterSet.decimalDigits.inverted).trimmingCharacters(in: .whitespaces)) else { return nil }
+
+        if impliedMSLString.hasPrefix("fl") {
+            self = .fl(flightLevel: value)
+            return
+        }
         
         let unit: UnitLength
         
@@ -69,11 +74,6 @@ public enum AirSpaceAltitude {
             unit = .meters
         } else {
             unit = .feet
-        }
-        
-        if impliedMSLString.hasPrefix("fl") {
-            self = .fl(flightLevel: value)
-            return
         }
         
         if impliedMSLString.hasSuffix("agl") {
@@ -311,6 +311,46 @@ public extension AirSpace {
             .map { degree in center.coordinate(at: radius, direction: degree) }
         
         return coordinates
+    }
+}
+
+extension AirSpaceAltitude {
+    var asNSDictionary: NSDictionary {
+        switch self {
+        case .surface:
+            return [ "type": "surface" ] as NSDictionary
+        case .fl(let lvl):
+            return [ "type": "fl", "value": lvl ] as NSDictionary
+        case .agl(let alt):
+            return [ "type": "agl", "value": alt.value, "unit": alt.unit.symbol ] as NSDictionary
+        case .msl(let alt):
+            return [ "type": "msl", "value": alt.value, "unit": alt.unit.symbol ] as NSDictionary
+        }
+    }
+}
+
+extension AirSpace: GeoJsonEncodable {
+    var geoJsonString: String? {
+        let coordinatesArray: [[Double]] = (self.polygonCoordinates+[self.polygonCoordinates[0]]).reversed().map { [$0.longitude, $0.latitude] }
+        
+        let dict: NSDictionary = [
+            "type": "Feature",
+            "properties": [
+                "name": self.name as NSString,
+                "type": self.class.rawValue as NSString,
+                "floor": self.floor.asNSDictionary,
+                "ceiling": self.ceiling.asNSDictionary,
+            ] as NSDictionary,
+            "geometry": [
+                "type": "Polygon" as NSString,
+                "coordinates": [ coordinatesArray as NSArray ] as NSArray,
+            ] as NSDictionary
+        ]
+        
+        guard JSONSerialization.isValidJSONObject(dict) else { return nil }
+        guard let data = try? JSONSerialization.data(withJSONObject: dict, options: []) else { return nil }
+        return String(data: data, encoding: .utf8)
+    
     }
 }
 

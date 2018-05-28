@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		51EDE51D20BC7B3D00F53408 /* GeoJsonEncodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51EDE51C20BC7B3D00F53408 /* GeoJsonEncodable.swift */; };
 		8716DE371D115D63005312B2 /* IGCHeaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8716DE361D115D63005312B2 /* IGCHeaderTests.swift */; };
 		871E012B1DFC72AD0072487D /* AirSpaceMapDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871E012A1DFC72AD0072487D /* AirSpaceMapDelegate.swift */; };
 		8722EF311D0DD90500DA4509 /* Iguazu.h in Headers */ = {isa = PBXBuildFile; fileRef = 8722EF301D0DD90500DA4509 /* Iguazu.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -53,6 +54,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		51EDE51C20BC7B3D00F53408 /* GeoJsonEncodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoJsonEncodable.swift; sourceTree = "<group>"; };
 		8716DE361D115D63005312B2 /* IGCHeaderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGCHeaderTests.swift; sourceTree = "<group>"; };
 		871E012A1DFC72AD0072487D /* AirSpaceMapDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AirSpaceMapDelegate.swift; sourceTree = "<group>"; };
 		8722EF2D1D0DD90500DA4509 /* Iguazu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Iguazu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -148,6 +150,7 @@
 				877B9CF41DFC1BE300D2EB91 /* CharacterSetExtensions.swift */,
 				877B9CF61DFC1C0F00D2EB91 /* ScannerExtensions.swift */,
 				871E012A1DFC72AD0072487D /* AirSpaceMapDelegate.swift */,
+				51EDE51C20BC7B3D00F53408 /* GeoJsonEncodable.swift */,
 			);
 			path = Iguazu;
 			sourceTree = "<group>";
@@ -342,6 +345,7 @@
 				8722EF4D1D0DDCEC00DA4509 /* IGCHeader.swift in Sources */,
 				8722EF481D0DDB8200DA4509 /* IGCData.swift in Sources */,
 				873CB3141DB3708800A6325E /* DateExtensions.swift in Sources */,
+				51EDE51D20BC7B3D00F53408 /* GeoJsonEncodable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
