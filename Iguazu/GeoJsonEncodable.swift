@@ -8,6 +8,6 @@
 
 import Foundation
 
-protocol GeoJsonEncodable {
+public protocol GeoJsonEncodable {
     var geoJsonString: String? { get }
 }

@@ -330,7 +330,7 @@ extension AirSpaceAltitude {
 }
 
 extension AirSpace: GeoJsonEncodable {
-    var geoJsonString: String? {
+    public var geoJsonString: String? {
         let coordinatesArray: [[Double]] = (self.polygonCoordinates+[self.polygonCoordinates[0]]).reversed().map { [$0.longitude, $0.latitude] }
         
         let dict: NSDictionary = [
