@@ -315,16 +315,20 @@ public extension AirSpace {
 }
 
 extension AirSpaceAltitude {
-    var asNSDictionary: NSDictionary {
+    var geoJsonAltitude: Int {
         switch self {
         case .surface:
-            return [ "type": "surface" ] as NSDictionary
-        case .fl(let lvl):
-            return [ "type": "fl", "value": lvl ] as NSDictionary
+            return 0
+        case .fl(let level):
+            let flMeasure = Measurement(value: 100.0*Double(level), unit: UnitLength.feet).converted(to: .meters)
+            let intMeters = Int(flMeasure.value.rounded())
+            return intMeters
         case .agl(let alt):
-            return [ "type": "agl", "value": alt.value, "unit": alt.unit.symbol ] as NSDictionary
+            let intAGL = Int(alt.converted(to: .meters).value)
+            return intAGL
         case .msl(let alt):
-            return [ "type": "msl", "value": alt.value, "unit": alt.unit.symbol ] as NSDictionary
+            let intMSL = Int(alt.converted(to: .meters).value)
+            return intMSL
         }
     }
 }
@@ -338,8 +342,8 @@ extension AirSpace: GeoJsonEncodable {
             "properties": [
                 "name": self.name as NSString,
                 "type": self.class.rawValue as NSString,
-                "floor": self.floor.asNSDictionary,
-                "ceiling": self.ceiling.asNSDictionary,
+                "floor": self.floor.geoJsonAltitude,
+                "ceiling": self.ceiling.geoJsonAltitude,
             ] as NSDictionary,
             "geometry": [
                 "type": "Polygon" as NSString,
