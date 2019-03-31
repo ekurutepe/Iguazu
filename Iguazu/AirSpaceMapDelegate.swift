@@ -46,7 +46,7 @@ public class AirSpaceMapDelegate: NSObject, MKMapViewDelegate {
 }
 
 public extension AirSpaceClass {
-    public var color: UIColor {
+    var color: UIColor {
         switch self {
         case .Danger:
             return .black

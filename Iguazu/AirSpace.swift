@@ -126,7 +126,7 @@ public extension AirSpace {
         }
     }
     
-    public static func airSpacesByClass(from openAirString:String) -> AirSpacesByClassDictionary? {
+    static func airSpacesByClass(from openAirString:String) -> AirSpacesByClassDictionary? {
         let lines = openAirString.components(separatedBy: .newlines)
         
         var airSpaces = [AirSpaceClass: [AirSpace]]()
@@ -169,8 +169,8 @@ public extension AirSpace {
                 currentAirspace?.labelCoordinates?.append(coord)
             case "V":
                 if value.hasPrefix("X") {
-                    let eqRange = value.range(of: "=")!
-                    state.x = coordinate(from: value.dropFirst(eqRange.upperBound.encodedOffset))
+                    guard let eqRange = value.range(of: "=") else { assertionFailure("malformed X"); return nil }
+                    state.x = coordinate(from: value.suffix(from: eqRange.upperBound))
                 } else if value.hasPrefix("D") {
                     guard let signRange = value.rangeOfCharacter(from: .plusMinus) else { fatalError("malformed direction line: \(line)") }
                     let sign = value[signRange.lowerBound ..< signRange.upperBound]
@@ -227,7 +227,7 @@ public extension AirSpace {
         return airSpaces
     }
         
-    public static func airSpaces(from openAirString:String) -> [AirSpace]? {
+    static func airSpaces(from openAirString:String) -> [AirSpace]? {
         guard let airspaces = self.airSpacesByClass(from: openAirString) else { return nil }
         let flatAirSpaces = airspaces.reduce([AirSpace]()) { (res, tuple) -> [AirSpace] in
             return res + tuple.value
@@ -235,7 +235,7 @@ public extension AirSpace {
         return flatAirSpaces
     }
     
-    public static func airSpacesByClass(withContentsOf url: URL) ->AirSpacesByClassDictionary? {
+    static func airSpacesByClass(withContentsOf url: URL) ->AirSpacesByClassDictionary? {
         var openAirString = ""
         do {
             openAirString = try String(contentsOf: url, encoding: .ascii)
@@ -247,7 +247,7 @@ public extension AirSpace {
         return self.airSpacesByClass(from: openAirString)
     }
         
-    public static func airSpaces(withContentsOf url: URL) -> [AirSpace]? {
+    static func airSpaces(withContentsOf url: URL) -> [AirSpace]? {
         var openAirString = ""
         do {
             openAirString = try String(contentsOf: url, encoding: .ascii)

@@ -117,7 +117,7 @@ public enum IGCHeaderField {
     static func parseDateString(hLine: String) -> IGCHeaderField {
         guard let prefixRange = hLine.range(of: HeaderRecordCode.date.rawValue) else { fatalError() }
 
-        let dateString = hLine.dropFirst(prefixRange.upperBound.encodedOffset)
+        let dateString = hLine.suffix(from: prefixRange.upperBound)
 
         guard let date = Date.parse(headerDateString: String(dateString)) else { fatalError() }
 
@@ -127,7 +127,7 @@ public enum IGCHeaderField {
     static func parseAccuracyString(hLine: String) -> IGCHeaderField {
         guard let prefixRange = hLine.range(of: HeaderRecordCode.accuracy.rawValue) else { fatalError() }
 
-        let accuracyString = hLine.dropFirst(prefixRange.upperBound.encodedOffset)
+        let accuracyString = hLine.suffix(from: prefixRange.upperBound)
 
         guard let accuracy = Int(accuracyString) else { fatalError() }
 
@@ -138,7 +138,7 @@ public enum IGCHeaderField {
         guard let _ = line.range(of: prefix),
             let separatorRange = line.range(of: ":") else { fatalError() }
 
-        let value = line.dropFirst(separatorRange.upperBound.encodedOffset)
+        let value = line.suffix(from: separatorRange.upperBound)
             .trimmingCharacters(in: .whitespacesAndNewlines)
 
         return value
