@@ -136,21 +136,11 @@
 		8722EF2F1D0DD90500DA4509 /* Iguazu */ = {
 			isa = PBXGroup;
 			children = (
-				873CB3131DB3708800A6325E /* DateExtensions.swift */,
-				8722EF471D0DDB8200DA4509 /* IGCData.swift */,
-				876CBA3C1D10659200C125AC /* IGCExtension.swift */,
-				873CB3151DB3718300A6325E /* IGCFix.swift */,
-				8722EF4C1D0DDCEC00DA4509 /* IGCHeader.swift */,
-				8722EF501D0DEF2A00DA4509 /* IGCRecord.swift */,
+				8745975C2251426D004921BF /* AirSpace */,
+				8745975D2251428C004921BF /* Extensions */,
+				8745975B22514254004921BF /* IGC */,
 				8722EF301D0DD90500DA4509 /* Iguazu.h */,
 				8722EF321D0DD90500DA4509 /* Info.plist */,
-				877A18961D18367A00EC6E41 /* StringExtensions.swift */,
-				877B9CF01DFC1B6700D2EB91 /* AirSpace.swift */,
-				877B9CF21DFC1BAB00D2EB91 /* CLLocationCoordinate2DExtensions.swift */,
-				877B9CF41DFC1BE300D2EB91 /* CharacterSetExtensions.swift */,
-				877B9CF61DFC1C0F00D2EB91 /* ScannerExtensions.swift */,
-				871E012A1DFC72AD0072487D /* AirSpaceMapDelegate.swift */,
-				51EDE51C20BC7B3D00F53408 /* GeoJsonEncodable.swift */,
 			);
 			path = Iguazu;
 			sourceTree = "<group>";
@@ -178,6 +168,40 @@
 				8722EF4A1D0DDC1D00DA4509 /* lx7007.igc */,
 			);
 			name = "Test Files";
+			sourceTree = "<group>";
+		};
+		8745975B22514254004921BF /* IGC */ = {
+			isa = PBXGroup;
+			children = (
+				8722EF471D0DDB8200DA4509 /* IGCData.swift */,
+				876CBA3C1D10659200C125AC /* IGCExtension.swift */,
+				873CB3151DB3718300A6325E /* IGCFix.swift */,
+				8722EF4C1D0DDCEC00DA4509 /* IGCHeader.swift */,
+				8722EF501D0DEF2A00DA4509 /* IGCRecord.swift */,
+			);
+			path = IGC;
+			sourceTree = "<group>";
+		};
+		8745975C2251426D004921BF /* AirSpace */ = {
+			isa = PBXGroup;
+			children = (
+				877B9CF01DFC1B6700D2EB91 /* AirSpace.swift */,
+				871E012A1DFC72AD0072487D /* AirSpaceMapDelegate.swift */,
+				51EDE51C20BC7B3D00F53408 /* GeoJsonEncodable.swift */,
+			);
+			path = AirSpace;
+			sourceTree = "<group>";
+		};
+		8745975D2251428C004921BF /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				877B9CF41DFC1BE300D2EB91 /* CharacterSetExtensions.swift */,
+				877B9CF21DFC1BAB00D2EB91 /* CLLocationCoordinate2DExtensions.swift */,
+				873CB3131DB3708800A6325E /* DateExtensions.swift */,
+				877B9CF61DFC1C0F00D2EB91 /* ScannerExtensions.swift */,
+				877A18961D18367A00EC6E41 /* StringExtensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		877B9D101DFC225800D2EB91 /* IguazuPerformanceTests */ = {
