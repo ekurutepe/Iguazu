@@ -129,7 +129,7 @@ public extension AirSpace {
     static func airSpacesByClass(from openAirString:String) -> AirSpacesByClassDictionary? {
         let lines = openAirString.components(separatedBy: .newlines)
         
-        var airSpaces = [AirSpaceClass: [AirSpace]]()
+        var airSpaces = AirSpacesByClassDictionary()
         
         var currentAirspace: AirSpaceInProgress? = nil
         
@@ -235,7 +235,7 @@ public extension AirSpace {
         return flatAirSpaces
     }
     
-    static func airSpacesByClass(withContentsOf url: URL) ->AirSpacesByClassDictionary? {
+    static func airSpacesByClass(withContentsOf url: URL) -> AirSpacesByClassDictionary? {
         var openAirString = ""
         do {
             openAirString = try String(contentsOf: url, encoding: .ascii)
