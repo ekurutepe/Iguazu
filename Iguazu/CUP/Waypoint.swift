@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Waypoint {
+public struct Waypoint {
     let title: String
     let code: String
     let latitude: Double
@@ -16,7 +16,7 @@ struct Waypoint {
     let elevation: Double
 }
 
-extension Waypoint {
+public extension Waypoint {
     static func waypoints(withContentsOf url: URL) -> [Waypoint] {
         var cupString = ""
         do {
