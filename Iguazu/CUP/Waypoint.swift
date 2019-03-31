@@ -9,11 +9,11 @@
 import Foundation
 
 public struct Waypoint {
-    let title: String
-    let code: String
-    let latitude: Double
-    let longitude: Double
-    let elevation: Double
+    public let title: String
+    public let code: String
+    public let latitude: Double
+    public let longitude: Double
+    public let elevation: Double
 }
 
 public extension Waypoint {
