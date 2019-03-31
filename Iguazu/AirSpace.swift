@@ -169,8 +169,8 @@ public extension AirSpace {
                 currentAirspace?.labelCoordinates?.append(coord)
             case "V":
                 if value.hasPrefix("X") {
-                    let eqRange = value.range(of: "=")!
-                    state.x = coordinate(from: value.dropFirst(eqRange.upperBound.encodedOffset))
+                    guard let eqRange = value.range(of: "=") else { assertionFailure("malformed X"); return nil }
+                    state.x = coordinate(from: value.suffix(from: eqRange.upperBound))
                 } else if value.hasPrefix("D") {
                     guard let signRange = value.rangeOfCharacter(from: .plusMinus) else { fatalError("malformed direction line: \(line)") }
                     let sign = value[signRange.lowerBound ..< signRange.upperBound]
