@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name         = "Iguazu"
-  s.version      = "1.2.2"
+  s.version      = "1.3"
   s.summary      = "An aviation file format parser written in Swift"
   s.description  = <<-DESC
 Iguazu is a new project and still work in progress. The goal is to have a Swift framework with support for various popular aviation file formats to facilitate development of apps for pilots on the iOS platform.
@@ -26,5 +26,5 @@ For more details on the Iguazu Falls: https://en.wikipedia.org/wiki/Iguazu_Falls
   s.platform     = :ios, "10.0"
   s.source       = { :git => "https://github.com/ekurutepe/Iguazu.git", :tag => "#{s.version}" }
   s.source_files  = "Iguazu", "Iguazu/**/*.{swift}"
-  s.swift_version = "4.1"
+  s.swift_version = "5"
 end
