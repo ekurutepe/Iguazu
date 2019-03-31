@@ -10,6 +10,7 @@ import Foundation
 
 struct Waypoint {
     let title: String
+    let code: String
     let latitude: Double
     let longitude: Double
     let elevation: Double
@@ -41,8 +42,9 @@ extension Waypoint {
     init?(cupRow: String) {
         let components = cupRow.components(separatedBy: ",")
 //    "001SPLuesse",,XX,5208.650N,01240.100E,66m,5,,,,
-        guard let title = components.first, components.count > 5 else { return nil }
-        self.title = title.replacingOccurrences(of: "\"", with: "")
+        guard components.count > 5 else { return nil }
+        self.title = components[0].replacingOccurrences(of: "\"", with: "")
+        self.code = components[1].replacingOccurrences(of: "\"", with: "")
         
         let latStringNS = components[3]
         let lngStringEW = components[4]

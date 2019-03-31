@@ -28,6 +28,7 @@ class WaypointTests : XCTestCase {
         XCTAssertTrue(waypoints.count > 0)
         let lusse = waypoints.first!
         XCTAssertEqual(lusse.title, "001SPLuesse")
+        XCTAssertEqual(lusse.code, "001")
         XCTAssertEqual(lusse.latitude, 52.14416666666666)
         XCTAssertEqual(lusse.longitude, 12.668333333333333)
         XCTAssertEqual(lusse.elevation, 66.0)
