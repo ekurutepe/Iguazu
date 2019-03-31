@@ -19,6 +19,9 @@
 		873CB3141DB3708800A6325E /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873CB3131DB3708800A6325E /* DateExtensions.swift */; };
 		873CB3161DB3718300A6325E /* IGCFix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873CB3151DB3718300A6325E /* IGCFix.swift */; };
 		873CB3181DB3778500A6325E /* IGCFixTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873CB3171DB3778500A6325E /* IGCFixTests.swift */; };
+		87459760225143D0004921BF /* Waypoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8745975F225143D0004921BF /* Waypoint.swift */; };
+		8745976222514E50004921BF /* WP2019_Luesse.cup in Resources */ = {isa = PBXBuildFile; fileRef = 8745976122514E4F004921BF /* WP2019_Luesse.cup */; };
+		8745976422514E61004921BF /* WaypointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8745976322514E61004921BF /* WaypointTests.swift */; };
 		874F49251D1489490019DC30 /* IGCExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874F49241D1489490019DC30 /* IGCExtensionTests.swift */; };
 		876CBA3D1D10659200C125AC /* IGCExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876CBA3C1D10659200C125AC /* IGCExtension.swift */; };
 		877A18971D18367A00EC6E41 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877A18961D18367A00EC6E41 /* StringExtensions.swift */; };
@@ -69,6 +72,9 @@
 		873CB3131DB3708800A6325E /* DateExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
 		873CB3151DB3718300A6325E /* IGCFix.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGCFix.swift; sourceTree = "<group>"; };
 		873CB3171DB3778500A6325E /* IGCFixTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGCFixTests.swift; sourceTree = "<group>"; };
+		8745975F225143D0004921BF /* Waypoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Waypoint.swift; sourceTree = "<group>"; };
+		8745976122514E4F004921BF /* WP2019_Luesse.cup */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WP2019_Luesse.cup; sourceTree = "<group>"; };
+		8745976322514E61004921BF /* WaypointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaypointTests.swift; sourceTree = "<group>"; };
 		874F49241D1489490019DC30 /* IGCExtensionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGCExtensionTests.swift; sourceTree = "<group>"; };
 		876CBA3C1D10659200C125AC /* IGCExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGCExtension.swift; sourceTree = "<group>"; };
 		877A18961D18367A00EC6E41 /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
@@ -137,6 +143,7 @@
 			isa = PBXGroup;
 			children = (
 				8745975C2251426D004921BF /* AirSpace */,
+				8745975E225142CC004921BF /* CUP */,
 				8745975D2251428C004921BF /* Extensions */,
 				8745975B22514254004921BF /* IGC */,
 				8722EF301D0DD90500DA4509 /* Iguazu.h */,
@@ -157,6 +164,7 @@
 				873CB3171DB3778500A6325E /* IGCFixTests.swift */,
 				87BB56D01DB37A5D00379BE0 /* DateExtensionsTests.swift */,
 				877B9CFA1DFC1D8C00D2EB91 /* AirSpaceTests.swift */,
+				8745976322514E61004921BF /* WaypointTests.swift */,
 			);
 			path = IguazuTests;
 			sourceTree = "<group>";
@@ -164,6 +172,7 @@
 		8722EF491D0DDC0800DA4509 /* Test Files */ = {
 			isa = PBXGroup;
 			children = (
+				8745976122514E4F004921BF /* WP2019_Luesse.cup */,
 				877B9CF81DFC1C4600D2EB91 /* DAeC_Germany_Week22_2016.txt */,
 				8722EF4A1D0DDC1D00DA4509 /* lx7007.igc */,
 			);
@@ -202,6 +211,14 @@
 				877A18961D18367A00EC6E41 /* StringExtensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		8745975E225142CC004921BF /* CUP */ = {
+			isa = PBXGroup;
+			children = (
+				8745975F225143D0004921BF /* Waypoint.swift */,
+			);
+			path = CUP;
 			sourceTree = "<group>";
 		};
 		877B9D101DFC225800D2EB91 /* IguazuPerformanceTests */ = {
@@ -340,6 +357,7 @@
 			files = (
 				877B9CF91DFC1C4600D2EB91 /* DAeC_Germany_Week22_2016.txt in Resources */,
 				8722EF4B1D0DDC1D00DA4509 /* lx7007.igc in Resources */,
+				8745976222514E50004921BF /* WP2019_Luesse.cup in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -368,6 +386,7 @@
 				877B9CF31DFC1BAB00D2EB91 /* CLLocationCoordinate2DExtensions.swift in Sources */,
 				873CB3161DB3718300A6325E /* IGCFix.swift in Sources */,
 				8722EF4D1D0DDCEC00DA4509 /* IGCHeader.swift in Sources */,
+				87459760225143D0004921BF /* Waypoint.swift in Sources */,
 				8722EF481D0DDB8200DA4509 /* IGCData.swift in Sources */,
 				873CB3141DB3708800A6325E /* DateExtensions.swift in Sources */,
 				51EDE51D20BC7B3D00F53408 /* GeoJsonEncodable.swift in Sources */,
@@ -378,6 +397,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8745976422514E61004921BF /* WaypointTests.swift in Sources */,
 				877A18991D18370100EC6E41 /* StringExtensionsTests.swift in Sources */,
 				87FA6A6B1D12D10F000C5F7E /* IGCDataTests.swift in Sources */,
 				877B9CFB1DFC1D8C00D2EB91 /* AirSpaceTests.swift in Sources */,
