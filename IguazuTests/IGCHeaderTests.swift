@@ -72,7 +72,7 @@ class IGCHeaderTests: XCTestCase {
     // MARK: - Tests for line parsing
 
     func testDateHeader() {
-        let dateHeader = IGCHeaderField.parseHLine(hLine: dateHeaderString)
+        guard let dateHeader = IGCHeaderField.parseHLine(hLine: dateHeaderString) else { XCTFail("expecting a date header but got nil"); return }
         switch dateHeader {
         case .date(let d):
             print("date \(d)")
@@ -85,7 +85,7 @@ class IGCHeaderTests: XCTestCase {
     }
 
     func testAccuracyHeader() {
-        let accuracyHeader = IGCHeaderField.parseHLine(hLine: accuracyHeaderString)
+        guard let accuracyHeader = IGCHeaderField.parseHLine(hLine: accuracyHeaderString) else { XCTFail("expecting a accuracy header but got nil"); return }
         switch accuracyHeader {
         case .accuracy(let acc):
             print("accuracy \(acc)")
@@ -97,7 +97,7 @@ class IGCHeaderTests: XCTestCase {
     }
 
     func testPilotHeader() {
-        let pilotHeader = IGCHeaderField.parseHLine(hLine: pilotHeaderString)
+        guard let pilotHeader = IGCHeaderField.parseHLine(hLine: pilotHeaderString) else { XCTFail("expecting a pilot header but got nil"); return }
         switch pilotHeader {
         case .pilotInCharge(let name):
             print("pilot name \(name)")
@@ -110,7 +110,7 @@ class IGCHeaderTests: XCTestCase {
     }
 
     func testPilotLongHeader() {
-        let pilotHeader = IGCHeaderField.parseHLine(hLine: pilotHeaderLongString)
+        guard let pilotHeader = IGCHeaderField.parseHLine(hLine: pilotHeaderLongString) else { XCTFail("expecting a pilot header but got nil"); return }
         switch pilotHeader {
         case .pilotInCharge(let name):
             print("pilot name \(name)")
@@ -123,7 +123,7 @@ class IGCHeaderTests: XCTestCase {
     }
 
     func testCrewHeader() {
-        let header = IGCHeaderField.parseHLine(hLine: crewHeaderString)
+        guard let header = IGCHeaderField.parseHLine(hLine: crewHeaderString) else { XCTFail("expecting a crew header but got nil"); return }
         switch header {
         case .crew(let name):
             print("pilot name \(name)")
@@ -136,7 +136,7 @@ class IGCHeaderTests: XCTestCase {
     }
 
     func testGliderTypeHeader() {
-        let header = IGCHeaderField.parseHLine(hLine: gliderTypeString)
+        guard let header = IGCHeaderField.parseHLine(hLine: gliderTypeString) else { XCTFail("expecting a glider header but got nil"); return }
         switch header {
         case .gliderType(let type):
             print("glider type \(type)")
@@ -149,7 +149,7 @@ class IGCHeaderTests: XCTestCase {
     }
 
     func testGliderRegistrationHeader() {
-        let header = IGCHeaderField.parseHLine(hLine: gliderRegistrationString)
+        guard let header = IGCHeaderField.parseHLine(hLine: gliderRegistrationString) else { XCTFail("expecting a reg header but got nil"); return }
         switch header {
         case .gliderRegistration(let registration):
             print("glider registration \(registration)")
@@ -162,7 +162,7 @@ class IGCHeaderTests: XCTestCase {
     }
 
     func testCompetitionIDHeader() {
-        let header = IGCHeaderField.parseHLine(hLine: tailfinNumberString)
+        guard let header = IGCHeaderField.parseHLine(hLine: tailfinNumberString) else { XCTFail("expecting a comp ID header but got nil"); return }
         switch header {
         case .competitionID(let tailfin):
             print("glider registration \(tailfin)")
@@ -175,7 +175,7 @@ class IGCHeaderTests: XCTestCase {
     }
 
     func testCompetitionClassHeader() {
-        let header = IGCHeaderField.parseHLine(hLine: competitionClassString)
+        guard let header = IGCHeaderField.parseHLine(hLine: competitionClassString) else { XCTFail("expecting a class header but got nil"); return }
         switch header {
         case .competitionClass(let cClass):
             print("competition class \(cClass)")
