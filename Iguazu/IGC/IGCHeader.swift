@@ -73,8 +73,8 @@ public enum IGCHeaderField {
     // Any free-text description of the class this glider is in, e.g. Standard, 15m, 18m, Open.
     case competitionClass(competitionClass: String)
 
-    static func parseHLine(hLine: String) -> IGCHeaderField {
-        guard let prefix = hLine.igcHeaderPrefix() else { fatalError("unknown header type: \(hLine)") }
+    static func parseHLine(hLine: String) -> IGCHeaderField? {
+        guard let prefix = hLine.igcHeaderPrefix() else { return nil }
         switch prefix {
         case .date:
             return parseDateString(hLine: hLine)
@@ -114,12 +114,12 @@ public enum IGCHeaderField {
         }
     }
 
-    static func parseDateString(hLine: String) -> IGCHeaderField {
-        guard let prefixRange = hLine.range(of: HeaderRecordCode.date.rawValue) else { fatalError() }
+    static func parseDateString(hLine: String) -> IGCHeaderField? {
+        guard let prefixRange = hLine.range(of: HeaderRecordCode.date.rawValue) else { return nil }
 
         let dateString = hLine.suffix(from: prefixRange.upperBound)
 
-        guard let date = Date.parse(headerDateString: String(dateString)) else { fatalError() }
+        guard let date = Date.parse(headerDateString: String(dateString)) else { return nil }
 
         return .date(flightDate: date)
     }
