@@ -15,6 +15,7 @@ public struct IGCData {
 
     // must be declared as var due to lazy property accessors in IGCHeader
     // pending https://github.com/apple/swift-evolution/blob/master/proposals/0030-property-behavior-decls.md
+    // potential solution: https://oleb.net/blog/2015/12/lazy-properties-in-structs-swift/
     public var header: IGCHeader
 
     let fixLines: [String]
@@ -49,8 +50,49 @@ public struct IGCData {
         let coordinates = self.locations.map { $0.coordinate }
         return MKPolyline(coordinates: coordinates, count: coordinates.count)
     }()
+    
+    public lazy var altitudes: [Int] = {
+       return fixes.map { $0.altimeterAltitude }
+    }()
+    
+    public lazy var groundSpeeds: [Double] = {
+        return fixes.enumerated().map { (offset, element) -> Double in
+            if offset == 0 { return 0.0 }
+            let prevFix = fixes[offset - 1]
+            let deltaX = element.clLocation.distance(from: prevFix.clLocation)
+            let deltaT = element.timestamp.timeIntervalSince(prevFix.timestamp)
+            return deltaX / deltaT
+        }
+    }()
 
-
+    public lazy var varioValues: [Double] = {
+        return fixes.enumerated().map { (offset, element) -> Double in
+            if offset == 0 { return 0.0 }
+            let prevFix = fixes[offset - 1]
+            let deltaX = Double(element.altimeterAltitude - prevFix.altimeterAltitude)
+            let deltaT = element.timestamp.timeIntervalSince(prevFix.timestamp)
+            return deltaX / deltaT
+        }
+    }()
+    
+    public lazy var totalEnergyValues: [Double] = {
+        return fixes.enumerated().map { (offset, element) -> Double in
+            if offset == 0 { return 0.0 }
+            if offset == 1 { return 0.0 }
+            let prevFix = fixes[offset - 1]
+            let prevPrevFix = fixes[offset - 2]
+            let deltaH = Double(element.altimeterAltitude - prevFix.altimeterAltitude)
+            let deltaX = element.clLocation.distance(from: prevFix.clLocation)
+            let deltaT = element.timestamp.timeIntervalSince(prevFix.timestamp)
+            let currentV = deltaX / deltaT
+            let prevDeltaX = prevFix.clLocation.distance(from: prevPrevFix.clLocation)
+            let prevDeltaT = prevFix.timestamp.timeIntervalSince(prevPrevFix.timestamp)
+            let prevV = prevDeltaX / prevDeltaT
+            let deltaVSq = currentV * currentV - prevV * prevV
+            return deltaH + deltaVSq/19.62 // 2*g
+        }
+    }()
+    
     /// Parses an IGCData instance from the string representation of an IGC
     /// File.
     ///

@@ -18,11 +18,12 @@ public struct IGCFix: IGCRecord, CustomStringConvertible {
     public let fixAccuracy: Int
     
     public var clLocation: CLLocation {
-        return CLLocation.init(coordinate: coordinate,
-                               altitude: CLLocationDistance(altimeterAltitude),
-                               horizontalAccuracy: CLLocationAccuracy(fixAccuracy),
-                               verticalAccuracy: -1,
-                               timestamp: timestamp)
+        return CLLocation(
+            coordinate: coordinate,
+            altitude: CLLocationDistance(altimeterAltitude),
+            horizontalAccuracy: CLLocationAccuracy(fixAccuracy),
+            verticalAccuracy: -1,
+            timestamp: timestamp)
     }
     
     public var description: String {

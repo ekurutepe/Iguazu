@@ -173,7 +173,7 @@ public struct IGCHeader {
         return date
     }()
 
-    public lazy var pilotInCharge: String = {
+    public lazy var pilotInCharge: String? = {
         let pic = self.headerFields.compactMap({ (header) -> String? in
             switch header {
             case .pilotInCharge(let name):
@@ -181,7 +181,7 @@ public struct IGCHeader {
             default:
                 return nil
             }
-        }).first!
+        }).first
 
         return pic
     }()
@@ -199,7 +199,7 @@ public struct IGCHeader {
         return crew
     }()
 
-    public lazy var gliderType: String = {
+    public lazy var gliderType: String? = {
         let gliderType = self.headerFields.compactMap({ (header) -> String? in
             switch header {
             case .gliderType(let value):
@@ -207,12 +207,12 @@ public struct IGCHeader {
             default:
                 return nil
             }
-        }).first!
+        }).first
         
         return gliderType
     }()
 
-    public lazy var gliderRegistration: String = {
+    public lazy var gliderRegistration: String? = {
         let gliderRegistration = self.headerFields.compactMap({ (header) -> String? in
             switch header {
             case .gliderRegistration(let value):
@@ -220,11 +220,24 @@ public struct IGCHeader {
             default:
                 return nil
             }
-        }).first!
+        }).first
         
         return gliderRegistration
     }()
 
+    public lazy var competitionID: String? = {
+        let competitionID = self.headerFields.compactMap({ (header) -> String? in
+            switch header {
+            case .competitionID(let value):
+                return value
+            default:
+                return nil
+            }
+        }).first
+        
+        return competitionID
+    }()
+    
     public init(with date: Date, pic: String, crew: String?, gliderType: String, gliderRegistration: String) {
         var headers: [IGCHeaderField] = [
             .date(flightDate: date),
