@@ -88,6 +88,9 @@ public struct IGCData {
         return fixes.enumerated().map { (offset, element) -> Double in
             if offset == 0 { return 0.0 }
             if offset == 1 { return 0.0 }
+            if let vat = element.extensions[.totalEnergy] {
+                return Double(vat)/100.0
+            }
             let prevFix = fixes[offset - 1]
             let prevPrevFix = fixes[offset - 2]
             let deltaH = Double(element.altimeterAltitude - prevFix.altimeterAltitude)
