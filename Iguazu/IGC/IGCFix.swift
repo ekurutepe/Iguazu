@@ -16,6 +16,7 @@ public struct IGCFix: IGCRecord, CustomStringConvertible {
     public let altimeterAltitude: Int
     public let gpsAltitude: Int
     public let fixAccuracy: Int
+    public let extensions: [IGCExtension.ExtensionType: Int]
     
     public var clLocation: CLLocation {
         return CLLocation(
@@ -39,7 +40,7 @@ private let GPSAltitudeOffset = 30
 private let FixAccucaryOffset = 35
 
 extension IGCFix {
-    public init(with line: String, midnight: Date) {
+    public init(with line: String, midnight: Date, extensions: [IGCExtension]? = nil) {
         guard let prefix = line.extractString(from: 0, length: 1), prefix == "B",
             let timeString = line.extractString(from: 1, length: 6),
             let timestamp = Date.parse(fixTimeString: timeString, on: midnight),
@@ -51,11 +52,26 @@ extension IGCFix {
         
         let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: lng)
         
+        var extensionValues = [IGCExtension.ExtensionType: Int]()
+        if let extensions = extensions {
+            let keysAndValues = extensions.compactMap { (e) -> (IGCExtension.ExtensionType, Int)? in
+                let index = e.startIndex-1
+                let length = e.endIndex - e.startIndex + 1
+                let type = e.type
+                guard let valueString = line.extractString(from: index, length: length),
+                    let value = Int(valueString) else { return nil }
+                
+                return (type, value)
+            }
+            extensionValues = Dictionary(uniqueKeysWithValues: keysAndValues)
+        }
+        
         self.init(timestamp: timestamp,
             coordinate: coordinate,
             altimeterAltitude: barometricAltitude,
             gpsAltitude: gpsAltitude,
-            fixAccuracy: accuracy)
+            fixAccuracy: accuracy,
+            extensions: extensionValues)
     }
 
     public init(with location: CLLocation, altimeterAltitude: Double) {
@@ -64,6 +80,7 @@ extension IGCFix {
         self.altimeterAltitude = Int(altimeterAltitude)
         self.gpsAltitude = Int(location.altitude)
         self.fixAccuracy = Int(location.horizontalAccuracy)
+        self.extensions = [:]
     }
     
     public var bLine: String {

@@ -21,7 +21,7 @@ public struct IGCData {
     let fixLines: [String]
     
     public lazy var fixes: [IGCFix] = {
-        self.fixLines.map { IGCFix(with: $0, midnight: self.header.flightDate) }
+        self.fixLines.map { IGCFix(with: $0, midnight: self.header.flightDate, extensions: self.extensions) }
     }()
 
     public lazy var takeOffLocation: CLLocation? = {
@@ -93,10 +93,21 @@ public struct IGCData {
             let deltaH = Double(element.altimeterAltitude - prevFix.altimeterAltitude)
             let deltaX = element.clLocation.distance(from: prevFix.clLocation)
             let deltaT = element.timestamp.timeIntervalSince(prevFix.timestamp)
-            let currentV = deltaX / deltaT
+            let currentV: Double
+            if let airspeed = element.extensions[.trueAirspeed] {
+                currentV = Double(airspeed)/360.0
+                print(currentV)
+            } else {
+                currentV = deltaX / deltaT
+            }
             let prevDeltaX = prevFix.clLocation.distance(from: prevPrevFix.clLocation)
             let prevDeltaT = prevFix.timestamp.timeIntervalSince(prevPrevFix.timestamp)
-            let prevV = prevDeltaX / prevDeltaT
+            let prevV: Double
+            if let airspeed = prevFix.extensions[.trueAirspeed] {
+                prevV = Double(airspeed)/360.0
+            } else {
+                prevV = prevDeltaX / prevDeltaT
+            }
             let deltaVSq = currentV * currentV - prevV * prevV
             return deltaH + deltaVSq/19.62 // 2*g
         }

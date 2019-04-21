@@ -9,9 +9,10 @@
 import Foundation
 
 public struct IGCExtension {
-    enum ExtensionType: String {
+    public enum ExtensionType: String {
         case fixAccuracy = "FXA"
         case engineNoiseLevel = "ENL"
+        case trueAirspeed = "TAS"
     }
 
     let startIndex: Int
