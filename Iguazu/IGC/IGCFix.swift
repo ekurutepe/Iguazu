@@ -88,3 +88,13 @@ extension IGCFix {
     }
 }
 
+extension IGCFix: Simplifiable {
+    public var x: CGFloat {
+        return CGFloat(coordinate.latitude)
+    }
+    
+    public var y: CGFloat {
+        return CGFloat(coordinate.longitude)
+    }
+}
+

@@ -22,6 +22,8 @@
 		87459760225143D0004921BF /* Waypoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8745975F225143D0004921BF /* Waypoint.swift */; };
 		8745976222514E50004921BF /* WP2019_Luesse.cup in Resources */ = {isa = PBXBuildFile; fileRef = 8745976122514E4F004921BF /* WP2019_Luesse.cup */; };
 		8745976422514E61004921BF /* WaypointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8745976322514E61004921BF /* WaypointTests.swift */; };
+		8745AD51226BA5F00088A45B /* SwiftSimplify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8745AD50226BA5F00088A45B /* SwiftSimplify.swift */; };
+		8745AD52226BA5F00088A45B /* SwiftSimplify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8745AD50226BA5F00088A45B /* SwiftSimplify.swift */; };
 		874F49251D1489490019DC30 /* IGCExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874F49241D1489490019DC30 /* IGCExtensionTests.swift */; };
 		876CBA3D1D10659200C125AC /* IGCExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876CBA3C1D10659200C125AC /* IGCExtension.swift */; };
 		877A18971D18367A00EC6E41 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877A18961D18367A00EC6E41 /* StringExtensions.swift */; };
@@ -98,6 +100,7 @@
 		8745975F225143D0004921BF /* Waypoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Waypoint.swift; sourceTree = "<group>"; };
 		8745976122514E4F004921BF /* WP2019_Luesse.cup */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WP2019_Luesse.cup; sourceTree = "<group>"; };
 		8745976322514E61004921BF /* WaypointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaypointTests.swift; sourceTree = "<group>"; };
+		8745AD50226BA5F00088A45B /* SwiftSimplify.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftSimplify.swift; sourceTree = "<group>"; };
 		874F49241D1489490019DC30 /* IGCExtensionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGCExtensionTests.swift; sourceTree = "<group>"; };
 		876CBA3C1D10659200C125AC /* IGCExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGCExtension.swift; sourceTree = "<group>"; };
 		877A18961D18367A00EC6E41 /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
@@ -228,6 +231,7 @@
 			isa = PBXGroup;
 			children = (
 				8722EF471D0DDB8200DA4509 /* IGCData.swift */,
+				8745AD50226BA5F00088A45B /* SwiftSimplify.swift */,
 				876CBA3C1D10659200C125AC /* IGCExtension.swift */,
 				873CB3151DB3718300A6325E /* IGCFix.swift */,
 				8722EF4C1D0DDCEC00DA4509 /* IGCHeader.swift */,
@@ -507,6 +511,7 @@
 				877A18971D18367A00EC6E41 /* StringExtensions.swift in Sources */,
 				871E012B1DFC72AD0072487D /* AirSpaceMapDelegate.swift in Sources */,
 				877B9CF51DFC1BE300D2EB91 /* CharacterSetExtensions.swift in Sources */,
+				8745AD51226BA5F00088A45B /* SwiftSimplify.swift in Sources */,
 				877B9CF31DFC1BAB00D2EB91 /* CLLocationCoordinate2DExtensions.swift in Sources */,
 				873CB3161DB3718300A6325E /* IGCFix.swift in Sources */,
 				8722EF4D1D0DDCEC00DA4509 /* IGCHeader.swift in Sources */,
@@ -551,6 +556,7 @@
 				87E65D98226A41C1001B25BE /* CharacterSetExtensions.swift in Sources */,
 				87E65D99226A41C1001B25BE /* CLLocationCoordinate2DExtensions.swift in Sources */,
 				87E65D9A226A41C1001B25BE /* DateExtensions.swift in Sources */,
+				8745AD52226BA5F00088A45B /* SwiftSimplify.swift in Sources */,
 				87E65D9B226A41C1001B25BE /* ScannerExtensions.swift in Sources */,
 				87E65D9C226A41C1001B25BE /* StringExtensions.swift in Sources */,
 				87E65D9D226A41C1001B25BE /* IGCData.swift in Sources */,

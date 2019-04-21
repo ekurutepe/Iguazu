@@ -48,7 +48,16 @@ public struct IGCData {
 
     public lazy var polyline: MKPolyline = {
         let coordinates = self.locations.map { $0.coordinate }
+        
         return MKPolyline(coordinates: coordinates, count: coordinates.count)
+    }()
+    
+    public lazy var simplifiedPolyline: MKPolyline = {
+        let coordinates = self.locations.map { $0.coordinate }
+        let simplified = SwiftSimplify.simplify(coordinates, tolerance: 0.0004, highQuality: true)
+        print("simplified from \(coordinates.count) to \(simplified.count)")
+        
+        return MKPolyline(coordinates: simplified, count: simplified.count)
     }()
     
     public lazy var altitudes: [Int] = {
