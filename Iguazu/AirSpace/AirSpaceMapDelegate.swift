@@ -46,6 +46,24 @@ public class AirSpaceMapDelegate: NSObject, MKMapViewDelegate {
 }
 
 public extension AirSpaceClass {
+#if os(OSX)
+    var color: NSColor {
+        switch self {
+        case .Danger:
+            return .black
+        case .CTR, .GliderProhibited, .Prohibited, .Restricted:
+            return .red
+        case .Delta:
+            return .green
+        case .Bravo, .Charlie, .RadioMandatoryZone:
+            return NSColor(red: 0.0, green: 0.6, blue: 1.0, alpha: 1.0)
+        case .TransponderMandatoryZone:
+            return .gray
+        default:
+            return .purple
+        }
+    }
+#elseif os(iOS)
     var color: UIColor {
         switch self {
         case .Danger:
@@ -62,4 +80,6 @@ public extension AirSpaceClass {
             return .purple
         }
     }
+#endif
 }
+

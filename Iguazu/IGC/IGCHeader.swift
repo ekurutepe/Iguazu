@@ -73,8 +73,8 @@ public enum IGCHeaderField {
     // Any free-text description of the class this glider is in, e.g. Standard, 15m, 18m, Open.
     case competitionClass(competitionClass: String)
 
-    static func parseHLine(hLine: String) -> IGCHeaderField {
-        guard let prefix = hLine.igcHeaderPrefix() else { fatalError("unknown header type: \(hLine)") }
+    static func parseHLine(hLine: String) -> IGCHeaderField? {
+        guard let prefix = hLine.igcHeaderPrefix() else { return nil }
         switch prefix {
         case .date:
             return parseDateString(hLine: hLine)
@@ -114,12 +114,12 @@ public enum IGCHeaderField {
         }
     }
 
-    static func parseDateString(hLine: String) -> IGCHeaderField {
-        guard let prefixRange = hLine.range(of: HeaderRecordCode.date.rawValue) else { fatalError() }
+    static func parseDateString(hLine: String) -> IGCHeaderField? {
+        guard let prefixRange = hLine.range(of: HeaderRecordCode.date.rawValue) else { return nil }
 
         let dateString = hLine.suffix(from: prefixRange.upperBound)
 
-        guard let date = Date.parse(headerDateString: String(dateString)) else { fatalError() }
+        guard let date = Date.parse(headerDateString: String(dateString)) else { return nil }
 
         return .date(flightDate: date)
     }
@@ -173,7 +173,7 @@ public struct IGCHeader {
         return date
     }()
 
-    public lazy var pilotInCharge: String = {
+    public lazy var pilotInCharge: String? = {
         let pic = self.headerFields.compactMap({ (header) -> String? in
             switch header {
             case .pilotInCharge(let name):
@@ -181,7 +181,7 @@ public struct IGCHeader {
             default:
                 return nil
             }
-        }).first!
+        }).first
 
         return pic
     }()
@@ -199,7 +199,7 @@ public struct IGCHeader {
         return crew
     }()
 
-    public lazy var gliderType: String = {
+    public lazy var gliderType: String? = {
         let gliderType = self.headerFields.compactMap({ (header) -> String? in
             switch header {
             case .gliderType(let value):
@@ -207,12 +207,12 @@ public struct IGCHeader {
             default:
                 return nil
             }
-        }).first!
+        }).first
         
         return gliderType
     }()
 
-    public lazy var gliderRegistration: String = {
+    public lazy var gliderRegistration: String? = {
         let gliderRegistration = self.headerFields.compactMap({ (header) -> String? in
             switch header {
             case .gliderRegistration(let value):
@@ -220,11 +220,24 @@ public struct IGCHeader {
             default:
                 return nil
             }
-        }).first!
+        }).first
         
         return gliderRegistration
     }()
 
+    public lazy var competitionID: String? = {
+        let competitionID = self.headerFields.compactMap({ (header) -> String? in
+            switch header {
+            case .competitionID(let value):
+                return value
+            default:
+                return nil
+            }
+        }).first
+        
+        return competitionID
+    }()
+    
     public init(with date: Date, pic: String, crew: String?, gliderType: String, gliderRegistration: String) {
         var headers: [IGCHeaderField] = [
             .date(flightDate: date),

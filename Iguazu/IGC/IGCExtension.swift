@@ -9,9 +9,11 @@
 import Foundation
 
 public struct IGCExtension {
-    enum ExtensionType: String {
+    public enum ExtensionType: String {
         case fixAccuracy = "FXA"
         case engineNoiseLevel = "ENL"
+        case trueAirspeed = "TAS"
+        case totalEnergy = "VAT"
     }
 
     let startIndex: Int
@@ -33,11 +35,11 @@ public struct IGCExtension {
         var extensions = [IGCExtension]()
 
         for i in 0 ..< extensionCount {
-            guard let firstByte = Int(extensionsString.extractString(from: (i * extensionCharLength), length: 2) ?? "") else { break }
-            guard let secondByte = Int(extensionsString.extractString(from: (i * extensionCharLength) + 2, length: 2) ?? "") else { break }
+            guard let firstByte = Int(extensionsString.extractString(from: (i * extensionCharLength), length: 2) ?? "") else { continue }
+            guard let secondByte = Int(extensionsString.extractString(from: (i * extensionCharLength) + 2, length: 2) ?? "") else { continue }
             let code = extensionsString.extractString(from: (i * extensionCharLength) + 4, length: 3) ?? ""
 
-            guard let type = ExtensionType(rawValue: code) else { break }
+            guard let type = ExtensionType(rawValue: code) else { continue }
 
             let ext = IGCExtension(startIndex: firstByte, endIndex: secondByte, type: type)
 
