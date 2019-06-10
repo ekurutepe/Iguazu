@@ -9,15 +9,15 @@
 import Foundation
 
 public struct Airport {
-    let title: String
-    let code: String
-    let country: String
-    let latitude: Double
-    let longitude: Double
-    let elevation: Measurement<UnitLength>
-    let direction: Int?
-    let length: Measurement<UnitLength>?
-    let frequency: String?
+    public let title: String
+    public let code: String
+    public let country: String
+    public let latitude: Double
+    public let longitude: Double
+    public let elevation: Measurement<UnitLength>
+    public let direction: Int?
+    public let length: Measurement<UnitLength>?
+    public let frequency: String?
 }
 
 public extension Airport {
