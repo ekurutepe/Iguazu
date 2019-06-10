@@ -34,38 +34,19 @@ public extension Waypoint {
 //    Title,Code,Country,Latitude,Longitude,Elevation,Style,Direction,Length,Frequency,Description
 //        let header = rows.first!
         let wps = rows.dropFirst()
-        return wps.compactMap { Waypoint(cupRow: $0) }
+        return wps.compactMap { Waypoint(row: $0) }
 
     }
-    
+}
 
-    init?(cupRow: String) {
-        let components = cupRow.components(separatedBy: ",")
-//    "001SPLuesse",,XX,5208.650N,01240.100E,66m,5,,,,
-        guard components.count > 5 else { return nil }
-        self.title = components[0].replacingOccurrences(of: "\"", with: "")
-        self.code = components[1].replacingOccurrences(of: "\"", with: "")
-        
-        let latStringNS = components[3]
-        let lngStringEW = components[4]
-        let elevString = components[5]
-        let NS = latStringNS.last
-        let latString = latStringNS.dropLast()
-        let latSign = (NS == "N") ? 1.0 : -1.0
-        guard let latDegrees = Double(latString.prefix(2)),
-            let latMinutes = Double(latString.dropFirst(2)) else { return nil }
-        
-        self.latitude = latSign * (latDegrees + latMinutes/60.0)
-
-        let EW = lngStringEW.last
-        
-        let lngString = lngStringEW.dropLast()
-
-        guard let lngDegrees = Double(lngString.prefix(3)),
-            let lngMinutes = Double(lngString.dropFirst(3)) else { return nil }
-        let lngSign = (EW == "E") ? 1.0 : -1.0
-        self.longitude = lngSign * (lngDegrees + lngMinutes/60.0)
-
-        self.elevation = Double(elevString) ?? 0.0
+private extension Waypoint {
+    init?(row: String) {
+        guard let cup = CUPRow(row) else { return nil }
+        self = Waypoint(
+            title: cup.title,
+             code: cup.code ?? "",
+             latitude: cup.latitude.converted(to: .degrees).value,
+             longitude: cup.longitue.converted(to: .degrees).value,
+             elevation: cup.elevation.converted(to: .meters).value)
     }
 }

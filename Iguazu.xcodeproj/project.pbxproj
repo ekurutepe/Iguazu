@@ -37,6 +37,10 @@
 		877B9D121DFC225800D2EB91 /* IguazuPerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877B9D111DFC225800D2EB91 /* IguazuPerformanceTests.swift */; };
 		877B9D141DFC225800D2EB91 /* Iguazu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8722EF2D1D0DD90500DA4509 /* Iguazu.framework */; };
 		877B9D1A1DFC22C000D2EB91 /* DAeC_Germany_Week22_2016.txt in Resources */ = {isa = PBXBuildFile; fileRef = 877B9CF81DFC1C4600D2EB91 /* DAeC_Germany_Week22_2016.txt */; };
+		87AFE82A22AE5BB8006D1B78 /* CUPRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AFE82922AE5BB8006D1B78 /* CUPRow.swift */; };
+		87AFE82C22AE67C5006D1B78 /* Airport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AFE82B22AE67C5006D1B78 /* Airport.swift */; };
+		87AFE82E22AE6F23006D1B78 /* AirportTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AFE82D22AE6F23006D1B78 /* AirportTests.swift */; };
+		87AFE83022AE6F51006D1B78 /* airports.cup in Resources */ = {isa = PBXBuildFile; fileRef = 87AFE82F22AE6F51006D1B78 /* airports.cup */; };
 		87BB56D11DB37A5D00379BE0 /* DateExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BB56D01DB37A5D00379BE0 /* DateExtensionsTests.swift */; };
 		87E65D86226A3CBE001B25BE /* Iguazu_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87E65D7D226A3CBD001B25BE /* Iguazu_macOS.framework */; };
 		87E65D8D226A3CBE001B25BE /* Iguazu_macOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 87E65D7F226A3CBD001B25BE /* Iguazu_macOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -114,6 +118,10 @@
 		877B9D0F1DFC225800D2EB91 /* IguazuPerformanceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IguazuPerformanceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		877B9D111DFC225800D2EB91 /* IguazuPerformanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IguazuPerformanceTests.swift; sourceTree = "<group>"; };
 		877B9D131DFC225800D2EB91 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		87AFE82922AE5BB8006D1B78 /* CUPRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CUPRow.swift; sourceTree = "<group>"; };
+		87AFE82B22AE67C5006D1B78 /* Airport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Airport.swift; sourceTree = "<group>"; };
+		87AFE82D22AE6F23006D1B78 /* AirportTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirportTests.swift; sourceTree = "<group>"; };
+		87AFE82F22AE6F51006D1B78 /* airports.cup */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = airports.cup; sourceTree = "<group>"; };
 		87BB56D01DB37A5D00379BE0 /* DateExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtensionsTests.swift; sourceTree = "<group>"; };
 		87E65D7D226A3CBD001B25BE /* Iguazu_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Iguazu_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		87E65D7F226A3CBD001B25BE /* Iguazu_macOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Iguazu_macOS.h; sourceTree = "<group>"; };
@@ -213,6 +221,7 @@
 				87BB56D01DB37A5D00379BE0 /* DateExtensionsTests.swift */,
 				877B9CFA1DFC1D8C00D2EB91 /* AirSpaceTests.swift */,
 				8745976322514E61004921BF /* WaypointTests.swift */,
+				87AFE82D22AE6F23006D1B78 /* AirportTests.swift */,
 			);
 			path = IguazuTests;
 			sourceTree = "<group>";
@@ -220,6 +229,7 @@
 		8722EF491D0DDC0800DA4509 /* Test Files */ = {
 			isa = PBXGroup;
 			children = (
+				87AFE82F22AE6F51006D1B78 /* airports.cup */,
 				8745976122514E4F004921BF /* WP2019_Luesse.cup */,
 				877B9CF81DFC1C4600D2EB91 /* DAeC_Germany_Week22_2016.txt */,
 				8722EF4A1D0DDC1D00DA4509 /* lx7007.igc */,
@@ -266,6 +276,8 @@
 			isa = PBXGroup;
 			children = (
 				8745975F225143D0004921BF /* Waypoint.swift */,
+				87AFE82922AE5BB8006D1B78 /* CUPRow.swift */,
+				87AFE82B22AE67C5006D1B78 /* Airport.swift */,
 			);
 			path = CUP;
 			sourceTree = "<group>";
@@ -471,6 +483,7 @@
 			files = (
 				877B9CF91DFC1C4600D2EB91 /* DAeC_Germany_Week22_2016.txt in Resources */,
 				8722EF4B1D0DDC1D00DA4509 /* lx7007.igc in Resources */,
+				87AFE83022AE6F51006D1B78 /* airports.cup in Resources */,
 				8745976222514E50004921BF /* WP2019_Luesse.cup in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -511,12 +524,14 @@
 				877A18971D18367A00EC6E41 /* StringExtensions.swift in Sources */,
 				871E012B1DFC72AD0072487D /* AirSpaceMapDelegate.swift in Sources */,
 				877B9CF51DFC1BE300D2EB91 /* CharacterSetExtensions.swift in Sources */,
+				87AFE82A22AE5BB8006D1B78 /* CUPRow.swift in Sources */,
 				8745AD51226BA5F00088A45B /* SwiftSimplify.swift in Sources */,
 				877B9CF31DFC1BAB00D2EB91 /* CLLocationCoordinate2DExtensions.swift in Sources */,
 				873CB3161DB3718300A6325E /* IGCFix.swift in Sources */,
 				8722EF4D1D0DDCEC00DA4509 /* IGCHeader.swift in Sources */,
 				87459760225143D0004921BF /* Waypoint.swift in Sources */,
 				8722EF481D0DDB8200DA4509 /* IGCData.swift in Sources */,
+				87AFE82C22AE67C5006D1B78 /* Airport.swift in Sources */,
 				873CB3141DB3708800A6325E /* DateExtensions.swift in Sources */,
 				51EDE51D20BC7B3D00F53408 /* GeoJsonEncodable.swift in Sources */,
 			);
@@ -526,6 +541,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				87AFE82E22AE6F23006D1B78 /* AirportTests.swift in Sources */,
 				8745976422514E61004921BF /* WaypointTests.swift in Sources */,
 				877A18991D18370100EC6E41 /* StringExtensionsTests.swift in Sources */,
 				87FA6A6B1D12D10F000C5F7E /* IGCDataTests.swift in Sources */,
@@ -830,7 +846,7 @@
 				INFOPLIST_FILE = "Iguazu-macOS/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.fifteenjugglers.Iguazu-macOS";
@@ -863,7 +879,7 @@
 				INFOPLIST_FILE = "Iguazu-macOS/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.fifteenjugglers.Iguazu-macOS";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
