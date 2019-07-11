@@ -41,7 +41,7 @@ public extension Collection where Iterator.Element == String {
     }
 }
 
-public enum AirSpaceAltitude {
+public enum AirSpaceAltitude: Equatable {
     case surface
     case agl(altitude: Altitude)
     case msl(altitude: Altitude)
