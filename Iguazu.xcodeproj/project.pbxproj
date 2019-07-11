@@ -42,6 +42,8 @@
 		87AFE82E22AE6F23006D1B78 /* AirportTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AFE82D22AE6F23006D1B78 /* AirportTests.swift */; };
 		87AFE83022AE6F51006D1B78 /* airports.cup in Resources */ = {isa = PBXBuildFile; fileRef = 87AFE82F22AE6F51006D1B78 /* airports.cup */; };
 		87BB56D11DB37A5D00379BE0 /* DateExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BB56D01DB37A5D00379BE0 /* DateExtensionsTests.swift */; };
+		87C809FF22C21F2600B30F55 /* CUPRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AFE82922AE5BB8006D1B78 /* CUPRow.swift */; };
+		87C80A0022C21F2A00B30F55 /* Airport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AFE82B22AE67C5006D1B78 /* Airport.swift */; };
 		87E65D86226A3CBE001B25BE /* Iguazu_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87E65D7D226A3CBD001B25BE /* Iguazu_macOS.framework */; };
 		87E65D8D226A3CBE001B25BE /* Iguazu_macOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 87E65D7F226A3CBD001B25BE /* Iguazu_macOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		87E65D94226A41C1001B25BE /* AirSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877B9CF01DFC1B6700D2EB91 /* AirSpace.swift */; };
@@ -572,12 +574,14 @@
 				87E65D98226A41C1001B25BE /* CharacterSetExtensions.swift in Sources */,
 				87E65D99226A41C1001B25BE /* CLLocationCoordinate2DExtensions.swift in Sources */,
 				87E65D9A226A41C1001B25BE /* DateExtensions.swift in Sources */,
+				87C809FF22C21F2600B30F55 /* CUPRow.swift in Sources */,
 				8745AD52226BA5F00088A45B /* SwiftSimplify.swift in Sources */,
 				87E65D9B226A41C1001B25BE /* ScannerExtensions.swift in Sources */,
 				87E65D9C226A41C1001B25BE /* StringExtensions.swift in Sources */,
 				87E65D9D226A41C1001B25BE /* IGCData.swift in Sources */,
 				87E65D9E226A41C1001B25BE /* IGCExtension.swift in Sources */,
 				87E65D9F226A41C1001B25BE /* IGCFix.swift in Sources */,
+				87C80A0022C21F2A00B30F55 /* Airport.swift in Sources */,
 				87E65DA0226A41C1001B25BE /* IGCHeader.swift in Sources */,
 				87E65DA1226A41C1001B25BE /* IGCRecord.swift in Sources */,
 			);

@@ -47,8 +47,7 @@ extension IGCFix {
             let lat = line.extractLatitude(from: LatitudeOffset),
             let lng = line.extractLongitude(from: LongitudeOffset),
             let barometricAltitude = line.extractAltitude(from: AltimeterOffset),
-            let gpsAltitude = line.extractAltitude(from: GPSAltitudeOffset),
-            let accuracy = line.extractAccuracy(from: FixAccucaryOffset) else { fatalError("could not parse line: \(line)") } // TODO: throw here instead of fatalError
+            let gpsAltitude = line.extractAltitude(from: GPSAltitudeOffset) else { fatalError("could not parse line: \(line)") } // TODO: throw here instead of fatalError
         
         let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: lng)
         
@@ -65,12 +64,14 @@ extension IGCFix {
             }
             extensionValues = Dictionary(uniqueKeysWithValues: keysAndValues)
         }
+
+        let accuracy = line.extractAccuracy(from: FixAccucaryOffset)
         
         self.init(timestamp: timestamp,
             coordinate: coordinate,
             altimeterAltitude: barometricAltitude,
             gpsAltitude: gpsAltitude,
-            fixAccuracy: accuracy,
+            fixAccuracy: accuracy ?? -1,
             extensions: extensionValues)
     }
 
