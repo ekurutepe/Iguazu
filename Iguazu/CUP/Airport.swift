@@ -24,7 +24,7 @@ public extension Airport {
     static func airports(withContentsOf url: URL) -> [Airport] {
         var cupString = ""
         do {
-            cupString = try String(contentsOf: url, encoding: .ascii)
+            cupString = try String(contentsOf: url, encoding: .utf8)
         }
         catch _ {
             return []
