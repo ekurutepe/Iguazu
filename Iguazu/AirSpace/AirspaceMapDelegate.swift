@@ -1,5 +1,5 @@
 //
-//  AirSpaceMapDelegate.swift
+//  AirspaceMapDelegate.swift
 //  Iguazu
 //
 //  Created by Engin Kurutepe on 10/12/2016.
@@ -8,16 +8,16 @@
 
 import MapKit
 
-public class AirSpaceMapDelegate: NSObject, MKMapViewDelegate {
-    private var _airspaceTable = [MKPolygon: AirSpace]()
+public class AirspaceMapDelegate: NSObject, MKMapViewDelegate {
+    private var _airspaceTable = [MKPolygon: Airspace]()
     
-    public var airspaceTable: [MKPolygon: AirSpace] {
+    public var airspaceTable: [MKPolygon: Airspace] {
         return _airspaceTable
     }
     
     public var polygons = [MKPolygon]()
     
-    public required init(airspaces: [AirSpace]) {
+    public required init(airspaces: [Airspace]) {
         super.init()
         polygons = airspaces.map {
             let coords = $0.polygonCoordinates
@@ -45,7 +45,7 @@ public class AirSpaceMapDelegate: NSObject, MKMapViewDelegate {
     }
 }
 
-public extension AirSpaceClass {
+public extension AirspaceClass {
 #if os(OSX)
     var color: NSColor {
         switch self {
