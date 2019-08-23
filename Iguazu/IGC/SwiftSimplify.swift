@@ -57,6 +57,17 @@ extension CLLocationCoordinate2D: Simplifiable {
     }
 }
 
+extension CLLocation: Simplifiable {
+  public var x: CGFloat {
+    return CGFloat(coordinate.latitude)
+  }
+
+  public var y: CGFloat {
+      return CGFloat(coordinate.longitude)
+  }
+
+}
+
 open class SwiftSimplify {
 	/**
 	Returns an array of simplified points
