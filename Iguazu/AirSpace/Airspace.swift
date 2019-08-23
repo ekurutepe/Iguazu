@@ -111,7 +111,7 @@ extension AirspaceAltitude: Comparable {
 }
 
 public struct Airspace {
-    public let `class`: AirspaceClass
+    public let airspaceClass: AirspaceClass
     public let ceiling: AirspaceAltitude
     public let floor: AirspaceAltitude
     public let name: String
@@ -119,7 +119,7 @@ public struct Airspace {
     public let polygonCoordinates: [CLLocationCoordinate2D]
 
     public init(name: String, class c: AirspaceClass, floor: AirspaceAltitude, ceiling: AirspaceAltitude, polygon: [CLLocationCoordinate2D], labelCoordinates: [CLLocationCoordinate2D]? = nil) {
-        self.class = c
+        self.airspaceClass = c
         self.ceiling = ceiling
         self.floor = floor
         self.name = name
@@ -155,9 +155,9 @@ public final class OpenAirParser {
             case "AC":
                 currentAirspace.flatMap {
                     $0.validAirspace.flatMap { asp in
-                        var list = airSpaces[asp.class] ?? [Airspace]()
+                        var list = airSpaces[asp.airspaceClass] ?? [Airspace]()
                         list.append(asp)
-                        airSpaces[asp.class] = list
+                        airSpaces[asp.airspaceClass] = list
                     }
                 }
                 
@@ -224,9 +224,9 @@ public final class OpenAirParser {
         
         currentAirspace.flatMap {
             $0.validAirspace.flatMap { asp in
-                var list = airSpaces[asp.class] ?? [Airspace]()
+                var list = airSpaces[asp.airspaceClass] ?? [Airspace]()
                 list.append(asp)
-                airSpaces[asp.class] = list
+                airSpaces[asp.airspaceClass] = list
             }
         }
         
@@ -377,7 +377,7 @@ extension Airspace: GeoJsonEncodable {
             "type": "Feature",
             "properties": [
                 "name": self.name as NSString,
-                "type": self.class.rawValue as NSString,
+                "type": self.airspaceClass.rawValue as NSString,
                 "floor": self.floor.geoJsonAltitude,
                 "ceiling": self.ceiling.geoJsonAltitude,
             ] as NSDictionary,
