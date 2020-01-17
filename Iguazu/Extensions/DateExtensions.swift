@@ -40,21 +40,9 @@ extension Date {
         let calendar = Calendar.current
         let components = DateComponents(calendar: calendar,
               timeZone: TimeZone(abbreviation: "UTC"),
-              era: nil,
-              year: nil,
-              month: nil,
-              day: nil,
               hour: hours,
               minute: minutes,
-              second: seconds,
-              nanosecond: nil,
-              weekday: nil,
-              weekdayOrdinal: nil,
-              quarter: nil,
-              weekOfMonth: nil,
-              weekOfYear: nil,
-              yearForWeekOfYear: nil)
-        
+              second: seconds)
         return calendar.date(byAdding: components, to: midnight)
     }
     

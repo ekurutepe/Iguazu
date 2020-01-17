@@ -12,47 +12,62 @@ import MapKit
 
 /// Represents an IGC file.
 public struct IGCData {
-
-  // must be declared as var due to lazy property accessors in IGCHeader
-  // pending https://github.com/apple/swift-evolution/blob/master/proposals/0030-property-behavior-decls.md
-  // potential solution: https://oleb.net/blog/2015/12/lazy-properties-in-structs-swift/
-  public var header: IGCHeader
+  public let header: IGCHeader
+  public let task: IGCTask?
 
   let fixLines: [String]
 
-  public lazy var fixes: [IGCFix] = {
-    self.fixLines.map { IGCFix(with: $0, midnight: self.header.flightDate, extensions: self.extensions) }
-  }()
+  private let _fixes = IGCDataBox<[IGCFix]> { (igcData) -> [IGCFix] in
+    return igcData.fixLines.concurrentMap { (line) -> IGCFix in
+      return IGCFix(with: line, midnight: igcData.header.flightDate, extensions: igcData.extensions) }
+  }
+  
+  public var fixes: [IGCFix] {
+    return _fixes.value(input: self)
+  }
 
-  public lazy var takeOffDate: Date? = {
-    return self.fixLines.first
-      .map { line -> IGCFix in
-        return IGCFix(with: line, midnight: self.header.flightDate, extensions: self.extensions)
+  public func fix(for date: Date) -> DirectionedFix? {
+    var offset: Int?
+    let f = fixes.enumerated().first { (idx, fix) -> Bool in
+      let result = abs(fix.timestamp.timeIntervalSince(date)) < 1.0
+      if result { offset = idx }
+      return result
     }
-    .map { fix -> Date in
-      return fix.timestamp
+    guard let ff = f?.1 else { return nil }
+    
+    if fixes.count - 1 > (offset ?? 0) {
+      let direction = ff.coordinate.bearing(to: fixes[offset!+1].coordinate)
+      return DirectionedFix(fix: ff, direction: direction)
     }
-  }()
+    
+    return DirectionedFix(fix: ff, direction: 0.0)
+    
+  }
+  
+  public var takeOffDate: Date? {
+    // Do not use self.fixes here to avoid parsing the whole file
+    guard let line = self.fixLines.first else { return nil }
 
-  public lazy var landingDate: Date? = {
-    return self.fixLines.last
-      .map { line -> IGCFix in
-        return IGCFix(with: line, midnight: self.header.flightDate, extensions: self.extensions)
-    }
-    .map { fix -> Date in
-      return fix.timestamp
-    }
-  }()
+    return IGCFix(with: line, midnight: self.header.flightDate).timestamp
+  }
+
+  public var landingDate: Date? {
+    // Do not use self.fixes here to avoid parsing the whole file
+    guard let line = self.fixLines.last else { return nil }
+
+    return IGCFix(with: line, midnight: self.header.flightDate).timestamp
+  }
 
   public lazy var takeOffLocation: CLLocation? = {
+    // Do not use self.fixes here to avoid parsing the whole file
     guard let line = self.fixLines.first else { return nil }
 
     let fix = IGCFix(with: line, midnight: self.header.flightDate)
-
     return fix.clLocation
   }()
 
   public lazy var landingLocation: CLLocation? = {
+    // Do not use self.fixes here to avoid parsing the whole file
     guard let line = self.fixLines.last else { return nil }
 
     let fix = IGCFix(with: line, midnight: self.header.flightDate)
@@ -61,20 +76,20 @@ public struct IGCData {
   }()
 
   public let extensions: [IGCExtension]?
+  
+  public var locations: [CLLocation] {
+    return fixes.concurrentMap { $0.clLocation }
+  }
 
-  public lazy var locations: [CLLocation] = {
-    self.fixes.map { $0.clLocation }
-  }()
-
-  public lazy var polyline: MKPolyline = {
-    let coordinates = self.locations.map { $0.coordinate }
+  public var polyline: MKPolyline {
+    let coordinates = fixes.concurrentMap { $0.clLocation.coordinate }
 
     return MKPolyline(coordinates: coordinates, count: coordinates.count)
-  }()
+  }
 
   /// The simplified path expressed as a CLLocationCoordinate2D array in 2D
   public lazy var simplifiedCoordinates: [CLLocationCoordinate2D] = {
-    let coordinates = self.locations.map { $0.coordinate }
+    let coordinates = fixes.concurrentMap { $0.clLocation.coordinate }
     let simplified = SwiftSimplify.simplify(coordinates, tolerance: 0.0001, highQuality: true)
     return simplified
   }()
@@ -85,7 +100,6 @@ public struct IGCData {
     let simplified = SwiftSimplify.simplify(locations, tolerance: 0.0001, highQuality: true)
     return simplified
   }()
-
 
   public lazy var simplifiedPolyline: MKPolyline = {
     let simplified = simplifiedCoordinates
@@ -166,7 +180,7 @@ public struct IGCData {
   /// - Parameter igcString: string read from the IGC file
   public init?(with igcString: String) {
     guard let header = IGCHeader(igcString: igcString) else { return nil }
-
+    self.task = IGCTask(with: igcString)
     let lines = igcString.components(separatedBy: .newlines)
 
     guard lines.count > 0 else { return nil }
@@ -214,8 +228,15 @@ public struct IGCData {
       $0.bLine
     }
     self.extensions = nil
-
+    self.task = nil
   }
 }
 
+fileprivate typealias IGCDataBox<T> = LazyBox<IGCData,T>
 
+public struct DirectionedFix {
+  let fix: IGCFix
+  public let direction: CLLocationDegrees
+  
+  public var coordinate: CLLocationCoordinate2D { return fix.coordinate }
+}

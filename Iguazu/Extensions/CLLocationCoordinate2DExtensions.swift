@@ -8,7 +8,7 @@
 
 import CoreLocation
 
-extension CLLocationCoordinate2D {
+public extension CLLocationCoordinate2D {
     private func DegreesToRadians(_ degrees: Double) -> Double { return degrees * .pi / 180.0 }
     private func RadiansToDegrees(_ radians: Double) -> CLLocationDegrees { return radians * 180.0 / .pi }
     

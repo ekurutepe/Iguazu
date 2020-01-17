@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct Waypoint {
+public struct Waypoint: Equatable, Codable {
     public let title: String
     public let code: String
     public let latitude: Double
@@ -31,11 +31,11 @@ public extension Waypoint {
     static func waypoints(from string: String) -> [Waypoint] {
         let rows = string.components(separatedBy: .newlines)
         guard rows.count > 1 else { return [] }
-//    Title,Code,Country,Latitude,Longitude,Elevation,Style,Direction,Length,Frequency,Description
-//        let header = rows.first!
+        //    Title,Code,Country,Latitude,Longitude,Elevation,Style,Direction,Length,Frequency,Description
+        //        let header = rows.first!
         let wps = rows.dropFirst()
         return wps.compactMap { Waypoint(row: $0) }
-
+        
     }
 }
 
@@ -44,9 +44,9 @@ private extension Waypoint {
         guard let cup = CUPRow(row) else { return nil }
         self = Waypoint(
             title: cup.title,
-             code: cup.code ?? "",
-             latitude: cup.latitude.converted(to: .degrees).value,
-             longitude: cup.longitue.converted(to: .degrees).value,
-             elevation: cup.elevation.converted(to: .meters).value)
+            code: cup.code ?? "",
+            latitude: cup.latitude.converted(to: .degrees).value,
+            longitude: cup.longitue.converted(to: .degrees).value,
+            elevation: cup.elevation.converted(to: .meters).value)
     }
 }

@@ -17,7 +17,8 @@ extension StringProtocol {
     ///
     /// - returns: the extracted substring
     func extractString(from start: Int, length: Int) -> String? {
-        guard start + length <= self.utf8.count,
+      let realLength = (length > 0) ? length : self.count - start - 1
+        guard start + realLength <= self.utf8.count,
             start >= 0 else { return nil }
 
         let startIndex = self.index(self.startIndex, offsetBy: start)
