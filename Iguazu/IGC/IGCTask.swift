@@ -69,8 +69,12 @@ public extension IGCTask {
     
     let wpLines = lines.dropFirst()
     
-    waypoints = wpLines.map {
-      return IGCWaypoint(with: $0)
-    }
+    waypoints = wpLines
+      .map {
+        return IGCWaypoint(with: $0)
+      }.filter {
+        // filter out zero coords
+        $0.coordinate != .zero
+      }
   }
 }
