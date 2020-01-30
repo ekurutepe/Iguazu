@@ -26,6 +26,8 @@ public struct IGCData {
     return _fixes.value(input: self)
   }
 
+  public let rawData: Data
+
   public func fix(for date: Date) -> DirectionedFix? {
     var offset: Int?
     let f = fixes.enumerated().first { (idx, fix) -> Bool in
@@ -58,22 +60,22 @@ public struct IGCData {
     return IGCFix(with: line, midnight: self.header.flightDate).timestamp
   }
 
-  public lazy var takeOffLocation: CLLocation? = {
+  public var takeOffLocation: CLLocation? {
     // Do not use self.fixes here to avoid parsing the whole file
     guard let line = self.fixLines.first else { return nil }
 
     let fix = IGCFix(with: line, midnight: self.header.flightDate)
     return fix.clLocation
-  }()
+  }
 
-  public lazy var landingLocation: CLLocation? = {
+  public var landingLocation: CLLocation? {
     // Do not use self.fixes here to avoid parsing the whole file
     guard let line = self.fixLines.last else { return nil }
 
     let fix = IGCFix(with: line, midnight: self.header.flightDate)
 
     return fix.clLocation
-  }()
+  }
 
   public let extensions: [IGCExtension]?
   
@@ -190,6 +192,7 @@ public struct IGCData {
 
     let fixes = lines.filter { $0.hasPrefix("B") }
 
+    self.rawData = igcString.data(using: .utf8)!
     self.header = header
     self.fixLines = fixes
     self.extensions = extensions
@@ -229,6 +232,7 @@ public struct IGCData {
     }
     self.extensions = nil
     self.task = nil
+    self.rawData = Data()
   }
 }
 
