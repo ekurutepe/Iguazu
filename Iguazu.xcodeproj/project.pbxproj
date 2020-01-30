@@ -25,6 +25,16 @@
 		8745AD51226BA5F00088A45B /* SwiftSimplify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8745AD50226BA5F00088A45B /* SwiftSimplify.swift */; };
 		8745AD52226BA5F00088A45B /* SwiftSimplify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8745AD50226BA5F00088A45B /* SwiftSimplify.swift */; };
 		874F49251D1489490019DC30 /* IGCExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874F49241D1489490019DC30 /* IGCExtensionTests.swift */; };
+		8756922223E37CA200C3379E /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8756921F23E37CA200C3379E /* ArrayExtensions.swift */; };
+		8756922323E37CA200C3379E /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8756921F23E37CA200C3379E /* ArrayExtensions.swift */; };
+		8756922423E37CA200C3379E /* ThreadSafe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8756922023E37CA200C3379E /* ThreadSafe.swift */; };
+		8756922523E37CA200C3379E /* ThreadSafe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8756922023E37CA200C3379E /* ThreadSafe.swift */; };
+		8756922623E37CA200C3379E /* LazyBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8756922123E37CA200C3379E /* LazyBox.swift */; };
+		8756922723E37CA200C3379E /* LazyBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8756922123E37CA200C3379E /* LazyBox.swift */; };
+		8756922923E37CDD00C3379E /* IGCTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8756922823E37CDD00C3379E /* IGCTask.swift */; };
+		8756922A23E37CDD00C3379E /* IGCTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8756922823E37CDD00C3379E /* IGCTask.swift */; };
+		8756922C23E37CF700C3379E /* IGCWaypoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8756922B23E37CF600C3379E /* IGCWaypoint.swift */; };
+		8756922D23E37CF700C3379E /* IGCWaypoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8756922B23E37CF600C3379E /* IGCWaypoint.swift */; };
 		876CBA3D1D10659200C125AC /* IGCExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876CBA3C1D10659200C125AC /* IGCExtension.swift */; };
 		877A18971D18367A00EC6E41 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877A18961D18367A00EC6E41 /* StringExtensions.swift */; };
 		877A18991D18370100EC6E41 /* StringExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877A18981D18370100EC6E41 /* StringExtensionsTests.swift */; };
@@ -108,6 +118,11 @@
 		8745976322514E61004921BF /* WaypointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaypointTests.swift; sourceTree = "<group>"; };
 		8745AD50226BA5F00088A45B /* SwiftSimplify.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftSimplify.swift; sourceTree = "<group>"; };
 		874F49241D1489490019DC30 /* IGCExtensionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGCExtensionTests.swift; sourceTree = "<group>"; };
+		8756921F23E37CA200C3379E /* ArrayExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayExtensions.swift; sourceTree = "<group>"; };
+		8756922023E37CA200C3379E /* ThreadSafe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreadSafe.swift; sourceTree = "<group>"; };
+		8756922123E37CA200C3379E /* LazyBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LazyBox.swift; sourceTree = "<group>"; };
+		8756922823E37CDD00C3379E /* IGCTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGCTask.swift; sourceTree = "<group>"; };
+		8756922B23E37CF600C3379E /* IGCWaypoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGCWaypoint.swift; sourceTree = "<group>"; };
 		876CBA3C1D10659200C125AC /* IGCExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGCExtension.swift; sourceTree = "<group>"; };
 		877A18961D18367A00EC6E41 /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		877A18981D18370100EC6E41 /* StringExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensionsTests.swift; sourceTree = "<group>"; };
@@ -206,6 +221,7 @@
 				8745975B22514254004921BF /* IGC */,
 				8722EF301D0DD90500DA4509 /* Iguazu.h */,
 				8722EF321D0DD90500DA4509 /* Info.plist */,
+				8756921E23E37CA200C3379E /* Utils */,
 			);
 			path = Iguazu;
 			sourceTree = "<group>";
@@ -243,11 +259,12 @@
 			isa = PBXGroup;
 			children = (
 				8722EF471D0DDB8200DA4509 /* IGCData.swift */,
-				8745AD50226BA5F00088A45B /* SwiftSimplify.swift */,
 				876CBA3C1D10659200C125AC /* IGCExtension.swift */,
 				873CB3151DB3718300A6325E /* IGCFix.swift */,
 				8722EF4C1D0DDCEC00DA4509 /* IGCHeader.swift */,
 				8722EF501D0DEF2A00DA4509 /* IGCRecord.swift */,
+				8756922823E37CDD00C3379E /* IGCTask.swift */,
+				8756922B23E37CF600C3379E /* IGCWaypoint.swift */,
 			);
 			path = IGC;
 			sourceTree = "<group>";
@@ -282,6 +299,17 @@
 				87AFE82B22AE67C5006D1B78 /* Airport.swift */,
 			);
 			path = CUP;
+			sourceTree = "<group>";
+		};
+		8756921E23E37CA200C3379E /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				8756921F23E37CA200C3379E /* ArrayExtensions.swift */,
+				8756922123E37CA200C3379E /* LazyBox.swift */,
+				8745AD50226BA5F00088A45B /* SwiftSimplify.swift */,
+				8756922023E37CA200C3379E /* ThreadSafe.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		877B9D101DFC225800D2EB91 /* IguazuPerformanceTests */ = {
@@ -421,7 +449,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1020;
-				LastUpgradeCheck = 1020;
+				LastUpgradeCheck = 1130;
 				ORGANIZATIONNAME = "Fifteen Jugglers Software";
 				TargetAttributes = {
 					8722EF2C1D0DD90500DA4509 = {
@@ -521,15 +549,20 @@
 			files = (
 				8722EF511D0DEF2A00DA4509 /* IGCRecord.swift in Sources */,
 				877B9CF11DFC1B6700D2EB91 /* AirSpace.swift in Sources */,
+				8756922C23E37CF700C3379E /* IGCWaypoint.swift in Sources */,
 				876CBA3D1D10659200C125AC /* IGCExtension.swift in Sources */,
+				8756922923E37CDD00C3379E /* IGCTask.swift in Sources */,
+				8756922423E37CA200C3379E /* ThreadSafe.swift in Sources */,
 				877B9CF71DFC1C0F00D2EB91 /* ScannerExtensions.swift in Sources */,
 				877A18971D18367A00EC6E41 /* StringExtensions.swift in Sources */,
 				871E012B1DFC72AD0072487D /* AirSpaceMapDelegate.swift in Sources */,
 				877B9CF51DFC1BE300D2EB91 /* CharacterSetExtensions.swift in Sources */,
+				8756922223E37CA200C3379E /* ArrayExtensions.swift in Sources */,
 				87AFE82A22AE5BB8006D1B78 /* CUPRow.swift in Sources */,
 				8745AD51226BA5F00088A45B /* SwiftSimplify.swift in Sources */,
 				877B9CF31DFC1BAB00D2EB91 /* CLLocationCoordinate2DExtensions.swift in Sources */,
 				873CB3161DB3718300A6325E /* IGCFix.swift in Sources */,
+				8756922623E37CA200C3379E /* LazyBox.swift in Sources */,
 				8722EF4D1D0DDCEC00DA4509 /* IGCHeader.swift in Sources */,
 				87459760225143D0004921BF /* Waypoint.swift in Sources */,
 				8722EF481D0DDB8200DA4509 /* IGCData.swift in Sources */,
@@ -569,15 +602,20 @@
 			files = (
 				87E65D94226A41C1001B25BE /* AirSpace.swift in Sources */,
 				87E65D95226A41C1001B25BE /* AirSpaceMapDelegate.swift in Sources */,
+				8756922D23E37CF700C3379E /* IGCWaypoint.swift in Sources */,
 				87E65D96226A41C1001B25BE /* GeoJsonEncodable.swift in Sources */,
+				8756922A23E37CDD00C3379E /* IGCTask.swift in Sources */,
+				8756922523E37CA200C3379E /* ThreadSafe.swift in Sources */,
 				87E65D97226A41C1001B25BE /* Waypoint.swift in Sources */,
 				87E65D98226A41C1001B25BE /* CharacterSetExtensions.swift in Sources */,
 				87E65D99226A41C1001B25BE /* CLLocationCoordinate2DExtensions.swift in Sources */,
 				87E65D9A226A41C1001B25BE /* DateExtensions.swift in Sources */,
+				8756922323E37CA200C3379E /* ArrayExtensions.swift in Sources */,
 				87C809FF22C21F2600B30F55 /* CUPRow.swift in Sources */,
 				8745AD52226BA5F00088A45B /* SwiftSimplify.swift in Sources */,
 				87E65D9B226A41C1001B25BE /* ScannerExtensions.swift in Sources */,
 				87E65D9C226A41C1001B25BE /* StringExtensions.swift in Sources */,
+				8756922723E37CA200C3379E /* LazyBox.swift in Sources */,
 				87E65D9D226A41C1001B25BE /* IGCData.swift in Sources */,
 				87E65D9E226A41C1001B25BE /* IGCExtension.swift in Sources */,
 				87E65D9F226A41C1001B25BE /* IGCFix.swift in Sources */,
@@ -658,7 +696,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -670,7 +708,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
+				SWIFT_TREAT_WARNINGS_AS_ERRORS = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -714,7 +752,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -724,7 +762,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
+				SWIFT_TREAT_WARNINGS_AS_ERRORS = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -837,7 +875,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
@@ -870,7 +908,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;

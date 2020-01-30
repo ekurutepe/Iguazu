@@ -22,7 +22,7 @@ private let LongitudeOffset = 9
 private let TitleOffset = 18
 
 public extension IGCWaypoint {
-  public init(with line: String) {
+  init(with line: String) {
     guard
       let prefix = line.extractString(from: 0, length: 1), prefix == "C"
     else {

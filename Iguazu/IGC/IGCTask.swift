@@ -25,7 +25,7 @@ private let TurnpointCountOffset = 23
 private let TitleOffset = 25
 
 public extension IGCTask {
-  public init?(with igcString: String) {
+  init?(with igcString: String) {
     
     let lines = igcString.components(separatedBy: .newlines)
       .filter({ (line) -> Bool in
