@@ -8,12 +8,12 @@
 import Foundation
 
 // based on https://oleb.net/blog/2015/12/lazy-properties-in-structs-swift/
-final class LazyBox<Input, Result> {
-  init(computation: @escaping (Input) -> Result) {
+final public class LazyBox<Input, Result> {
+  public init(computation: @escaping (Input) -> Result) {
     _value = .notYetComputed(computation)
   }
   
-  func value(input: Input) -> Result {
+  public func value(input: Input) -> Result {
     var returnValue: Result? = nil
     queue.sync {
       switch self._value {
