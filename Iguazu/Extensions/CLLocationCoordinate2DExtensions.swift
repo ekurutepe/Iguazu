@@ -9,6 +9,8 @@
 import CoreLocation
 
 public extension CLLocationCoordinate2D {
+    static let zero = CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
+
     private func DegreesToRadians(_ degrees: Double) -> Double { return degrees * .pi / 180.0 }
     private func RadiansToDegrees(_ radians: Double) -> CLLocationDegrees { return radians * 180.0 / .pi }
     
