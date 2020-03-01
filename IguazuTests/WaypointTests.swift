@@ -10,28 +10,25 @@ import XCTest
 @testable import Iguazu
 
 class WaypointTests : XCTestCase {
-    var cupString = ""
-    
+    var url: URL!
+
     override func setUp() {
         super.setUp()
-        do {
-            let url = Bundle(for: AirSpaceTests.self).url(forResource: "WP2019_Luesse", withExtension: "cup")
-            cupString = try String(contentsOf: url!, encoding: .ascii)
-        }
-        catch {
-            XCTFail("\(dump(error))")
-        }
+        url = Bundle(for: AirSpaceTests.self).url(forResource: "WP2019_Luesse", withExtension: "cup")
     }
-    
+
     func testFileParsing() {
-        let waypoints = Waypoint.waypoints(from: cupString)
+        guard let waypoints = CUPFile(name: "test", fileURL: url)?.points else {
+            XCTFail("could not parse waypoints file")
+            return
+        }
         XCTAssertTrue(waypoints.count > 0)
         let lusse = waypoints.first!
         XCTAssertEqual(lusse.title, "001SPLuesse")
         XCTAssertEqual(lusse.code, "001")
-        XCTAssertEqual(lusse.latitude, 52.14416666666666)
-        XCTAssertEqual(lusse.longitude, 12.668333333333333)
-        XCTAssertEqual(lusse.elevation, 66.0)
+        XCTAssertEqual(lusse.latitude.value, 52.14416666666666)
+        XCTAssertEqual(lusse.longitude.value, 12.668333333333333)
+        XCTAssertEqual(lusse.elevation.value, 66.0)
     }
     
     

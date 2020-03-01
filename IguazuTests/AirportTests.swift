@@ -10,21 +10,18 @@ import XCTest
 @testable import Iguazu
 
 class AirportTests : XCTestCase {
-    var cupString = ""
+    var url: URL!
 
     override func setUp() {
         super.setUp()
-        do {
-            let url = Bundle(for: AirSpaceTests.self).url(forResource: "airports", withExtension: "cup")
-            cupString = try String(contentsOf: url!, encoding: .ascii)
-        }
-        catch {
-            XCTFail("\(dump(error))")
-        }
+        url = Bundle(for: AirSpaceTests.self).url(forResource: "airports", withExtension: "cup")
     }
 
     func testFileParsing() {
-        let waypoints = Airport.airports(from: cupString)
+        guard let waypoints = CUPFile(name: "test", fileURL: url)?.airports else {
+            XCTFail("could not parse cup file")
+            return
+        }
         XCTAssertTrue(waypoints.count > 0)
         let ap = waypoints.first!
         XCTAssertEqual(ap.title, "AACHEN-MERZBRUECK")
