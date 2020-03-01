@@ -66,16 +66,14 @@ public extension AirspaceClass {
 #elseif os(iOS)
     var color: UIColor {
         switch self {
-        case .Danger:
-            return .black
-        case .CTR, .GliderProhibited, .Prohibited, .Restricted:
+        case .Danger, .GliderProhibited, .Prohibited, .Restricted:
             return .red
-        case .Delta:
-            return .green
-        case .Bravo, .Charlie, .RadioMandatoryZone:
-            return UIColor(red: 0.0, green: 0.6, blue: 1.0, alpha: 1.0)
+        case .Delta, .CTR, .Bravo, .Charlie, .RadioMandatoryZone:
+            return UIColor(red: 0.0, green: 0.12, blue: 0.67, alpha: 1.0)
         case .TransponderMandatoryZone:
-            return .gray
+            return .darkGray
+        case .WaveWindow:
+            return .green
         default:
             return .purple
         }
