@@ -1,5 +1,5 @@
 //
-//  CUPRow.swift
+//  PointOfInterest.swift
 //  Iguazu
 //
 //  Created by Engin Kurutepe on 10.06.19.
@@ -8,49 +8,57 @@
 
 import Foundation
 
-struct CUPRow {
+public typealias Airport = PointOfInterest
+public typealias Waypoint = PointOfInterest
+
+public struct PointOfInterest: Equatable, Codable {
 //    Title,Code,Country,Latitude,Longitude,Elevation,Style,Direction,Length,Frequency,Description
 //    "LUESSE","EDOJ",DE,5208.652N,01240.182E,65.0m,2,62,1020m,"128.755",""
-    let title: String
-    let code: String?
-    let country: String?
-    let latitude: Measurement<UnitAngle>
-    let longitue: Measurement<UnitAngle>
-    let elevation: Measurement<UnitLength>
-    let style: Int?
-    let direction: Int?
-    let length: Measurement<UnitLength>?
-    let frequency: String?
-    let description: String?
-}
+    public let title: String
+    public let code: String?
+    public let country: String?
+    public let latitude: Measurement<UnitAngle>
+    public let longitude: Measurement<UnitAngle>
+    public let elevation: Measurement<UnitLength>
+    public let style: Style
+    public let direction: Int?
+    public let length: Measurement<UnitLength>?
+    public let frequency: String?
+    public let description: String?
 
-extension CUPRow {
-    init?(_ row: String) {
-        let components = row.components(separatedBy: ",")
-        //    "001SPLuesse",,XX,5208.650N,01240.100E,66m,5,,,,
-        guard components.count == 11 else { return nil }
-        self.title = components[0].replacingOccurrences(of: "\"", with: "")
-        self.code = components[1].replacingOccurrences(of: "\"", with: "")
-        self.country = components[2].replacingOccurrences(of: "\"", with: "")
+    public enum Style: Int, Codable {
+        case unknown = 0
+        case waypoint
+        case airfieldGrass
+        case outlanding
+        case airfieldGliding
+        case airfieldPaved
+        case mountainPass
+        case mountainTop
+        case mast
+        case vor
+        case ndb
+        case coolingTower
+        case dam
+        case tunnel
+        case bridge
+        case powerPlant
+        case castle
+        case intersection
+    }
 
-        guard let latitude = Measurement<UnitAngle>(latitudeString: components[3]) else { return nil }
+    public init(title: String, code: String?, country: String?, latitude: Measurement<UnitAngle>, longitude: Measurement<UnitAngle>, elevation: Measurement<UnitLength>, style: Style, direction: Int?, length: Measurement<UnitLength>?, frequency: String?, description: String?) {
+        self.title = title
+        self.code = code
+        self.country = country
         self.latitude = latitude
-
-        guard let longitude = Measurement<UnitAngle>(longitudeString: components[4]) else { return nil }
-        self.longitue = longitude
-
-        guard let elevation = Measurement<UnitLength>(components[5]) else { return nil }
+        self.longitude = longitude
         self.elevation = elevation
-
-        self.style = Int(components[6])
-
-        self.direction = Int(components[7])
-
-        self.length = Measurement<UnitLength>(components[8])
-
-        self.frequency = components[9].replacingOccurrences(of: "\"", with: "")
-
-        self.description = components[10].replacingOccurrences(of: "\"", with: "")
+        self.style = style
+        self.direction = direction
+        self.length = length
+        self.frequency = frequency
+        self.description = description
     }
 }
 
