@@ -34,8 +34,8 @@ public final class CUPParser {
 }
 
 public struct CUPFile {
-    let name: String
-    let points: [PointOfInterest]
+    public let name: String
+    public let points: [PointOfInterest]
 }
 
 public extension CUPFile {
