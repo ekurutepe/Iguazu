@@ -34,7 +34,7 @@ public extension Collection where Iterator.Element == String {
     var degree: CLLocationDegrees {
         return self.enumerated().map { (n,c) in
             let idx = Double(n)
-            guard let value = Double(c.trimmingCharacters(in: CharacterSet.whitespaces)) else { fatalError("not convertible to degrees: '\(c)'") }
+            guard let value = Double(c) else { fatalError("not convertible to degrees: '\(c)'") }
             return value * pow(60.0, -idx)
         }
         .reduce(0.0, +)
@@ -277,7 +277,7 @@ public final class OpenAirParser {
         let scanner = Scanner(string: string.uppercased())
         guard let latString = scanner.scanUpToCharacters(from: .northSouth) else { fatalError("could not find N/S in coordinate string") }
 
-        let latComponents = latString.components(separatedBy: ":")
+        let latComponents = latString.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: ":")
 
         var latitude = latComponents.degree
         guard latitude <= 90.0 else { fatalError("latitude \(latitude) for \"\(string)\"; \(dump(latComponents))") }
@@ -290,7 +290,7 @@ public final class OpenAirParser {
 
         guard let lngHemisphere = scanner.scanCharacters(from: .eastWest) else { fatalError("could not find E/W hemisphere")}
 
-        let lngComponents = lngString.components(separatedBy: ":")
+        let lngComponents = lngString.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: ":")
 
         var longitude = lngComponents.degree
         guard longitude <= 180.0 else { fatalError("longitude \(longitude) for \"\(string)\"; \(dump(lngComponents))") }
