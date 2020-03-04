@@ -17,8 +17,8 @@ public struct PointOfInterest: Equatable, Codable {
     public let title: String
     public let code: String?
     public let country: String?
-    public let latitude: Measurement<UnitAngle>
-    public let longitude: Measurement<UnitAngle>
+    public let latitude: Double
+    public let longitude: Double
     public let elevation: Measurement<UnitLength>
     public let style: Style
     public let direction: Int?
@@ -47,7 +47,7 @@ public struct PointOfInterest: Equatable, Codable {
         case intersection
     }
 
-    public init(title: String, code: String?, country: String?, latitude: Measurement<UnitAngle>, longitude: Measurement<UnitAngle>, elevation: Measurement<UnitLength>, style: Style, direction: Int?, length: Measurement<UnitLength>?, frequency: String?, description: String?) {
+    public init(title: String, code: String?, country: String?, latitude: Double, longitude: Double, elevation: Measurement<UnitLength>, style: Style, direction: Int?, length: Measurement<UnitLength>?, frequency: String?, description: String?) {
         self.title = title
         self.code = code
         self.country = country

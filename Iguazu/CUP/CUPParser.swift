@@ -13,8 +13,8 @@ public final class CUPParser {
         //    "001SPLuesse",,XX,5208.650N,01240.100E,66m,5,,,,
         guard
             components.count == 11,
-            let latitude = Measurement<UnitAngle>(latitudeString: components[3]),
-            let longitude = Measurement<UnitAngle>(longitudeString: components[4]),
+            let latitude = Measurement<UnitAngle>(latitudeString: components[3])?.value,
+            let longitude = Measurement<UnitAngle>(longitudeString: components[4])?.value,
             let elevation = Measurement<UnitLength>(components[5])
         else { return nil }
 
