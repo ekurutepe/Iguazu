@@ -43,12 +43,19 @@ public struct CUPFile {
 public extension CUPFile {
     init?(name: String, fileURL: URL) {
         self.name = name
-        guard let fileContents = try? String(contentsOf: fileURL) else { return nil }
-        let lines = fileContents.components(separatedBy: .newlines)
-        self.points = lines.concurrentMap { (line) -> PointOfInterest? in
-                CUPParser.pointOfInterest(from: line, sourceIdentifier: fileURL.lastPathComponent)
-            }
-            .compactMap { $0 }
+        do {
+            let fileContents = try String(contentsOf: fileURL)
+            let lines = fileContents.components(separatedBy: .newlines)
+            self.points = lines.concurrentMap { (line) -> PointOfInterest? in
+                    CUPParser.pointOfInterest(from: line, sourceIdentifier: fileURL.lastPathComponent)
+                }
+                .compactMap { $0 }
+        } catch {
+            print("could not parse file:", fileURL, error)
+            assertionFailure()
+            return nil
+        }
+
     }
 
     var airports: [Airport] {
