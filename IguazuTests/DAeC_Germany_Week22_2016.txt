@@ -35,7 +35,7 @@
 *             e.g. Airspace C LFSB, etc.
 *
 *
-* The times for the restricted and danger areas (ED-R´s and ED-D´s) are from German-AIP.
+* The times for the restricted and danger areas (ED-RÂ´s and ED-DÂ´s) are from German-AIP.
 * 
 *   e.g.    MON-THU     = this area is active from Monday till Thursday 
 *           MON-FRI+    = this area is normally active from Monday till Friday. Activation for SAT, SUN and HOL is possible by NOTAM
@@ -4710,7 +4710,7 @@ AL GND
 DP 51:54:06 N 014:21:35 E
 DP 51:58:11 N 014:38:41 E 
 DP 51:53:59 N 014:41:22 E
-*along the German–Polish border
+*along the Germanâ€“Polish border
 DP 51:51:16 N 014:36:34 E
 DP 51:48:33 N 014:25:11 E 
 DP 51:54:06 N 014:21:35 E
@@ -6837,7 +6837,7 @@ DP 52:02:00 N 010:33:00 E
 
 AC W
 AN Hoher Meissner 123.500
-*W N=HMeißnerW
+*W N=HMeiÃŸnerW
 *AF 123.500
 *AG Stauffenbuehl Start
 AH FL160

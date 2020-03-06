@@ -3,13 +3,11 @@ import XCTest
 
 class AirSpaceTests : XCTestCase {
 
-    var openAirString = ""
-    
+    var url: URL!
     override func setUp() {
         super.setUp()
         do {
-            let url = Bundle(for: AirSpaceTests.self).url(forResource: "DAeC_Germany_Week22_2016", withExtension: "txt")
-            openAirString = try String(contentsOf: url!, encoding: .ascii)
+            url = Bundle(for: AirSpaceTests.self).url(forResource: "DAeC_Germany_Week22_2016", withExtension: "txt")
         }
         catch {
             XCTFail("\(dump(error))")
@@ -17,13 +15,13 @@ class AirSpaceTests : XCTestCase {
     }
 
     func testFileParsing() {
-        let airSpaces = OpenAirParser().airSpaces(from: self.openAirString)
+        let airSpaces = OpenAirParser().airSpaces(withContentsOf: url)
         XCTAssertNotNil(airSpaces)
         XCTAssertTrue(airSpaces!.count > 0)
     }
     
     func testGeoJsonEncoding() {
-        let airSpaces = OpenAirParser().airSpaces(from: self.openAirString)
+        let airSpaces = OpenAirParser().airSpaces(withContentsOf: url)
         XCTAssertNotNil(airSpaces)
         let asp = airSpaces!.sorted { $0.name < $1.name }.first!
         let geoJson = asp.geoJsonString!
