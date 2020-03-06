@@ -25,6 +25,7 @@ public struct PointOfInterest: Equatable, Codable {
     public let length: Measurement<UnitLength>?
     public let frequency: String?
     public let description: String?
+    public var sourceIdentifier: String? 
 
     public enum Style: Int, Codable {
         case unknown = 0

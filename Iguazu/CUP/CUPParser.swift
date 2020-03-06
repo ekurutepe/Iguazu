@@ -8,7 +8,7 @@
 import Foundation
 
 public final class CUPParser {
-    static public func pointOfInterest(from row: String) -> PointOfInterest? {
+    static public func pointOfInterest(from row: String, sourceIdentifier: String?) -> PointOfInterest? {
         let components = row.components(separatedBy: ",")
         //    "001SPLuesse",,XX,5208.650N,01240.100E,66m,5,,,,
         guard
@@ -18,7 +18,7 @@ public final class CUPParser {
             let elevation = Measurement<UnitLength>(components[5])
         else { return nil }
 
-        return PointOfInterest(
+        var p = PointOfInterest(
             title: components[0].replacingOccurrences(of: "\"", with: ""),
             code: components[1].replacingOccurrences(of: "\"", with: ""),
             country: components[2].replacingOccurrences(of: "\"", with: ""),
@@ -30,6 +30,8 @@ public final class CUPParser {
             length: Measurement<UnitLength>(components[8]),
             frequency: components[9].replacingOccurrences(of: "\"", with: ""),
             description: components[10].replacingOccurrences(of: "\"", with: ""))
+        p.sourceIdentifier = sourceIdentifier
+        return p
     }
 }
 
@@ -44,7 +46,7 @@ public extension CUPFile {
         guard let fileContents = try? String(contentsOf: fileURL) else { return nil }
         let lines = fileContents.components(separatedBy: .newlines)
         self.points = lines.concurrentMap { (line) -> PointOfInterest? in
-                CUPParser.pointOfInterest(from: line)
+                CUPParser.pointOfInterest(from: line, sourceIdentifier: fileURL.lastPathComponent)
             }
             .compactMap { $0 }
     }

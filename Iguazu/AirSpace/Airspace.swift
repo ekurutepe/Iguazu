@@ -114,13 +114,14 @@ extension AirspaceAltitude: Comparable {
     }
 }
 
-public struct Airspace {
+public struct Airspace: Equatable {
     public let airspaceClass: AirspaceClass
     public let ceiling: AirspaceAltitude
     public let floor: AirspaceAltitude
     public let name: String
     public let labelCoordinates: [CLLocationCoordinate2D]?
     public let polygonCoordinates: [CLLocationCoordinate2D]
+    public var sourceIdentifier: String?
 
     public init(name: String, class c: AirspaceClass, floor: AirspaceAltitude, ceiling: AirspaceAltitude, polygon: [CLLocationCoordinate2D], labelCoordinates: [CLLocationCoordinate2D]? = nil) {
         self.airspaceClass = c
@@ -137,7 +138,7 @@ public final class OpenAirParser {
 
     }
 
-    public func airSpacesByClass(from openAirString: String) -> AirspacesByClassDictionary? {
+    public func airSpacesByClass(from openAirString: String, sourceIdentifier: String?) -> AirspacesByClassDictionary? {
         let lines = openAirString.components(separatedBy: .newlines)
 
         var airSpaces = AirspacesByClassDictionary()
@@ -168,6 +169,7 @@ public final class OpenAirParser {
 
                 state = ParserState()
                 currentAirspace = AirspaceInProgress()
+                currentAirspace?.sourceIdentifier = sourceIdentifier
                 currentAirspace?.class = AirspaceClass(rawValue: value)
             case "AN":
                 currentAirspace?.name = value
@@ -239,8 +241,8 @@ public final class OpenAirParser {
         return airSpaces
     }
 
-    public func airSpaces(from openAirString: String) -> [Airspace]? {
-        guard let airspaces = self.airSpacesByClass(from: openAirString) else { return nil }
+    public func airSpaces(from openAirString: String, sourceIdentifier: String?) -> [Airspace]? {
+        guard let airspaces = self.airSpacesByClass(from: openAirString, sourceIdentifier: sourceIdentifier) else { return nil }
         let flatAirspaces = airspaces.reduce([Airspace]()) { (res, tuple) -> [Airspace] in
             return res + tuple.value
         }
@@ -257,7 +259,7 @@ public final class OpenAirParser {
             return nil
         }
 
-        return self.airSpacesByClass(from: openAirString)
+        return self.airSpacesByClass(from: openAirString, sourceIdentifier: url.lastPathComponent)
     }
 
     public func airSpaces(withContentsOf url: URL) -> [Airspace]? {
@@ -270,7 +272,7 @@ public final class OpenAirParser {
             return nil
         }
 
-        return self.airSpaces(from: openAirString)
+        return self.airSpaces(from: openAirString, sourceIdentifier: url.lastPathComponent)
     }
 
     private func coordinate<S: StringProtocol>(from string: S) -> CLLocationCoordinate2D? {
@@ -339,6 +341,7 @@ public final class OpenAirParser {
         var name: String? = nil
         var labelCoordinates: [CLLocationCoordinate2D]? = nil
         var polygonCoordinates = [CLLocationCoordinate2D]()
+        var sourceIdentifier: String? = nil
 
         var validAirspace: Airspace? {
             guard let klass = self.class,
@@ -353,7 +356,9 @@ public final class OpenAirParser {
             if first != last {
                 coords.append(first)
             }
-            return Airspace(name: name, class: klass, floor: floor, ceiling: ceiling, polygon: coords, labelCoordinates: self.labelCoordinates)
+            var a = Airspace(name: name, class: klass, floor: floor, ceiling: ceiling, polygon: coords, labelCoordinates: self.labelCoordinates)
+            a.sourceIdentifier = sourceIdentifier
+            return a
         }
     }
 }
