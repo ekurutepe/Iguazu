@@ -255,8 +255,13 @@ public final class OpenAirParser {
             openAirString = try String(contentsOf: url, encoding: .utf8)
         }
         catch {
-            assertionFailure("failed opening \(url): \(error.localizedDescription)")
-            return nil
+            do {
+                openAirString = try String(contentsOf: url, encoding: .isoLatin1)
+            }
+            catch {
+                assertionFailure("failed opening \(url): \(error.localizedDescription)")
+                return nil
+            }
         }
 
         return self.airSpacesByClass(from: openAirString, sourceIdentifier: url.lastPathComponent)
