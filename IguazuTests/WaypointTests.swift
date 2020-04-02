@@ -30,6 +30,18 @@ class WaypointTests : XCTestCase {
         XCTAssertEqual(lusse.longitude, 12.668333333333333)
         XCTAssertEqual(lusse.elevation.value, 66.0)
     }
+
+    func testParsingWithCommas() {
+        let commasUrl = Bundle(for: AirSpaceTests.self).url(forResource: "Commas", withExtension: "cup")!
+        let cupString = try! String(contentsOf: commasUrl)
+
+        let pois = cupString.components(separatedBy: .newlines).compactMap { (line) -> PointOfInterest? in
+            let p = CUPParser.pointOfInterest(from: line, sourceIdentifier: "source")
+            return p
+        }
+
+        XCTAssertEqual(pois.count, 3)
+    }
     
     
 
