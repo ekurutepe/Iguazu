@@ -117,8 +117,13 @@ public enum IGCHeaderField {
   static func parseDateString(hLine: String) -> IGCHeaderField? {
     guard let prefixRange = hLine.range(of: HeaderRecordCode.date.rawValue) else { return nil }
     
-    let dateString = hLine.suffix(from: prefixRange.upperBound)
-    
+    let maybeDateString = hLine.suffix(from: prefixRange.upperBound)
+
+    guard let dateStartIndex = maybeDateString.firstIndex(where: { $0.isNumber }) else { return nil }
+
+    let dateEndIndex = maybeDateString.index(dateStartIndex, offsetBy: 5)
+    let dateString = maybeDateString[dateStartIndex...dateEndIndex]
+
     guard let date = Date.parse(headerDateString: String(dateString)) else { return nil }
     
     return .date(flightDate: date)

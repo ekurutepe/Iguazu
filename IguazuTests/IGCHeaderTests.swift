@@ -68,6 +68,23 @@ class IGCHeaderTests: XCTestCase {
     func testHeaderGliderRegistration() {
         XCTAssertEqual(header.gliderRegistration, "G_CKPM")
     }
+
+    func testOudieHeader() {
+        let headerString: String
+        do {
+            let path = Bundle(for: IGCDataTests.self).path(forResource: "oudie", ofType: "igc")
+            headerString = try String(contentsOfFile: path!)
+        }
+        catch _ {
+            XCTFail()
+            return
+        }
+
+        let header = IGCHeader(igcString: headerString)
+
+        XCTAssertNotNil(header, "nil Oudie Header")
+        XCTAssertEqual(header?.flightDate.description, "2020-03-12 00:00:00 +0000")
+    }
     
     // MARK: - Tests for line parsing
 

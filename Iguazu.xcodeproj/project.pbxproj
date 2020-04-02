@@ -35,6 +35,7 @@
 		8756922C23E37CF700C3379E /* IGCWaypoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8756922B23E37CF600C3379E /* IGCWaypoint.swift */; };
 		8756922D23E37CF700C3379E /* IGCWaypoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8756922B23E37CF600C3379E /* IGCWaypoint.swift */; };
 		876CBA3D1D10659200C125AC /* IGCExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876CBA3C1D10659200C125AC /* IGCExtension.swift */; };
+		87720D8C24366260005EDFBA /* oudie.igc in Resources */ = {isa = PBXBuildFile; fileRef = 87720D8B24366260005EDFBA /* oudie.igc */; };
 		877A18971D18367A00EC6E41 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877A18961D18367A00EC6E41 /* StringExtensions.swift */; };
 		877A18991D18370100EC6E41 /* StringExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877A18981D18370100EC6E41 /* StringExtensionsTests.swift */; };
 		877B9CF11DFC1B6700D2EB91 /* AirSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877B9CF01DFC1B6700D2EB91 /* AirSpace.swift */; };
@@ -121,6 +122,7 @@
 		8756922823E37CDD00C3379E /* IGCTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGCTask.swift; sourceTree = "<group>"; };
 		8756922B23E37CF600C3379E /* IGCWaypoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGCWaypoint.swift; sourceTree = "<group>"; };
 		876CBA3C1D10659200C125AC /* IGCExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGCExtension.swift; sourceTree = "<group>"; };
+		87720D8B24366260005EDFBA /* oudie.igc */ = {isa = PBXFileReference; lastKnownFileType = text; path = oudie.igc; sourceTree = "<group>"; };
 		877A18961D18367A00EC6E41 /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		877A18981D18370100EC6E41 /* StringExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensionsTests.swift; sourceTree = "<group>"; };
 		877B9CF01DFC1B6700D2EB91 /* AirSpace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AirSpace.swift; sourceTree = "<group>"; };
@@ -248,6 +250,7 @@
 				8745976122514E4F004921BF /* WP2019_Luesse.cup */,
 				877B9CF81DFC1C4600D2EB91 /* DAeC_Germany_Week22_2016.txt */,
 				8722EF4A1D0DDC1D00DA4509 /* lx7007.igc */,
+				87720D8B24366260005EDFBA /* oudie.igc */,
 			);
 			name = "Test Files";
 			sourceTree = "<group>";
@@ -509,6 +512,7 @@
 			files = (
 				877B9CF91DFC1C4600D2EB91 /* DAeC_Germany_Week22_2016.txt in Resources */,
 				8722EF4B1D0DDC1D00DA4509 /* lx7007.igc in Resources */,
+				87720D8C24366260005EDFBA /* oudie.igc in Resources */,
 				87AFE83022AE6F51006D1B78 /* airports.cup in Resources */,
 				8745976222514E50004921BF /* WP2019_Luesse.cup in Resources */,
 			);
