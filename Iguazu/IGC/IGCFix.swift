@@ -39,15 +39,37 @@ private let AltimeterOffset = 25
 private let GPSAltitudeOffset = 30
 private let FixAccucaryOffset = 35
 
+enum IGCParsingError: Error, Equatable {
+    case invalidPrefix
+    case invalidTimestamp
+    case invalidLatitude
+    case invalidLongitude
+    case invalidBarometricAltitude
+    case invalidGPSAltitude
+}
+
 extension IGCFix {
-    public init(with line: String, midnight: Date, extensions: [IGCExtension]? = nil) {
-        guard let prefix = line.extractString(from: 0, length: 1), prefix == "B",
+    public init(with line: String, midnight: Date, extensions: [IGCExtension]? = nil) throws {
+        guard let prefix = line.extractString(from: 0, length: 1), prefix == "B" else {
+            throw IGCParsingError.invalidPrefix
+        }
+        guard
             let timeString = line.extractString(from: 1, length: 6),
-            let timestamp = Date.parse(fixTimeString: timeString, on: midnight),
-            let lat = line.extractLatitude(from: LatitudeOffset),
-            let lng = line.extractLongitude(from: LongitudeOffset),
-            let barometricAltitude = line.extractAltitude(from: AltimeterOffset),
-            let gpsAltitude = line.extractAltitude(from: GPSAltitudeOffset) else { fatalError("could not parse line: \(line)") } // TODO: throw here instead of fatalError
+            let timestamp = Date.parse(fixTimeString: timeString, on: midnight)
+        else { throw IGCParsingError.invalidTimestamp }
+
+        guard let lat = line.extractLatitude(from: LatitudeOffset) else {
+            throw IGCParsingError.invalidLatitude
+        }
+        guard let lng = line.extractLongitude(from: LongitudeOffset)  else {
+            throw IGCParsingError.invalidLongitude
+        }
+        guard let barometricAltitude = line.extractAltitude(from: AltimeterOffset) else {
+            throw IGCParsingError.invalidBarometricAltitude
+        }
+        guard let gpsAltitude = line.extractAltitude(from: GPSAltitudeOffset) else {
+            throw IGCParsingError.invalidGPSAltitude
+        }
         
         let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: lng)
         

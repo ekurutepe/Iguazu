@@ -18,8 +18,15 @@ public struct IGCData {
   let fixLines: [String]
 
   private let _fixes = IGCDataBox<[IGCFix]> { (igcData) -> [IGCFix] in
-    return igcData.fixLines.concurrentMap { (line) -> IGCFix in
-      return IGCFix(with: line, midnight: igcData.header.flightDate, extensions: igcData.extensions) }
+    return igcData.fixLines
+        .concurrentMap { (line) -> IGCFix? in
+            do {
+                return try IGCFix(with: line, midnight: igcData.header.flightDate, extensions: igcData.extensions)
+            } catch {
+                print("could not parse fix line \(line): \(error)")
+                return nil
+            }
+        }.compactMap { $0 }
   }
   
   public var fixes: [IGCFix] {
@@ -50,31 +57,31 @@ public struct IGCData {
     // Do not use self.fixes here to avoid parsing the whole file
     guard let line = self.fixLines.first else { return nil }
 
-    return IGCFix(with: line, midnight: self.header.flightDate).timestamp
+    return try? IGCFix(with: line, midnight: self.header.flightDate).timestamp
   }
 
   public var landingDate: Date? {
     // Do not use self.fixes here to avoid parsing the whole file
     guard let line = self.fixLines.last else { return nil }
 
-    return IGCFix(with: line, midnight: self.header.flightDate).timestamp
+    return try? IGCFix(with: line, midnight: self.header.flightDate).timestamp
   }
 
   public var takeOffLocation: CLLocation? {
     // Do not use self.fixes here to avoid parsing the whole file
     guard let line = self.fixLines.first else { return nil }
 
-    let fix = IGCFix(with: line, midnight: self.header.flightDate)
-    return fix.clLocation
+    let fix = try? IGCFix(with: line, midnight: self.header.flightDate)
+    return fix?.clLocation
   }
 
   public var landingLocation: CLLocation? {
     // Do not use self.fixes here to avoid parsing the whole file
     guard let line = self.fixLines.last else { return nil }
 
-    let fix = IGCFix(with: line, midnight: self.header.flightDate)
+    let fix = try? IGCFix(with: line, midnight: self.header.flightDate)
 
-    return fix.clLocation
+    return fix?.clLocation
   }
 
   public let extensions: [IGCExtension]?
