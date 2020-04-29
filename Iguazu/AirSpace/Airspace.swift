@@ -31,10 +31,11 @@ public typealias Altitude = Measurement<UnitLength>
 public typealias DegreeComponents = Array<String>
 
 public extension Collection where Iterator.Element == String {
-    var degree: CLLocationDegrees {
+    var degree: CLLocationDegrees? {
+        guard allSatisfy({ Double($0) != nil }) else { return nil }
         return self.enumerated().map { (n,c) in
             let idx = Double(n)
-            guard let value = Double(c) else { fatalError("not convertible to degrees: '\(c)'") }
+            let value = Double(c)!
             return value * pow(60.0, -idx)
         }
         .reduce(0.0, +)
@@ -109,7 +110,8 @@ extension AirspaceAltitude: Comparable {
         case (.fl(_), .agl(_)):
             return false
         default:
-            fatalError("Compare only makes sense for comparing FL and MSL. Comparisons with surface and AGL are programmer error!!!")
+            assertionFailure("Compare only makes sense for comparing FL and MSL. Comparisons with surface and AGL are programmer error!!!")
+            return false
         }
     }
 }
@@ -134,9 +136,11 @@ public struct Airspace: Equatable {
 }
 
 public final class OpenAirParser {
-    public init() {
+    enum OpenAirParserError: Error, Equatable {
 
     }
+
+    public init() {}
 
     public func airSpacesByClass(from openAirString: String, sourceIdentifier: String?) -> AirspacesByClassDictionary? {
         let lines = openAirString.components(separatedBy: .newlines)
@@ -178,7 +182,11 @@ public final class OpenAirParser {
             case "AH":
                 currentAirspace?.ceiling = AirspaceAltitude(value)
             case "AT":
-                guard let coord = coordinate(from: value) else { fatalError("got unparseable label coordinate: \(line)")  }
+                guard let coord = coordinate(from: value) else {
+                    assertionFailure("got unparseable label coordinate: \(line)")
+                    currentAirspace = nil
+                    continue
+                }
                 if currentAirspace?.labelCoordinates == nil { currentAirspace?.labelCoordinates = [CLLocationCoordinate2D]() }
                 currentAirspace?.labelCoordinates?.append(coord)
             case "V":
@@ -186,7 +194,11 @@ public final class OpenAirParser {
                     guard let eqRange = value.range(of: "=") else { assertionFailure("malformed X"); return nil }
                     state.x = coordinate(from: value.suffix(from: eqRange.upperBound))
                 } else if value.hasPrefix("D") {
-                    guard let signRange = value.rangeOfCharacter(from: .plusMinus) else { fatalError("malformed direction line: \(line)") }
+                    guard let signRange = value.rangeOfCharacter(from: .plusMinus) else {
+                        assertionFailure("malformed direction line: \(line)")
+                        currentAirspace = nil
+                        continue
+                    }
                     let sign = value[signRange.lowerBound ..< signRange.upperBound]
                     state.clockwise = (sign == "+")
                 } else {
@@ -194,27 +206,63 @@ public final class OpenAirParser {
                 }
             case "DC":
                 //*    DC radius; draw a circle (center taken from the previous V X=...  record, radius in nm
-                guard let center = state.x else { fatalError("got circle but got no center: \(line)") }
-                guard let radiusInNM = Double(value) else { fatalError("got circle but got no radius: \(line)") }
+                guard let center = state.x else {
+                    assertionFailure("got circle but got no center: \(line)")
+                    currentAirspace = nil
+                    continue
+                }
+                guard let radiusInNM = Double(value) else {
+                    assertionFailure("got circle but got no radius: \(line)")
+                    currentAirspace = nil
+                    continue
+                }
                 let radius = Measurement(value: radiusInNM, unit: UnitLength.nauticalMiles).converted(to: .meters)
                 currentAirspace?.polygonCoordinates.append(contentsOf: polygonArc(around: center, radius: radius.value, from: 0.0, to: 0.0, clockwise: true))
             case "DP":
                 //*    DP coordinate; add polygon pointC
-                guard let coord = coordinate(from: value) else { fatalError("got unparseable polygon point: \(line)")  }
+                guard let coord = coordinate(from: value) else {
+                    print("got unparseable polygon point: \(line)")
+                    continue
+                }
                 currentAirspace?.polygonCoordinates.append(coord)
             case "DA":
                 //*    DA radius, angleStart, angleEnd; add an arc, angles in degrees, radius in nm (set center using V X=...)
-                guard let center = state.x else { fatalError("got an arc but got no center: \(line)") }
+                guard let center = state.x else {
+                    assertionFailure("got an arc but got no center: \(line)")
+                    currentAirspace = nil
+                    continue
+                }
                 let numbers = value.components(separatedBy: ",").map { $0.trimmingCharacters(in: .whitespaces) }.compactMap(Double.init)
-                guard numbers.count == 3 else { fatalError("Need 3 parameters for DA arc but got \(numbers.count): \(line)") }
+                var start = 0.0
+                var end = 0.0
+                guard numbers.count > 0 else {
+                    assertionFailure("Need 3 parameters for DA arc but got \(numbers.count): \(line)")
+                    currentAirspace = nil
+                    continue
+                }
+                if numbers.count > 1 {
+                    start = numbers[1]
+                }
+
+                if numbers.count > 2 {
+                    end = numbers[2]
+                }
                 let radius = Measurement(value: numbers[0], unit: UnitLength.nauticalMiles).converted(to: .meters)
-                let coords = polygonArc(around: center, radius: radius.value, from: numbers[1], to: numbers[2], clockwise: state.clockwise)
+                let coords = polygonArc(around: center, radius: radius.value, from: start, to: end, clockwise: state.clockwise)
                 currentAirspace?.polygonCoordinates.append(contentsOf: coords)
             case "DB":
                 //*    DB coordinate1, coordinate2; add an arc, from coordinate1 to coordinate2 (set center using V X=...)
-                guard let center = state.x else { fatalError("got an arc but got no center: \(line)") }
+                guard let center = state.x else {
+                    assertionFailure("got an arc but got no center: \(line)")
+                    currentAirspace = nil
+                    continue
+                }
                 let fromToCoords = value.components(separatedBy: ",").compactMap(coordinate)
-                guard fromToCoords.count == 2 else { fatalError("Need 2 points for DB arc but got \(fromToCoords.count): \(line)") }
+                guard fromToCoords.count == 2 else {
+                    assertionFailure("Need 2 points for DB arc but got \(fromToCoords.count): \(line)")
+                    currentAirspace = nil
+                    continue
+                }
                 let from = fromToCoords.first!
                 let to = fromToCoords.last!
                 let dist1 = center.distance(from: from)
@@ -251,14 +299,14 @@ public final class OpenAirParser {
 
     public func airSpacesByClass(withContentsOf url: URL) -> AirspacesByClassDictionary? {
         var openAirString = ""
+        var encoding: String.Encoding = .init(rawValue: 0)
         do {
-            openAirString = try String(contentsOf: url, encoding: .utf8)
+            openAirString = try String(contentsOf: url, usedEncoding: &encoding)
         }
         catch {
             do {
-                openAirString = try String(contentsOf: url, encoding: .isoLatin1)
-            }
-            catch {
+                openAirString = try String(contentsOf: url, encoding: .ascii)
+            } catch {
                 assertionFailure("failed opening \(url): \(error.localizedDescription)")
                 return nil
             }
@@ -269,38 +317,70 @@ public final class OpenAirParser {
 
     public func airSpaces(withContentsOf url: URL) -> [Airspace]? {
         var openAirString = ""
+        var encoding: String.Encoding = .init(rawValue: 0)
         do {
-            openAirString = try String(contentsOf: url, encoding: .utf8)
+            openAirString = try String(contentsOf: url, usedEncoding: &encoding)
         }
         catch {
-            assertionFailure("failed opening \(url): \(error.localizedDescription)")
-            return nil
+            do {
+                openAirString = try String(contentsOf: url, encoding: .ascii)
+            } catch {
+                assertionFailure("failed opening \(url): \(error.localizedDescription)")
+                return nil
+            }
         }
 
         return self.airSpaces(from: openAirString, sourceIdentifier: url.lastPathComponent)
     }
 
     private func coordinate<S: StringProtocol>(from string: S) -> CLLocationCoordinate2D? {
-        let scanner = Scanner(string: string.uppercased())
-        guard let latString = scanner.scanUpToCharacters(from: .northSouth) else { fatalError("could not find N/S in coordinate string") }
+        let upperCased = string.uppercased()
+        let scanner = Scanner(string: upperCased)
+        guard
+            let latString = scanner.scanUpToCharacters(from: .northSouth),
+            latString != upperCased
+        else {
+            print("could not find N/S in coordinate string")
+            return nil
+        }
 
         let latComponents = latString.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: ":")
 
-        var latitude = latComponents.degree
-        guard latitude <= 90.0 else { fatalError("latitude \(latitude) for \"\(string)\"; \(dump(latComponents))") }
+        guard
+            var latitude = latComponents.degree,
+            latitude <= 90.0
+        else {
+            assertionFailure("invalid latitude for \"\(string)\"; \(dump(latComponents))")
+            return nil
+        }
 
-        guard let latHemisphere = scanner.scanCharacters(from: .northSouth) else { fatalError("could not find N/S hemisphere")}
+        guard let latHemisphere = scanner.scanCharacters(from: .northSouth) else {
+            assertionFailure("could not find N/S hemisphere")
+            return nil
+        }
 
         if latHemisphere == "S" { latitude = -1.0 * latitude }
 
-        guard let lngString = scanner.scanUpToCharacters(from: .eastWest) else { fatalError("could not find EW in coordinate string") }
+        guard let lngString = scanner.scanUpToCharacters(from: .eastWest) else {
+            assertionFailure("could not find EW in coordinate string")
+            return nil
+        }
 
-        guard let lngHemisphere = scanner.scanCharacters(from: .eastWest) else { fatalError("could not find E/W hemisphere")}
+        guard let lngHemisphere = scanner.scanCharacters(from: .eastWest) else {
+            assertionFailure("could not find E/W hemisphere")
+            return nil
+        }
 
         let lngComponents = lngString.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: ":")
 
-        var longitude = lngComponents.degree
-        guard longitude <= 180.0 else { fatalError("longitude \(longitude) for \"\(string)\"; \(dump(lngComponents))") }
+
+        guard
+            var longitude = lngComponents.degree,
+            longitude <= 180.0
+        else {
+            assertionFailure("invalid longitude for \"\(string)\"; \(dump(lngComponents))")
+            return nil
+        }
 
         if lngHemisphere == "W" { longitude = -1.0 * longitude }
 
