@@ -9,11 +9,13 @@
 import Foundation
 
 // Adapted from https://talk.objc.io/episodes/S01E90-concurrent-map?t=524
-public extension Array {
+public extension Collection {
     func concurrentMap<B>(_ transform: @escaping (Element) -> B) -> [B] {
         let result = ThreadSafe(Array<B?>(repeating: nil, count: count))
+        let startIndex = self.startIndex
         DispatchQueue.concurrentPerform(iterations: count) { idx in
-            let element = self[idx]
+            let index = self.index(startIndex, offsetBy: idx)
+            let element = self[index]
             let transformed = transform(element)
             result.atomically {
                 $0[idx] = transformed
@@ -24,8 +26,10 @@ public extension Array {
     
     func concurrentFilter( _ condition: @escaping (Element) -> Bool ) -> [Element] {
         let result = ThreadSafe(Array<Element?>(repeating: nil, count: count))
+        let startIndex = self.startIndex
         DispatchQueue.concurrentPerform(iterations: count) { idx in
-            let element = self[idx]
+            let index = self.index(startIndex, offsetBy: idx)
+            let element = self[index]
             let transformed = condition(element) ? element : nil
             result.atomically {
                 $0[idx] = transformed
