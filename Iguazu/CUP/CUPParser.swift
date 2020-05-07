@@ -60,6 +60,17 @@ public struct CUPFile {
 }
 
 public extension CUPFile {
+    init?(name: String, cupString: String) {
+        self.name = name
+        let lines = Array(cupString.components(separatedBy: .newlines).dropFirst())
+        self.points = lines.concurrentMap { (line) -> PointOfInterest? in
+            guard !line.isEmpty else { return nil }
+            return CUPParser.pointOfInterest(from: line, sourceIdentifier: name)
+        }
+        .compactMap { $0 }
+        guard points.count > 0 else { return nil }
+    }
+    
     init?(name: String, fileURL: URL) {
         self.name = name
         do {
@@ -72,7 +83,7 @@ public extension CUPFile {
                 .compactMap { $0 }
         } catch {
             print("could not parse file:", fileURL, error)
-            assertionFailure()
+//            assertionFailure()
             return nil
         }
 

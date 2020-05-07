@@ -294,7 +294,7 @@ public final class OpenAirParser {
         let flatAirspaces = airspaces.reduce([Airspace]()) { (res, tuple) -> [Airspace] in
             return res + tuple.value
         }
-        return flatAirspaces
+        return flatAirspaces.isEmpty ? nil : flatAirspaces
     }
 
     public func airSpacesByClass(withContentsOf url: URL) -> AirspacesByClassDictionary? {
