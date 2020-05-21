@@ -31,7 +31,7 @@ extension Date {
     }
     
     static func parse(fixTimeString: String, on midnight: Date) -> Date? {
-        precondition(fixTimeString.utf8.count == 6)
+        guard fixTimeString.utf8.count == 6 else { return nil }
         
         guard let hours = Int(fixTimeString.extractString(from: 0, length: 2)!),
             let minutes = Int(fixTimeString.extractString(from: 2, length: 2)!),

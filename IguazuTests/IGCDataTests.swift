@@ -12,15 +12,12 @@ import XCTest
 class IGCDataTests: XCTestCase {
 
     var igcString = ""
-    var corruptedIgcString = ""
 
     override func setUp() {
         super.setUp()
         do {
             let path = Bundle(for: IGCDataTests.self).path(forResource: "lx7007", ofType: "igc")
             igcString = try String(contentsOfFile: path!)
-            let cpath = Bundle(for: IGCDataTests.self).path(forResource: "corrupted", ofType: "igc")
-            corruptedIgcString = try String(contentsOfFile: cpath!)
         }
         catch _ {
             XCTFail()
@@ -54,6 +51,18 @@ class IGCDataTests: XCTestCase {
     }
 
     func testCorruptedData() {
+        let cpath = Bundle(for: IGCDataTests.self).path(forResource: "corrupted", ofType: "igc")
+        let corruptedIgcString = try! String(contentsOfFile: cpath!)
+
+        guard let data = IGCData(with: corruptedIgcString) else { XCTFail("could not parse igc file"); return }
+
+        XCTAssertGreaterThan(data.fixes.count, 0)
+    }
+
+    func testCorruptedData2() {
+        let cpath = Bundle(for: IGCDataTests.self).url(forResource: "05DLGD01_rst", withExtension: "igc")!
+        let corruptedIgcString = try! String(contentsOf: cpath, encoding: .ascii)
+
         guard let data = IGCData(with: corruptedIgcString) else { XCTFail("could not parse igc file"); return }
 
         XCTAssertGreaterThan(data.fixes.count, 0)
