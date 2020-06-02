@@ -16,6 +16,7 @@
 		8722EF4B1D0DDC1D00DA4509 /* lx7007.igc in Resources */ = {isa = PBXBuildFile; fileRef = 8722EF4A1D0DDC1D00DA4509 /* lx7007.igc */; };
 		8722EF4D1D0DDCEC00DA4509 /* IGCHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8722EF4C1D0DDCEC00DA4509 /* IGCHeader.swift */; };
 		8722EF511D0DEF2A00DA4509 /* IGCRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8722EF501D0DEF2A00DA4509 /* IGCRecord.swift */; };
+		873B5E01248689EE00765123 /* 2020-06-01-XCM-09K-01.igc in Resources */ = {isa = PBXBuildFile; fileRef = 873B5E00248689EE00765123 /* 2020-06-01-XCM-09K-01.igc */; };
 		873CB3141DB3708800A6325E /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873CB3131DB3708800A6325E /* DateExtensions.swift */; };
 		873CB3161DB3718300A6325E /* IGCFix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873CB3151DB3718300A6325E /* IGCFix.swift */; };
 		873CB3181DB3778500A6325E /* IGCFixTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873CB3171DB3778500A6325E /* IGCFixTests.swift */; };
@@ -112,6 +113,7 @@
 		8722EF4A1D0DDC1D00DA4509 /* lx7007.igc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = lx7007.igc; sourceTree = "<group>"; };
 		8722EF4C1D0DDCEC00DA4509 /* IGCHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGCHeader.swift; sourceTree = "<group>"; };
 		8722EF501D0DEF2A00DA4509 /* IGCRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGCRecord.swift; sourceTree = "<group>"; };
+		873B5E00248689EE00765123 /* 2020-06-01-XCM-09K-01.igc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "2020-06-01-XCM-09K-01.igc"; sourceTree = "<group>"; };
 		873CB3131DB3708800A6325E /* DateExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
 		873CB3151DB3718300A6325E /* IGCFix.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGCFix.swift; sourceTree = "<group>"; };
 		873CB3171DB3778500A6325E /* IGCFixTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGCFixTests.swift; sourceTree = "<group>"; };
@@ -252,6 +254,7 @@
 		8722EF491D0DDC0800DA4509 /* Test Files */ = {
 			isa = PBXGroup;
 			children = (
+				873B5E00248689EE00765123 /* 2020-06-01-XCM-09K-01.igc */,
 				87C2F8BE2476B27B003E1D68 /* 05DLGD01_rst.igc */,
 				87AFE82F22AE6F51006D1B78 /* airports.cup */,
 				8745976122514E4F004921BF /* WP2019_Luesse.cup */,
@@ -524,6 +527,7 @@
 				87C2F8BF2476B27B003E1D68 /* 05DLGD01_rst.igc in Resources */,
 				877B9CF91DFC1C4600D2EB91 /* DAeC_Germany_Week22_2016.txt in Resources */,
 				8722EF4B1D0DDC1D00DA4509 /* lx7007.igc in Resources */,
+				873B5E01248689EE00765123 /* 2020-06-01-XCM-09K-01.igc in Resources */,
 				87720D8C24366260005EDFBA /* oudie.igc in Resources */,
 				87AFE83022AE6F51006D1B78 /* airports.cup in Resources */,
 				8745976222514E50004921BF /* WP2019_Luesse.cup in Resources */,

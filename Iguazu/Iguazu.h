@@ -6,7 +6,7 @@
 //  Copyright © 2016 Fifteen Jugglers Software. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
 //! Project version number for Iguazu.
 FOUNDATION_EXPORT double IguazuVersionNumber;

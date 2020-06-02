@@ -128,7 +128,7 @@ public struct IGCData {
   }()
 
   public lazy var altitudes: [Int] = {
-    return fixes.map { $0.altimeterAltitude }
+    return fixes.map { ($0.altimeterAltitude > 0) ? $0.altimeterAltitude : $0.gpsAltitude }
   }()
 
   public lazy var groundSpeeds: [Double] = {

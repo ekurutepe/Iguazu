@@ -16,8 +16,7 @@ class IGCDataTests: XCTestCase {
     override func setUp() {
         super.setUp()
         do {
-            let path = Bundle(for: IGCDataTests.self).path(forResource: "lx7007", ofType: "igc")
-            igcString = try String(contentsOfFile: path!)
+
         }
         catch _ {
             XCTFail()
@@ -49,6 +48,15 @@ class IGCDataTests: XCTestCase {
 
         XCTAssertGreaterThan(data.fixes.count, 0)
     }
+
+  func testOudieData() {
+    let cpath = Bundle(for: IGCDataTests.self).path(forResource: "2020-06-01-XCM-09K-01", ofType: "igc")
+    let oudieString = try! String(contentsOfFile: cpath!)
+
+    guard let data = IGCData(with: oudieString) else { XCTFail("could not parse igc file"); return }
+
+    XCTAssertGreaterThan(data.fixes.count, 0)
+  }
 
     func testCorruptedData() {
         let cpath = Bundle(for: IGCDataTests.self).path(forResource: "corrupted", ofType: "igc")

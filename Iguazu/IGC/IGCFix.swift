@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreGraphics
 import CoreLocation
 
 /// Representes a fix record in the IGC file.
