@@ -11,7 +11,7 @@ import Foundation
 public typealias Airport = PointOfInterest
 public typealias Waypoint = PointOfInterest
 
-public struct PointOfInterest: Equatable, Codable {
+public struct PointOfInterest: Hashable, Equatable, Codable {
 //    Title,Code,Country,Latitude,Longitude,Elevation,Style,Direction,Length,Frequency,Description
 //    "LUESSE","EDOJ",DE,5208.652N,01240.182E,65.0m,2,62,1020m,"128.755",""
     public let title: String
