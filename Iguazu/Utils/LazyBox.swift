@@ -19,13 +19,13 @@ final public class LazyBox<Input, Result> {
       switch self._value {
       case .notYetComputed(let computation):
         let result = computation(input)
+        if result == nil { return }
         self._value = .computed(result)
         returnValue = result
       case .computed(let result):
         returnValue = result
       }
     }
-    assert(returnValue != nil)
     return returnValue!
   }
   
