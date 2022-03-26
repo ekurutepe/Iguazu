@@ -22,6 +22,8 @@ public enum AirspaceClass: String {
     case WaveWindow = "W"
     case TransponderMandatoryZone = "TMZ"
     case RadioMandatoryZone = "RMZ"
+    case thermalHotspot
+    case thermalBadspot
 }
 
 public typealias AirspacesByClassDictionary = [AirspaceClass: [Airspace]]
