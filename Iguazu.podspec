@@ -26,6 +26,6 @@ For more details on the Iguazu Falls: https://en.wikipedia.org/wiki/Iguazu_Falls
   s.ios.deployment_target  = '12.2'
   s.osx.deployment_target  = '10.12'
   s.source       = { :git => "https://github.com/ekurutepe/Iguazu.git", :tag => "#{s.version}" }
-  s.source_files  = "Iguazu", "Iguazu/**/*.{swift}"
-  s.swift_version = "5.0"
+  s.source_files  = "Iguazu", "Sources/**/*.{swift}"
+  s.swift_version = "5.3"
 end
