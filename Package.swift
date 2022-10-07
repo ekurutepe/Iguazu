@@ -5,6 +5,11 @@ import PackageDescription
 
 let package = Package(
     name: "Iguazu",
+    platforms: [
+        .iOS(.v12),
+        .watchOS(.v9),
+        .macOS(.v10_15)
+    ],
     products: [
         .library(
             name: "Iguazu",
