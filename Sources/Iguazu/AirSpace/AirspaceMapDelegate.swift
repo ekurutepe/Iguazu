@@ -6,6 +6,7 @@
 //  Copyright © 2016 Fifteen Jugglers Software. All rights reserved.
 //
 
+#if !os(watchOS)
 import MapKit
 
 public class AirspaceMapDelegate: NSObject, MKMapViewDelegate {
@@ -81,3 +82,4 @@ public extension AirspaceClass {
 #endif
 }
 
+#endif
