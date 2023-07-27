@@ -10,25 +10,40 @@ import XCTest
 @testable import Iguazu
 
 class WaypointTests : XCTestCase {
-    var url: URL!
-
     override func setUp() {
         super.setUp()
-        url = Bundle(for: AirSpaceTests.self).url(forResource: "WP2019_Luesse", withExtension: "cup")
+
     }
 
     func testFileParsing() {
-        guard let waypoints = CUPFile(name: "test", fileURL: url)?.points else {
+        let url = Bundle(for: AirSpaceTests.self).url(forResource: "klppnck6-utf8", withExtension: "cup")!
+        guard
+            let file = CUPFile(name: "test", fileURL: url)
+        else {
             XCTFail("could not parse waypoints file")
             return
         }
+        let waypoints = file.points
         XCTAssertTrue(waypoints.count > 0)
         let lusse = waypoints.first!
-        XCTAssertEqual(lusse.title, "001SPLuesse")
-        XCTAssertEqual(lusse.code, "001")
-        XCTAssertEqual(lusse.latitude, 52.14416666666666)
-        XCTAssertEqual(lusse.longitude, 12.668333333333333)
-        XCTAssertEqual(lusse.elevation.value, 66.0)
+        XCTAssertEqual(lusse.title, "001 AP1 Klippeneck")
+        XCTAssertEqual(lusse.code, "AP1")
+    }
+
+
+    func testProblematicEncodingParsing() {
+        let url = Bundle(for: AirSpaceTests.self).url(forResource: "klppnck6", withExtension: "cup")!
+        guard
+            let file = CUPFile(name: "test", fileURL: url)
+        else {
+            XCTFail("could not parse waypoints file")
+            return
+        }
+        let waypoints = file.points
+        XCTAssertTrue(waypoints.count > 0)
+        let lusse = waypoints.first!
+        XCTAssertEqual(lusse.title, "001 AP1 Klippeneck")
+        XCTAssertEqual(lusse.code, "AP1")
     }
 
     func testParsingWithCommas() {

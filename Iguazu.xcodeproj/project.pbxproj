@@ -16,6 +16,9 @@
 		8722EF4B1D0DDC1D00DA4509 /* lx7007.igc in Resources */ = {isa = PBXBuildFile; fileRef = 8722EF4A1D0DDC1D00DA4509 /* lx7007.igc */; };
 		8722EF4D1D0DDCEC00DA4509 /* IGCHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8722EF4C1D0DDCEC00DA4509 /* IGCHeader.swift */; };
 		8722EF511D0DEF2A00DA4509 /* IGCRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8722EF501D0DEF2A00DA4509 /* IGCRecord.swift */; };
+		87332A192A71B4E300416A4B /* klppnck5-engin.cup in Resources */ = {isa = PBXBuildFile; fileRef = 87332A182A71B4E300416A4B /* klppnck5-engin.cup */; };
+		87332A1B2A722DA200416A4B /* klppnck6.cup in Resources */ = {isa = PBXBuildFile; fileRef = 87332A1A2A722DA200416A4B /* klppnck6.cup */; };
+		87332A1D2A7230A000416A4B /* klppnck6-utf8.cup in Resources */ = {isa = PBXBuildFile; fileRef = 87332A1C2A7230A000416A4B /* klppnck6-utf8.cup */; };
 		873B5E01248689EE00765123 /* 2020-06-01-XCM-09K-01.igc in Resources */ = {isa = PBXBuildFile; fileRef = 873B5E00248689EE00765123 /* 2020-06-01-XCM-09K-01.igc */; };
 		873CB3141DB3708800A6325E /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873CB3131DB3708800A6325E /* DateExtensions.swift */; };
 		873CB3161DB3718300A6325E /* IGCFix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873CB3151DB3718300A6325E /* IGCFix.swift */; };
@@ -83,6 +86,9 @@
 		8722EF4A1D0DDC1D00DA4509 /* lx7007.igc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = lx7007.igc; sourceTree = "<group>"; };
 		8722EF4C1D0DDCEC00DA4509 /* IGCHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGCHeader.swift; sourceTree = "<group>"; };
 		8722EF501D0DEF2A00DA4509 /* IGCRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGCRecord.swift; sourceTree = "<group>"; };
+		87332A182A71B4E300416A4B /* klppnck5-engin.cup */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "klppnck5-engin.cup"; sourceTree = "<group>"; };
+		87332A1A2A722DA200416A4B /* klppnck6.cup */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = klppnck6.cup; sourceTree = "<group>"; };
+		87332A1C2A7230A000416A4B /* klppnck6-utf8.cup */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "klppnck6-utf8.cup"; sourceTree = "<group>"; };
 		873B5E00248689EE00765123 /* 2020-06-01-XCM-09K-01.igc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "2020-06-01-XCM-09K-01.igc"; sourceTree = "<group>"; };
 		873CB3131DB3708800A6325E /* DateExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
 		873CB3151DB3718300A6325E /* IGCFix.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGCFix.swift; sourceTree = "<group>"; };
@@ -210,6 +216,9 @@
 		8722EF491D0DDC0800DA4509 /* Test Files */ = {
 			isa = PBXGroup;
 			children = (
+				87332A1C2A7230A000416A4B /* klppnck6-utf8.cup */,
+				87332A1A2A722DA200416A4B /* klppnck6.cup */,
+				87332A182A71B4E300416A4B /* klppnck5-engin.cup */,
 				873B5E00248689EE00765123 /* 2020-06-01-XCM-09K-01.igc */,
 				87C2F8BE2476B27B003E1D68 /* 05DLGD01_rst.igc */,
 				87AFE82F22AE6F51006D1B78 /* airports.cup */,
@@ -453,6 +462,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				87332A1D2A7230A000416A4B /* klppnck6-utf8.cup in Resources */,
 				87720D8E24366A11005EDFBA /* Commas.cup in Resources */,
 				876536AA245766D400FA1723 /* corrupted.igc in Resources */,
 				87C2F8BF2476B27B003E1D68 /* 05DLGD01_rst.igc in Resources */,
@@ -460,7 +470,9 @@
 				8722EF4B1D0DDC1D00DA4509 /* lx7007.igc in Resources */,
 				873B5E01248689EE00765123 /* 2020-06-01-XCM-09K-01.igc in Resources */,
 				87720D8C24366260005EDFBA /* oudie.igc in Resources */,
+				87332A1B2A722DA200416A4B /* klppnck6.cup in Resources */,
 				87AFE83022AE6F51006D1B78 /* airports.cup in Resources */,
+				87332A192A71B4E300416A4B /* klppnck5-engin.cup in Resources */,
 				8745976222514E50004921BF /* WP2019_Luesse.cup in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -739,7 +751,7 @@
 		8722EF451D0DD90500DA4509 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = IguazuTests/Info.plist;
+				INFOPLIST_FILE = Tests/IguazuTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -754,7 +766,7 @@
 		8722EF461D0DD90500DA4509 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = IguazuTests/Info.plist;
+				INFOPLIST_FILE = Tests/IguazuTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

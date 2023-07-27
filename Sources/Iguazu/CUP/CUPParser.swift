@@ -74,16 +74,17 @@ public extension CUPFile {
     init?(name: String, fileURL: URL) {
         self.name = name
         do {
-            let fileContents = try String(contentsOf: fileURL)
+            let fileData = try Data(contentsOf: fileURL)
+            let fileContents = try String.withData(fileData)
             let lines = Array(fileContents.components(separatedBy: .newlines).dropFirst())
             self.points = lines.concurrentMap { (line) -> PointOfInterest? in
-                    guard !line.isEmpty else { return nil }
-                    return CUPParser.pointOfInterest(from: line, sourceIdentifier: fileURL.lastPathComponent)
-                }
-                .compactMap { $0 }
+                guard !line.isEmpty else { return nil }
+                return CUPParser.pointOfInterest(from: line, sourceIdentifier: fileURL.lastPathComponent)
+            }
+            .compactMap { $0 }
         } catch {
             print("could not parse file:", fileURL, error)
-//            assertionFailure()
+            //            assertionFailure()
             return nil
         }
 
@@ -94,5 +95,16 @@ public extension CUPFile {
             [PointOfInterest.Style.airfieldGliding, .airfieldGrass, .airfieldPaved].contains($0.style)
         }
     }
+}
 
+extension String {
+    static func withData(_ data: Data, allowedEncodings: [Encoding] = [.utf8, .windowsCP1252, .ascii]) throws -> String {
+        for enc in allowedEncodings {
+            if let string = self.init(data: data, encoding: enc) {
+                return string
+            }
+        }
+
+        throw NSError(domain: NSCocoaErrorDomain, code: 261)
+    }
 }
