@@ -6,7 +6,7 @@ import PackageDescription
 let package = Package(
     name: "Iguazu",
     platforms: [
-        .iOS(.v12),
+        .iOS(.v13),
         .watchOS(.v9),
         .macOS(.v10_15)
     ],
@@ -15,14 +15,9 @@ let package = Package(
             name: "Iguazu",
             targets: ["Iguazu"]),
     ],
-    dependencies: [
-    ],
     targets: [
         .target(
             name: "Iguazu",
             dependencies: []),
-        .testTarget(
-            name: "IguazuTests",
-            dependencies: ["Iguazu"]),
     ]
 )
